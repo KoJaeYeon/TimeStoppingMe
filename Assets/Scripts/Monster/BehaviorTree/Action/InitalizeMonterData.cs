@@ -1,7 +1,7 @@
 using BehaviorDesigner.Runtime.Tasks;
 using UnityEngine;
 
-[TaskCategory("Monster/Action/Initalize")]
+[TaskCategory("Monster/Initalize")]
 public class InitalizeMonterData : Action
 {
     public override TaskStatus OnUpdate()
