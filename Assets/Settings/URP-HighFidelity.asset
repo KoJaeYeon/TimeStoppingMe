@@ -17,9 +17,12 @@ MonoBehaviour:
   m_RendererType: 1
   m_RendererData: {fileID: 0}
   m_RendererDataList:
-  - {fileID: 11400000, guid: c40be3174f62c4acf8c1216858c64956, type: 2}
+  - {fileID: 11400000, guid: b6d1799f1f3f52a4dbd20940ce408a5b, type: 2}
+  - {fileID: 11400000, guid: 0e31efe9ba528a949b5a8d656ad91d1d, type: 2}
+  - {fileID: 11400000, guid: 399d3d0b941a2c646a266fa4870b69a3, type: 2}
+  - {fileID: 11400000, guid: d5dbb2c5ee7c9cc4cadab736ed78e1fc, type: 2}
   m_DefaultRendererIndex: 0
-  m_RequireDepthTexture: 0
+  m_RequireDepthTexture: 1
   m_RequireOpaqueTexture: 0
   m_OpaqueDownsampling: 1
   m_SupportsTerrainHoles: 1
@@ -64,7 +67,7 @@ MonoBehaviour:
   m_SupportsDynamicBatching: 0
   m_MixedLightingSupported: 1
   m_SupportsLightCookies: 1
-  m_SupportsLightLayers: 0
+  m_SupportsLightLayers: 1
   m_DebugLevel: 0
   m_StoreActionsOptimization: 0
   m_EnableRenderGraph: 0
