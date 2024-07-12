@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7676c9df58a84574e879e125a74cc93c, type: 3}
+  m_Name: Monster_Range
+  m_EditorClassIdentifier: 
+  AttackDistance: 10
+  TrackDistance: 20
+  MaxHealth: 75
+  Damage: 1
+  MoveSpeed: 1
+  AngularSpeed: 360
+  Search_Range: 150
+  IdleRange_Min: 5
+  IdleRange_Max: 10

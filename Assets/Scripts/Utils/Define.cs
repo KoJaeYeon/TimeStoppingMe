@@ -2,7 +2,8 @@
 public enum MonsterState
 {
     Idle,
-    Tracking
+    Tracking,
+    Attack
 }
 #endregion
 
