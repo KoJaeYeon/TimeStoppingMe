@@ -21,3 +21,5 @@ MonoBehaviour:
   Search_Range: 150
   IdleRange_Min: 5
   IdleRange_Max: 10
+  projectile1_EndDistance: 15
+  projectile1_Speed: 20
