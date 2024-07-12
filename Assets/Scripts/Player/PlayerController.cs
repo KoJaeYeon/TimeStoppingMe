@@ -1,44 +1,95 @@
+using BehaviorDesigner.Runtime.Tasks.Unity.UnityTransform;
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
 public class PlayerController : MonoBehaviour
 {
-    public float moveSpeed = 5f;
+    [SerializeField] private float moveSpeed = 5f;
+    [SerializeField] private float rotationSpeed = 720f;
+    [SerializeField] private float attackRange = 0.5f;
+    [SerializeField] private Transform attackPoint;
+    [SerializeField] private LayerMask enemyLayers;
+    [SerializeField] private int playerAttackDamage = 10;
 
+    private CharacterController characterController;
     private Vector2 moveInput;
+    private Vector2 mousePosition;
 
-    private void OnEnable()
+    private void Awake()
     {
-        // PlayerInput 컴포넌트가 있는지 확인하고, 없다면 추가
-        if (!TryGetComponent(out PlayerInput playerInput))
-        {
-            playerInput = gameObject.AddComponent<PlayerInput>();
-        }
-
-        // Move 이벤트에 콜백 등록
-        playerInput.onActionTriggered += OnActionTriggered;
+        characterController = GetComponent<CharacterController>();
     }
 
-    private void OnDisable()
+    public void OnMove(InputAction.CallbackContext context)
     {
-        // Move 이벤트에 콜백 해제
-        if (TryGetComponent(out PlayerInput playerInput))
-        {
-            playerInput.onActionTriggered -= OnActionTriggered;
-        }
+        moveInput = context.ReadValue<Vector2>();
     }
 
-    public void OnActionTriggered(InputAction.CallbackContext context)
+    public void OnLook(InputAction.CallbackContext context)
     {
-        if (context.action.name == "Move")
+        mousePosition = context.ReadValue<Vector2>();   
+    }
+
+    public void OnAttack(InputAction.CallbackContext context)
+    {
+        if (context.performed)
         {
-            moveInput = context.ReadValue<Vector2>();
+            Attack();
         }
     }
 
     private void Update()
     {
-        Vector3 move = new Vector3(moveInput.x, 0, moveInput.y) * moveSpeed * Time.deltaTime;
-        transform.Translate(move, Space.World);
+        Move();
+        Rotate();
+    }
+
+    private void Move()
+    {
+        Vector3 movement = new Vector3(moveInput.x, 0f, moveInput.y) * moveSpeed * Time.deltaTime;
+        characterController.Move(movement);
+    }
+
+    private void Rotate()
+    {
+        Ray ray = Camera.main.ScreenPointToRay(mousePosition);
+        Plane playerPlane = new Plane(Vector3.up, transform.position);
+
+        if (playerPlane.Raycast(ray, out float distance))
+        {
+            Vector3 targetPoint = ray.GetPoint(distance);
+            Vector3 direction = (targetPoint - transform.position).normalized;
+            direction.y = 0;
+
+            if (direction != Vector3.zero)
+            {
+                Quaternion targetRotation = Quaternion.LookRotation(direction);
+                transform.rotation = Quaternion.RotateTowards(transform.rotation, targetRotation, rotationSpeed * Time.deltaTime);
+            }
+        }
+    }
+
+    private void Attack()
+    {
+        Ray ray = Camera.main.ScreenPointToRay(mousePosition);
+        if (Physics.Raycast(ray, out RaycastHit hit, attackRange, enemyLayers))
+        {
+            IAttackable attackable = hit.collider.GetComponent<IAttackable>();
+            if (attackable != null)
+            {
+                attackable.OnTakeDamaged(playerAttackDamage);
+                Debug.Log("We hit " + hit.collider.name);
+            }
+        }
+    }
+
+    private void OnDrawGizmosSelected()
+    {
+        if (attackPoint == null)
+            return;
+
+        Gizmos.DrawWireSphere(attackPoint.position, attackRange);
     }
 }
