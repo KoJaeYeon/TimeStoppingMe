@@ -1,4 +1,3 @@
-using BehaviorDesigner.Runtime.Tasks.Unity.UnityTransform;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -6,18 +5,16 @@ using UnityEngine.InputSystem;
 
 public class PlayerController : MonoBehaviour
 {
-    [SerializeField] private float moveSpeed = 5f;
-    [SerializeField] private float rotationSpeed = 720f;
-    [SerializeField] private float attackRange = 0.5f;
-    [SerializeField] private Transform attackPoint;
-    [SerializeField] private LayerMask enemyLayers;
-    [SerializeField] private int playerAttackDamage = 10;
+    public float moveSpeed = 5f;
+    public float rotationSpeed = 720f;
+    public WeaponBase currentWeapon;
+    public LayerMask enemyLayers;
 
     private CharacterController characterController;
     private Vector2 moveInput;
     private Vector2 mousePosition;
 
-    private void Awake()
+    void Awake()
     {
         characterController = GetComponent<CharacterController>();
     }
@@ -29,30 +26,30 @@ public class PlayerController : MonoBehaviour
 
     public void OnLook(InputAction.CallbackContext context)
     {
-        mousePosition = context.ReadValue<Vector2>();   
+        mousePosition = context.ReadValue<Vector2>();
     }
 
     public void OnAttack(InputAction.CallbackContext context)
     {
-        if (context.performed)
+        if (context.performed && currentWeapon != null)
         {
-            Attack();
+            currentWeapon.Fire(enemyLayers);
         }
     }
 
-    private void Update()
+    void Update()
     {
         Move();
         Rotate();
     }
 
-    private void Move()
+    void Move()
     {
-        Vector3 movement = new Vector3(moveInput.x, 0f, moveInput.y) * moveSpeed * Time.deltaTime;
-        characterController.Move(movement);
+        Vector3 move = new Vector3(moveInput.x, 0, moveInput.y) * moveSpeed * Time.deltaTime;
+        characterController.Move(move);
     }
 
-    private void Rotate()
+    void Rotate()
     {
         Ray ray = Camera.main.ScreenPointToRay(mousePosition);
         Plane playerPlane = new Plane(Vector3.up, transform.position);
@@ -69,27 +66,5 @@ public class PlayerController : MonoBehaviour
                 transform.rotation = Quaternion.RotateTowards(transform.rotation, targetRotation, rotationSpeed * Time.deltaTime);
             }
         }
-    }
-
-    private void Attack()
-    {
-        Ray ray = Camera.main.ScreenPointToRay(mousePosition);
-        if (Physics.Raycast(ray, out RaycastHit hit, attackRange, enemyLayers))
-        {
-            IAttackable attackable = hit.collider.GetComponent<IAttackable>();
-            if (attackable != null)
-            {
-                attackable.OnTakeDamaged(playerAttackDamage);
-                Debug.Log("We hit " + hit.collider.name);
-            }
-        }
-    }
-
-    private void OnDrawGizmosSelected()
-    {
-        if (attackPoint == null)
-            return;
-
-        Gizmos.DrawWireSphere(attackPoint.position, attackRange);
     }
 }
