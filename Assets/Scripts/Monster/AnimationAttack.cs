@@ -4,8 +4,9 @@ using UnityEngine;
 
 public class AnimationAttack : MonoBehaviour
 {
-    public void Attack()
+    public void Attack0()
     {
-        transform.parent.GetComponent<Monster>();
+        var monster = transform.parent.GetComponent<Monster>();
+        monster.Attack0();
     }
 }

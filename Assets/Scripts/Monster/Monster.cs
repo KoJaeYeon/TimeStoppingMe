@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class Monster : MonoBehaviour
 {
+    public Transform TargetTrans;
+
     public float AttackDistance;
     public float TrackDistance;
 

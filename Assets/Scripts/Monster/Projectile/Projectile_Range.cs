@@ -14,8 +14,9 @@ public class Projectile_Range : Projectile_Monster
 
     public void Init(Vector3 startPos, Vector3 targetPos)
     {
-        startPosition = transform.position;
-        targetPosition = target;
+        startPosition = startPos;
+        targetPosition = targetPos;
+        targetPosition.y = 0;
 
         // 목표 위치까지의 거리
         float distance = Vector3.Distance(startPosition, targetPosition);

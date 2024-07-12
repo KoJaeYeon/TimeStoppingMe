@@ -10,6 +10,12 @@ public class DetectTargetDistance : Action
     public SharedFloat LastTrackedTime;
     //[TODO_J] 몬스터 정보 받아오는 스크립트 만들어야됨
     public SharedMonster Monster;
+
+    public SharedFloat Speed;
+    public SharedFloat AnularSpeed;
+    public SharedFloat AttackDistance;
+    public SharedFloat TrackDistance;
+
     public override TaskStatus OnUpdate()
     {
         Vector3 ownerPos = Owner.transform.position;

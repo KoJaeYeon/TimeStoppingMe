@@ -238,12 +238,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7569912d6fb3b964f8ef1a21819b4610, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  TargetTrans: {fileID: 0}
   AttackDistance: 10
   TrackDistance: 20
-  TargetTrans: {fileID: 0}
   LaunchTrans: {fileID: 8444077149286104094}
   projectile_StartPos: {fileID: 0}
-  projectile_Prefab: {fileID: 0}
+  projectile_Prefab: {fileID: 5947030866179023587, guid: 292c10adc7c15fa4c9575f9a86180fbf,
+    type: 3}
 --- !u!1 &1457445065988429051
 GameObject:
   m_ObjectHideFlags: 0
