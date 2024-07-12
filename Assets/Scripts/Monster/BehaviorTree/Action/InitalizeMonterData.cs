@@ -13,6 +13,7 @@ public class InitalizeMonterData : Action
     public SharedFloat AnuglarSpeed;
     public SharedFloat AttackDistance;
     public SharedFloat TrackDistance;
+    public SharedFloat SearchAngle;
     public override TaskStatus OnUpdate()
     {
         var targetObject = GameObject.FindGameObjectWithTag("Player");
@@ -28,8 +29,12 @@ public class InitalizeMonterData : Action
             Monster.Value = monster;
             Monster.Value.TargetTrans = targetObject.transform;
 
-            AttackDistance.Value = monster.AttackDistance;
-            TrackDistance.Value = monster.TrackDistance;
+            Speed.Value = monster.monster_Data.MoveSpeed;
+            AnuglarSpeed.Value = monster.monster_Data.AngularSpeed;
+            AttackDistance.Value = monster.monster_Data.AttackDistance;
+            TrackDistance.Value = monster.monster_Data.TrackDistance;
+            SearchAngle.Value = monster.monster_Data.Search_Range;
+
             NavMeshAgent.Value = navmeshAgent;
             return TaskStatus.Success;
         }

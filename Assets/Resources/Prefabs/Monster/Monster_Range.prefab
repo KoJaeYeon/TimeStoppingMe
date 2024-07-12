@@ -190,7 +190,7 @@ MonoBehaviour:
       startIndex: 
       variableStartIndex: 
       JSONSerialization: '{"Variables":[{"Type":"BehaviorDesigner.Runtime.SharedGameObject","Name":"Owner","IsShared":true,"PropertyMapping":"UnityEngine.Transform/gameObject","PropertyMappingOwner":0},{"Type":"BehaviorDesigner.Runtime.SharedGameObject","Name":"Model","IsShared":true,"PropertyMapping":"UnityEngine.Transform/gameObject","PropertyMappingOwner":1},{"Type":"BehaviorDesigner.Runtime.SharedTransform","Name":"TargetTrans","IsShared":true},{"Type":"BehaviorDesigner.Runtime.SharedFloat","Name":"LastTrackedTime","IsShared":true,"Tooltip":"\ucd94\uaca9\ubc94\uc704\uac00
-        \ub9c8\uc9c0\ub9c9\uc73c\ub85c \uc801\uc6a9\ub41c \uc2dc\uac04\uc785\ub2c8\ub2e4.","SinglemValue":0},{"Type":"BehaviorDesigner.Runtime.SharedMonsterState","Name":"State","IsShared":true,"MonsterStatemValue":"Idle"},{"Type":"BehaviorDesigner.Runtime.SharedMonster","Name":"Monster","IsShared":true},{"Type":"SharedNavmeshAgent","Name":"NavmeshAgent","IsShared":true}]}'
+        \ub9c8\uc9c0\ub9c9\uc73c\ub85c \uc801\uc6a9\ub41c \uc2dc\uac04\uc785\ub2c8\ub2e4.","SinglemValue":0},{"Type":"BehaviorDesigner.Runtime.SharedMonsterState","Name":"State","IsShared":true,"MonsterStatemValue":"Idle"},{"Type":"BehaviorDesigner.Runtime.SharedMonster","Name":"Monster","IsShared":true},{"Type":"SharedNavmeshAgent","Name":"NavmeshAgent","IsShared":true},{"Type":"BehaviorDesigner.Runtime.SharedFloat","Name":"Speed","IsShared":true,"SinglemValue":0},{"Type":"BehaviorDesigner.Runtime.SharedFloat","Name":"AnuglarSpeed","IsShared":true,"SinglemValue":0},{"Type":"BehaviorDesigner.Runtime.SharedFloat","Name":"AttackDistance","IsShared":true,"SinglemValue":0},{"Type":"BehaviorDesigner.Runtime.SharedFloat","Name":"TrackDistance","IsShared":true,"SinglemValue":0},{"Type":"BehaviorDesigner.Runtime.SharedFloat","Name":"SearchAngle","IsShared":true,"SinglemValue":0}]}'
       fieldSerializationData:
         typeName: []
         fieldNameHash: 
@@ -241,8 +241,9 @@ MonoBehaviour:
   TargetTrans: {fileID: 0}
   AttackDistance: 10
   TrackDistance: 20
+  health: 0
+  monster_Data: {fileID: 11400000, guid: dafd2c85507280140a1d889acc89aed6, type: 2}
   LaunchTrans: {fileID: 8444077149286104094}
-  projectile_StartPos: {fileID: 0}
   projectile_Prefab: {fileID: 5947030866179023587, guid: 292c10adc7c15fa4c9575f9a86180fbf,
     type: 3}
 --- !u!1 &1457445065988429051
