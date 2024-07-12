@@ -20,6 +20,7 @@ public class TrackingTarget : Action
 
     [UnityEngine.Tooltip("The GameObject that the agent is seeking")]
     public SharedTransform TargetTrans;
+    public SharedMonster SharedMonster;
 
     /// <summary>
     /// Allow pathfinding to resume.
@@ -34,6 +35,7 @@ public class TrackingTarget : Action
         navMeshAgent.Value.isStopped = false;
 #endif
 
+        arriveDistance.Value = SharedMonster.Value.AttackDistance;
         SetDestination(TargetTrans.Value.position);
     }
 

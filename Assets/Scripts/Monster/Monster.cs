@@ -6,4 +6,9 @@ public class Monster : MonoBehaviour
 {
     public float AttackDistance;
     public float TrackDistance;
+
+    public virtual void Attack0()
+    {
+
+    }
 }

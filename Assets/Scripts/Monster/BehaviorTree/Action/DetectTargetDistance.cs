@@ -20,8 +20,6 @@ public class DetectTargetDistance : Action
 
         var monster = Monster.Value;
 
-        Debug.Log(LastTrackedTime);
-
         if(distance <= monster.AttackDistance)
         {
             OwnerMonsterState.Value = MonsterState.Attack;
