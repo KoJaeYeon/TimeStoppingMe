@@ -137,6 +137,7 @@ GameObject:
   - component: {fileID: 4966396211287086216}
   - component: {fileID: 6967114950068480922}
   - component: {fileID: -930164340393075536}
+  - component: {fileID: 8037318771901160296}
   m_Layer: 0
   m_Name: Monster_Range
   m_TagString: Untagged
@@ -188,7 +189,7 @@ MonoBehaviour:
       parentIndex: 
       startIndex: 
       variableStartIndex: 
-      JSONSerialization: 
+      JSONSerialization: '{"Variables":[{"Type":"BehaviorDesigner.Runtime.SharedGameObject","Name":"Owner","IsShared":true},{"Type":"BehaviorDesigner.Runtime.SharedTransform","Name":"TargetTrans","IsShared":true},{"Type":"BehaviorDesigner.Runtime.SharedFloat","Name":"LastTrackedTime","IsShared":true,"SinglemValue":0},{"Type":"BehaviorDesigner.Runtime.SharedMonsterState","Name":"State","IsShared":true,"MonsterStatemValue":"Idle"},{"Type":"BehaviorDesigner.Runtime.SharedMonster","Name":"Monster","IsShared":true}]}'
       fieldSerializationData:
         typeName: []
         fieldNameHash: 
@@ -197,7 +198,7 @@ MonoBehaviour:
         unityObjects: []
         byteData: 
         byteDataArray: 
-      Version: 
+      Version: 1.7.8
   gizmoViewMode: 2
   showBehaviorDesignerGizmo: 1
 --- !u!195 &-930164340393075536
@@ -222,6 +223,20 @@ NavMeshAgent:
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
+--- !u!114 &8037318771901160296
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1334493055497012160}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d417c86c5fcff174da087df0c1b956b2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  AttackDistance: 3
+  TrackDistance: 10
 --- !u!1 &1457445065988429051
 GameObject:
   m_ObjectHideFlags: 0
