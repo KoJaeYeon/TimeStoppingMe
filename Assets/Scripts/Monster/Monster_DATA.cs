@@ -18,4 +18,7 @@ public class Monster_DATA : ScriptableObject
 
     public float IdleRange_Min;
     public float IdleRange_Max;
+
+    public float projectile1_EndDistance;
+    public float projectile1_Speed;
 }

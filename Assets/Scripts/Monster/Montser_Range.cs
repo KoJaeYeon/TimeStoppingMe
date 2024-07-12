@@ -14,7 +14,7 @@ public class Montser_Range : Monster
         var projecile = Instantiate(projectile_Prefab);
         var projectile_Range = projecile.GetComponent<Projectile_Range>();
 
-        projectile_Range.Init(LaunchTrans.position, TargetTrans.position);
+        projectile_Range.Init(LaunchTrans.position, TargetTrans.position, monster_Data.projectile1_EndDistance);
     }
 
     public override void Attack0()
