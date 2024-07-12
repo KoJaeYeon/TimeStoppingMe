@@ -19,3 +19,5 @@ MonoBehaviour:
   MoveSpeed: 1
   AngularSpeed: 360
   Search_Range: 150
+  IdleRange_Min: 5
+  IdleRange_Max: 10

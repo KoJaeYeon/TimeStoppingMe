@@ -16,4 +16,6 @@ public class Monster_DATA : ScriptableObject
     //부채꼴
     public float Search_Range;
 
+    public float IdleRange_Min;
+    public float IdleRange_Max;
 }
