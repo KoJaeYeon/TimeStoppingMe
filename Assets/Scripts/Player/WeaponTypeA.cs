@@ -37,7 +37,7 @@ public class WeaponTypeA : WeaponBase
             IAttackable attackable = hitCollider.GetComponent<IAttackable>();
             if (attackable != null)
             {
-                attackable.ApplyStatusEffect(new Debuff_Burn());
+                attackable.OnTakeDebuffed(new Debuff_Burn());
             }
         }
     }

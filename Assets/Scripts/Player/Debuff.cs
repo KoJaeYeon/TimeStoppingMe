@@ -4,9 +4,9 @@ using UnityEngine;
 
 public abstract class Debuff
 {
-    public float Duration { get; protected set; }
-    public float TickInterval { get; protected set; }
-    public int DamagePerTick {  get; protected set; }
+    public float Duration { get; set; }
+    public float TickInterval { get; set; }
+    public int DamagePerTick {  get; set; }
     protected float lastTickTime;
     protected float endTime;
 

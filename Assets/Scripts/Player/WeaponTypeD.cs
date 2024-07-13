@@ -37,7 +37,7 @@ public class WeaponTypeD : WeaponBase
             IAttackable attackable = hitCollider.GetComponent<IAttackable>();
             if (attackable != null)
             {
-                attackable.ApplyStatusEffect(new PoisonEffect());
+                attackable.OnTakeDebuffed(new Debuff_Poison());
             }
         }
     }

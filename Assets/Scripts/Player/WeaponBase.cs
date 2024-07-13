@@ -27,7 +27,7 @@ public class WeaponBase : MonoBehaviour
         currentAmmoSize = maxAmmoSize;
     }
 
-    public void Fire(LayerMask enemyLayers)
+    public virtual void Fire(LayerMask enemyLayers)
     {
         if (isReloading) return;
 

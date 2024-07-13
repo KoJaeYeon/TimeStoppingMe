@@ -21,7 +21,7 @@ public class Monster : MonoBehaviour,IAttackable
 
     }
 
-    public void OnTakebuffed<T>(T buffed)
+    public void OnTakeBuffed<T>(T buffed)
     {
         throw new System.NotImplementedException();
     }
@@ -33,7 +33,7 @@ public class Monster : MonoBehaviour,IAttackable
         health -= _dmg;
     }
 
-    public void OnTakeDebuffed<T>(T debuff)
+    public void OnTakeDebuffed<T>(T debuff) where T : Debuff
     {
         throw new System.NotImplementedException();
     }
