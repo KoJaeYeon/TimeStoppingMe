@@ -28,9 +28,12 @@ public class Monster : MonoBehaviour,IAttackable
 
     public void OnTakeDamaged<T>(T damage)
     {
-        float _dmg = (float)Convert.ChangeType(damage, typeof(float));
+        if(damage is float)
+        {
+            float _dmg = (float)Convert.ChangeType(damage, typeof(float));
 
-        health -= _dmg;
+            health -= _dmg;
+        }
     }
 
     public void OnTakeDebuffed<T>(T debuff) where T : Debuff
