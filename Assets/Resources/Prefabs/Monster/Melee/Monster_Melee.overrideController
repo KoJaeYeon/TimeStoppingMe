@@ -1,0 +1,17 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!221 &22100000
+AnimatorOverrideController:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: Monster_Melee
+  m_Controller: {fileID: 9100000, guid: 5ffe3624392d0404793fbdfa01631bab, type: 2}
+  m_Clips:
+  - m_OriginalClip: {fileID: 7400000, guid: 3496e44f6ccabb9449e3265bb18bf75e, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: dc5a303883d10ad41b81ede9c4905edf, type: 2}
+  - m_OriginalClip: {fileID: 7400000, guid: 15affbc04c25df14390895246161bb19, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: 3efddd396d77e9049b58614775cf04ca, type: 2}
+  - m_OriginalClip: {fileID: 7400000, guid: 33b3d312b24a25f4884cca098a06ea56, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: 537b6ffb3a57d3b479bdce753e2922a6, type: 2}
