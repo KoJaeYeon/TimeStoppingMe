@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.18028352, g: 0.22571376, b: 0.30692244, a: 1}
+  m_IndirectSpecularColor: {r: 0.18028378, g: 0.22571412, b: 0.30692285, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -563,7 +563,7 @@ GameObject:
   - component: {fileID: 1117939999}
   - component: {fileID: 1117939998}
   - component: {fileID: 1117939997}
-  - component: {fileID: 1117939996}
+  - component: {fileID: 1117940000}
   m_Layer: 0
   m_Name: DummyWeapon
   m_TagString: Untagged
@@ -587,22 +587,6 @@ Transform:
   - {fileID: 1568599077}
   m_Father: {fileID: 1545521177}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1117939996
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1117939994}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cb73088d08e6bd048afc464fa43d33cd, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  bulletPrefab: {fileID: 6268056124104497011, guid: 3c8acda65cbea544b9b462484b2a617b,
-    type: 3}
-  firePoint: {fileID: 1568599077}
-  damageAmount: 10
 --- !u!65 &1117939997
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -674,6 +658,31 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1117939994}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &1117940000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1117939994}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a9968d7e8c35dab41a4f18b22f54e906, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bulletPrefab: {fileID: 6268056124104497011, guid: 3c8acda65cbea544b9b462484b2a617b,
+    type: 3}
+  firePoint: {fileID: 1568599077}
+  baseDamage: 0
+  baseFireRate: 0
+  baseRange: 0
+  projectileSpeed: 0
+  projectileCount: 0
+  parallelSpacing: 0.5
+  maxAmmoSize: 0
+  reloadTime: 0
+  projectilePattern: 0
+  fireMode: 0
 --- !u!1 &1284928161
 GameObject:
   m_ObjectHideFlags: 0
@@ -883,7 +892,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveSpeed: 5
   rotationSpeed: 720
-  currentWeapon: {fileID: 1117939996}
+  currentWeapon: {fileID: 1117940000}
   enemyLayers:
     serializedVersion: 2
     m_Bits: 128
@@ -962,19 +971,7 @@ MonoBehaviour:
     m_ActionId: bd017aa6-5eae-49ff-80a0-b30f84b1357f
     m_ActionName: Player/Attack[/Mouse/leftButton]
   - m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1545521179}
-        m_TargetAssemblyTypeName: PlayerController, Assembly-CSharp
-        m_MethodName: OnTimeStop
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
     m_ActionId: 6672cd8f-5602-435c-bce4-d5e41ac42d62
     m_ActionName: Player/TimeStop[/Keyboard/t]
   m_NeverAutoSwitchControlSchemes: 0

@@ -2,11 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Player : MonoBehaviour
+public class Player : MonoBehaviour, IAttackable
 {
     [SerializeField] protected int maxHP;
     [SerializeField] protected int currentHP;
     [SerializeField] protected float moveSpeed;
+
+    
 
     public int MaxHP { get { return maxHP; } }
     public int CurrentHP { get { return  currentHP; } }
