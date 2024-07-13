@@ -7,16 +7,18 @@ public class PlayerController : MonoBehaviour
 {
     public float moveSpeed = 5f;
     public float rotationSpeed = 720f;
-    public WeaponBase currentWeapon;
-    public LayerMask enemyLayers;
 
     private CharacterController characterController;
+    private Player player;
+
     private Vector2 moveInput;
     private Vector2 mousePosition;
+    public LayerMask enemyLayers;
 
     void Awake()
     {
         characterController = GetComponent<CharacterController>();
+        player = GetComponent<Player>();
     }
 
     public void OnMove(InputAction.CallbackContext context)
@@ -31,9 +33,17 @@ public class PlayerController : MonoBehaviour
 
     public void OnAttack(InputAction.CallbackContext context)
     {
-        if (context.performed && currentWeapon != null)
+        if (context.performed && player.CurrentWeapon != null)
         {
-            currentWeapon.Fire(enemyLayers);
+            player.CurrentWeapon.Fire(enemyLayers);
+        }
+    }
+
+    public void OnReload(InputAction.CallbackContext context)
+    {
+        if(context.performed && player.CurrentWeapon != null)
+        {
+            player.ReloadWeapon();
         }
     }
 

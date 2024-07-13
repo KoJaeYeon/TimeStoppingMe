@@ -22,7 +22,7 @@ public class WeaponBase : MonoBehaviour
     private float nextFireTime = 0f;
     private bool isReloading = false;
 
-    private void Start()
+    public void Init()
     {
         currentAmmoSize = maxAmmoSize;
     }
@@ -84,8 +84,10 @@ public class WeaponBase : MonoBehaviour
         }
     }
 
-    private IEnumerator Reload()
+    public IEnumerator Reload()
     {
+        if (isReloading) yield break;
+
         isReloading = true;
         Debug.Log("Reloading...");
         yield return new WaitForSeconds(reloadTime);
