@@ -19,12 +19,12 @@ public class Monster_Melee : Monster
         AttackCollision.SetActive(false);
     }
 
-    public override void Attack0()
+    public override void Attack1()
     {
         AttackCollision.SetActive(true);
     }
 
-    public override void Attack0_End()
+    public override void Attack1_End()
     {
         AttackCollision.SetActive(false);
     }

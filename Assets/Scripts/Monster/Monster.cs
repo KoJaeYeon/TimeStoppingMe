@@ -16,16 +16,44 @@ public class Monster : MonoBehaviour,IAttackable
         health = monster_Data.MaxHealth;
     }
 
-    public virtual void Attack0()
+    #region Skill
+    public virtual void Attack1()
     {
 
     }
 
-    public virtual void Attack0_End()
+    public virtual void Attack1_End()
+    {
+
+    }
+    public virtual void Attack2()
     {
 
     }
 
+    public virtual void Attack2_End()
+    {
+
+    }
+    public virtual void Attack3()
+    {
+
+    }
+
+    public virtual void Attack3_End()
+    {
+
+    }
+    public virtual void Attack4()
+    {
+
+    }
+
+    public virtual void Attack4_End()
+    {
+
+    }
+    #endregion
     public void OnTakeBuffed<T>(T buffed)
     {
         throw new System.NotImplementedException();

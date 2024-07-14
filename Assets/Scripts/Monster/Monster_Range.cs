@@ -19,7 +19,7 @@ public class Monster_Range : Monster
         projectile_Range.Init(LaunchTrans.position, TargetTrans.position, monster_Data_Range.projectile1_EndDistance, monster_Data_Range.projectile1_EndHeight);
     }
 
-    public override void Attack0()
+    public override void Attack1()
     {
         SpawnProjectile();
     }

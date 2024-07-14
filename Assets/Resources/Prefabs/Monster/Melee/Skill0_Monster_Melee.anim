@@ -54712,14 +54712,14 @@ AnimationClip:
   m_HasMotionFloatCurves: 0
   m_Events:
   - time: 0.6
-    functionName: Attack0
+    functionName: Attack1
     data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0
     intParameter: 0
     messageOptions: 0
   - time: 1.1666666
-    functionName: Attack0_End
+    functionName: Attack1_End
     data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0

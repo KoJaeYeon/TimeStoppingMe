@@ -1,9 +1,6 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using static UnityEngine.UI.GridLayoutGroup;
+﻿using UnityEngine;
 
-public class Melee_AttackCollision : MonoBehaviour
+public class Boss_AttackCollision : MonoBehaviour
 {
     int damage;
     float maxAngle;
@@ -32,6 +29,10 @@ public class Melee_AttackCollision : MonoBehaviour
             if (IAttack != null)
             {
                 IAttack.OnTakeDamaged(damage);
+
+                //보스 체력회복
+                var Monster = transform.parent.GetComponent<Monster_Boss>();
+                Monster.RestoreHealth();
             }
             else
             {

@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 8227642750339198680}
   - component: {fileID: 8540524906534942025}
   - component: {fileID: 5705958243592260422}
+  - component: {fileID: -6458250260182578589}
   m_Layer: 0
   m_Name: Projectile_Monster_Boss_loveshot
   m_TagString: Untagged
@@ -133,3 +134,21 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &-6458250260182578589
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5947030866179023587}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d742f31c3d9a9db44ba59e0f8b0c1486, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damage: 0
+  launchSpeed: 0
+  startPosition: {x: 0, y: 0, z: 0}
+  targetPosition: {x: 0, y: 0, z: 0}
+  direction: {x: 0, y: 0, z: 0}
+  maxDistance: 15
