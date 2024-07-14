@@ -11,12 +11,17 @@ public class Monster : MonoBehaviour,IAttackable
 
     public Monster_DATA monster_Data;
 
-    private void Awake()
+    public virtual void Awake()
     {
         health = monster_Data.MaxHealth;
     }
 
     public virtual void Attack0()
+    {
+
+    }
+
+    public virtual void Attack0_End()
     {
 
     }

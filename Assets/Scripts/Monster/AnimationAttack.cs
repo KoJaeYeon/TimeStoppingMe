@@ -9,4 +9,10 @@ public class AnimationAttack : MonoBehaviour
         var monster = transform.parent.GetComponent<Monster>();
         monster.Attack0();
     }
+
+    public void Attack0_End()
+    {
+        var monster = transform.parent.GetComponent<Monster>();
+        monster.Attack0_End();
+    }
 }

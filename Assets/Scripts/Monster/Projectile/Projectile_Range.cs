@@ -12,10 +12,11 @@ public class Projectile_Range : Projectile_Monster
     public float timeToTarget;
     public float maxDistance = 15f;
 
-    public void Init(Vector3 startPos, Vector3 targetPos, float maxDistance)
+    public void Init(Vector3 startPos, Vector3 targetPos, float maxDistance, float maxHeight)
     {
         startPosition = startPos;
         this.maxDistance = maxDistance;
+        this.maxHeight = maxHeight;
         // 목표 위치까지의 거리
         float distance = Vector3.Distance(startPosition, targetPos);
 

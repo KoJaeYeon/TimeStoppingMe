@@ -10,17 +10,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7676c9df58a84574e879e125a74cc93c, type: 3}
-  m_Name: Monster_Range
+  m_Name: Monster_Melee
   m_EditorClassIdentifier: 
-  AttackDistance: 7.5
-  TrackDistance: 15
-  MaxHealth: 75
+  AttackDistance: 2
+  TrackDistance: 20
+  MaxHealth: 100
   Damage: 1
   MoveSpeed: 1
   AngularSpeed: 360
-  Search_Range: 150
   IdleRange_Min: 5
   IdleRange_Max: 10
-  projectile1_EndDistance: 15
-  projectile1_EndHeight: 8
+  Search_Range: 150
+  projectile1_EndDistance: 2
+  projectile1_EndHeight: 0
   projectile1_Speed: 0

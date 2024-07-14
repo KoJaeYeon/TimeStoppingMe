@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using static UnityEngine.GraphicsBuffer;
 
-public class Montser_Range : Monster
+public class Monster_Range : Monster
 {   
     public Transform LaunchTrans;
 
@@ -14,7 +14,7 @@ public class Montser_Range : Monster
         var projecile = Instantiate(projectile_Prefab);
         var projectile_Range = projecile.GetComponent<Projectile_Range>();
 
-        projectile_Range.Init(LaunchTrans.position, TargetTrans.position, monster_Data.projectile1_EndDistance);
+        projectile_Range.Init(LaunchTrans.position, TargetTrans.position, monster_Data.projectile1_EndDistance, monster_Data.projectile1_EndHeight);
     }
 
     public override void Attack0()
