@@ -49,17 +49,25 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
-        Move();
-        Rotate();
+        if (player.IsTimeStopped())
+        {
+            Move(Time.unscaledDeltaTime);
+            Rotate(Time.unscaledDeltaTime);
+        }
+        else
+        {
+            Move(Time.deltaTime);
+            Rotate(Time.deltaTime);
+        }
     }
 
-    void Move()
+    void Move(float deltaTime)
     {
-        Vector3 move = new Vector3(moveInput.x, 0, moveInput.y) * moveSpeed * Time.deltaTime;
+        Vector3 move = new Vector3(moveInput.x, 0, moveInput.y) * moveSpeed * deltaTime;
         characterController.Move(move);
     }
 
-    void Rotate()
+    void Rotate(float deltaTime)
     {
         Ray ray = Camera.main.ScreenPointToRay(mousePosition);
         Plane playerPlane = new Plane(Vector3.up, transform.position);
@@ -73,7 +81,7 @@ public class PlayerController : MonoBehaviour
             if (direction != Vector3.zero)
             {
                 Quaternion targetRotation = Quaternion.LookRotation(direction);
-                transform.rotation = Quaternion.RotateTowards(transform.rotation, targetRotation, rotationSpeed * Time.deltaTime);
+                transform.rotation = Quaternion.RotateTowards(transform.rotation, targetRotation, rotationSpeed * deltaTime);
             }
         }
     }

@@ -33,13 +33,13 @@
                     "initialStateCheck": true
                 },
                 {
-                    "name": "TimeStop",
+                    "name": "Reload",
                     "type": "Button",
-                    "id": "6672cd8f-5602-435c-bce4-d5e41ac42d62",
+                    "id": "8d883197-63c6-46c6-bb1b-342db65aa688",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
-                    "initialStateCheck": false
+                    "initialStateCheck": true
                 }
             ],
             "bindings": [
@@ -122,12 +122,12 @@
                 },
                 {
                     "name": "",
-                    "id": "c9f876bc-be3d-4cd5-89ba-a133ca450823",
-                    "path": "<Keyboard>/t",
+                    "id": "c9ba5626-2dbe-40ac-91ab-bb44fd23d326",
+                    "path": "<Keyboard>/r",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "TimeStop",
+                    "action": "Reload",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

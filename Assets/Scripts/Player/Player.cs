@@ -1,6 +1,9 @@
+using BehaviorDesigner.Runtime.Tasks.Unity.Timeline;
+using Cinemachine;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class Player : MonoBehaviour, IAttackable
 {
@@ -8,6 +11,9 @@ public class Player : MonoBehaviour, IAttackable
     [SerializeField] protected int currentHP;
     [SerializeField] protected float moveSpeed;
     [SerializeField] private WeaponBase currentWeapon;
+    [SerializeField] private bool isTimeStopped = false;
+    [SerializeField] private CinemachineBrain cinemachineBrain;
+    [SerializeField] private CinemachineVirtualCamera virtualCamera;
 
     private List<Debuff> activeDebuffs = new List<Debuff>();
 
@@ -16,12 +22,15 @@ public class Player : MonoBehaviour, IAttackable
     public float MoveSpeed { get {  return moveSpeed; } }
     public WeaponBase CurrentWeapon { get { return currentWeapon; } }
 
+    
+
     private void Start()
     {
         if(currentWeapon != null)
         {
             currentWeapon.Init();
         }
+        cinemachineBrain = Camera.main.GetComponent<CinemachineBrain>();
     }
 
     public void SetWeapon(WeaponBase newWeapon)
@@ -45,7 +54,15 @@ public class Player : MonoBehaviour, IAttackable
             debuff.ApplyEffect(gameObject);
         }
 
-        // 버프 상태 업데이트
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            TimeStop();
+        }
+
+        if (isTimeStopped)
+        {
+            cinemachineBrain.ManualUpdate(); // 강제로 시네머신 카메라 업데이트
+        }
     }
 
     public void OnTakeDamaged<T>(T damage)
@@ -112,5 +129,32 @@ public class Player : MonoBehaviour, IAttackable
         {
             StartCoroutine(currentWeapon.Reload());
         }
+    }
+
+    private void TimeStop()
+    {
+        isTimeStopped = !isTimeStopped;
+        Debug.Log(isTimeStopped ? "Time stopped." : "Time resumed.");
+
+        foreach (var rb in FindObjectsOfType<Rigidbody>())
+        {
+            if (rb.gameObject != gameObject)
+            {
+                rb.isKinematic = isTimeStopped;
+            }
+        }
+
+        foreach (var mb in FindObjectsOfType<MonoBehaviour>())
+        {
+            if (mb.gameObject != gameObject && mb.GetType() != typeof(CinemachineBrain))
+            {
+                mb.enabled = !isTimeStopped;
+            }
+        }
+    }
+
+    public bool IsTimeStopped()
+    {
+        return isTimeStopped;
     }
 }

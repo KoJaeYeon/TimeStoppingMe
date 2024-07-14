@@ -803,6 +803,7 @@ GameObject:
   - component: {fileID: 1545521175}
   - component: {fileID: 1545521181}
   - component: {fileID: 1545521179}
+  - component: {fileID: 1545521183}
   - component: {fileID: 1545521180}
   m_Layer: 0
   m_Name: Player
@@ -892,7 +893,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveSpeed: 5
   rotationSpeed: 720
-  currentWeapon: {fileID: 1117940000}
   enemyLayers:
     serializedVersion: 2
     m_Bits: 128
@@ -971,9 +971,37 @@ MonoBehaviour:
     m_ActionId: bd017aa6-5eae-49ff-80a0-b30f84b1357f
     m_ActionName: Player/Attack[/Mouse/leftButton]
   - m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1545521179}
+        m_TargetAssemblyTypeName: PlayerController, Assembly-CSharp
+        m_MethodName: OnTimeStop
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_ActionId: 6672cd8f-5602-435c-bce4-d5e41ac42d62
     m_ActionName: Player/TimeStop[/Keyboard/t]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1545521179}
+        m_TargetAssemblyTypeName: PlayerController, Assembly-CSharp
+        m_MethodName: OnReload
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 8d883197-63c6-46c6-bb1b-342db65aa688
+    m_ActionName: Player/Reload[/Keyboard/r]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Player
@@ -1005,6 +1033,23 @@ CharacterController:
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0.001
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &1545521183
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1545521172}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1533be7ce97f0124eb6178fe11720e13, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHP: 0
+  currentHP: 0
+  moveSpeed: 0
+  currentWeapon: {fileID: 1117940000}
+  isTimeStopped: 0
 --- !u!1 &1568599076
 GameObject:
   m_ObjectHideFlags: 0
