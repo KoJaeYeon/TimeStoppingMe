@@ -12,10 +12,10 @@ public class Player : MonoBehaviour, IAttackable
     [SerializeField] protected float moveSpeed;
     [SerializeField] private WeaponBase currentWeapon;
     [SerializeField] private bool isTimeStopped = false;
-    [SerializeField] private CinemachineBrain cinemachineBrain;
-    [SerializeField] private CinemachineVirtualCamera virtualCamera;
+    [SerializeField] private CinemachineVirtualCamera cinemachineVirtualCamera;
 
-    private List<Debuff> activeDebuffs = new List<Debuff>();
+    [SerializeField] private List<Item> hotbar = new List<Item> ();
+    [SerializeField] private List<Debuff> activeDebuffs = new List<Debuff>();
 
     public int MaxHP { get { return maxHP; } }
     public int CurrentHP { get { return  currentHP; } }
@@ -30,7 +30,7 @@ public class Player : MonoBehaviour, IAttackable
         {
             currentWeapon.Init();
         }
-        cinemachineBrain = Camera.main.GetComponent<CinemachineBrain>();
+        cinemachineVirtualCamera = FindObjectOfType<CinemachineVirtualCamera>();
     }
 
     public void SetWeapon(WeaponBase newWeapon)
@@ -61,7 +61,7 @@ public class Player : MonoBehaviour, IAttackable
 
         if (isTimeStopped)
         {
-            cinemachineBrain.ManualUpdate(); // 강제로 시네머신 카메라 업데이트
+            cinemachineVirtualCamera.enabled = true;
         }
     }
 
@@ -134,27 +134,34 @@ public class Player : MonoBehaviour, IAttackable
     private void TimeStop()
     {
         isTimeStopped = !isTimeStopped;
+        Time.timeScale = isTimeStopped ? 0f : 1f;
+        Time.fixedDeltaTime = 0.02f * Time.timeScale;
         Debug.Log(isTimeStopped ? "Time stopped." : "Time resumed.");
 
-        foreach (var rb in FindObjectsOfType<Rigidbody>())
+        if (cinemachineVirtualCamera != null)
         {
-            if (rb.gameObject != gameObject)
-            {
-                rb.isKinematic = isTimeStopped;
-            }
-        }
-
-        foreach (var mb in FindObjectsOfType<MonoBehaviour>())
-        {
-            if (mb.gameObject != gameObject && mb.GetType() != typeof(CinemachineBrain))
-            {
-                mb.enabled = !isTimeStopped;
-            }
+            cinemachineVirtualCamera.enabled = true;
         }
     }
 
     public bool IsTimeStopped()
     {
         return isTimeStopped;
+    }
+
+    public void AddToHotbar(Item item)
+    {
+        hotbar.Add(item);
+        Debug.Log(item.itemName + " added to hotbar.");
+    }
+
+    public void UseHotbarItem(int index)
+    {
+        if (index >= 0 && index < hotbar.Count)
+        {
+            Item item = hotbar[index];
+            item.Use(this);
+            hotbar.RemoveAt(index); // 사용 후 핫바에서 제거
+        }
     }
 }
