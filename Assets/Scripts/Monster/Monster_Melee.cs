@@ -13,7 +13,7 @@ public class Monster_Melee : Monster
     {
         base.Awake();
 
-        var sphereCollider = GetComponent<SphereCollider>();
+        var sphereCollider = AttackCollision.GetComponent<SphereCollider>();
         sphereCollider.radius = monster_Data.projectile1_EndDistance;
         AttackCollision.SetActive(false);
     }

@@ -76,6 +76,13 @@ public class Projectile_Range : Projectile_Monster
         {
             IAttackable.OnTakeDamaged(damage);
         }
+        else
+        {
+            if (collision.gameObject.CompareTag("Player"))
+            {
+                Debug.LogAssertion("Player IAttack is null");
+            }
+        }
 
         Destroy(gameObject);
     }
