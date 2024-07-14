@@ -8,7 +8,6 @@ public class PlayerController : MonoBehaviour
     public float moveSpeed = 5f;
     public float rotationSpeed = 720f;
 
-    private CharacterController characterController;
     private Player player;
 
     private Vector2 moveInput;
@@ -17,7 +16,6 @@ public class PlayerController : MonoBehaviour
 
     void Awake()
     {
-        characterController = GetComponent<CharacterController>();
         player = GetComponent<Player>();
     }
 
@@ -49,22 +47,15 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
-        if (player.IsTimeStopped())
-        {
-            Move(Time.unscaledDeltaTime);
-            Rotate(Time.unscaledDeltaTime);
-        }
-        else
-        {
-            Move(Time.deltaTime);
-            Rotate(Time.deltaTime);
-        }
+        float deltaTime = player.IsTimeStopped() ? Time.unscaledDeltaTime : Time.deltaTime;
+        Move(deltaTime);
+        Rotate(deltaTime);
     }
 
     void Move(float deltaTime)
     {
         Vector3 move = new Vector3(moveInput.x, 0, moveInput.y) * moveSpeed * deltaTime;
-        characterController.Move(move);
+        transform.position += move;
     }
 
     void Rotate(float deltaTime)

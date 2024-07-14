@@ -801,7 +801,6 @@ GameObject:
   - component: {fileID: 1545521177}
   - component: {fileID: 1545521176}
   - component: {fileID: 1545521175}
-  - component: {fileID: 1545521181}
   - component: {fileID: 1545521179}
   - component: {fileID: 1545521183}
   - component: {fileID: 1545521180}
@@ -974,22 +973,6 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1545521179}
         m_TargetAssemblyTypeName: PlayerController, Assembly-CSharp
-        m_MethodName: OnTimeStop
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-    m_ActionId: 6672cd8f-5602-435c-bce4-d5e41ac42d62
-    m_ActionName: Player/TimeStop[/Keyboard/t]
-  - m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1545521179}
-        m_TargetAssemblyTypeName: PlayerController, Assembly-CSharp
         m_MethodName: OnReload
         m_Mode: 0
         m_Arguments:
@@ -1007,32 +990,6 @@ MonoBehaviour:
   m_DefaultActionMap: Player
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
---- !u!143 &1545521181
-CharacterController:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1545521172}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Height: 2
-  m_Radius: 0.5
-  m_SlopeLimit: 45
-  m_StepOffset: 0.3
-  m_SkinWidth: 0.08
-  m_MinMoveDistance: 0.001
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &1545521183
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1050,6 +1007,8 @@ MonoBehaviour:
   moveSpeed: 0
   currentWeapon: {fileID: 1117940000}
   isTimeStopped: 0
+  cinemachineVirtualCamera: {fileID: 0}
+  hotbar: []
 --- !u!1 &1568599076
 GameObject:
   m_ObjectHideFlags: 0
