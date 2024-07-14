@@ -1,3 +1,4 @@
+using Cinemachine;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -7,16 +8,28 @@ public class PlayerController : MonoBehaviour
 {
     public float moveSpeed = 5f;
     public float rotationSpeed = 720f;
+    public float cameraFollowSpeed = 0.1f;
+    public float cursorFollowFactor = 0.5f;
 
     private Player player;
+    private CinemachineVirtualCamera cinemachineVirtualCamera;
+    private Transform cameraTransform;
 
     private Vector2 moveInput;
     private Vector2 mousePosition;
+    private Vector3 cameraOffset;
     public LayerMask enemyLayers;
 
     void Awake()
     {
         player = GetComponent<Player>();
+        cinemachineVirtualCamera = FindObjectOfType<CinemachineVirtualCamera>();
+
+        if (cinemachineVirtualCamera != null)
+        {
+            cameraTransform = cinemachineVirtualCamera.transform;
+            cameraOffset = cameraTransform.position - player.transform.position;
+        }
     }
 
     public void OnMove(InputAction.CallbackContext context)
@@ -50,6 +63,7 @@ public class PlayerController : MonoBehaviour
         float deltaTime = player.IsTimeStopped() ? Time.unscaledDeltaTime : Time.deltaTime;
         Move(deltaTime);
         Rotate(deltaTime);
+        UpdateCameraFollow(deltaTime);
     }
 
     void Move(float deltaTime)
@@ -75,5 +89,12 @@ public class PlayerController : MonoBehaviour
                 transform.rotation = Quaternion.RotateTowards(transform.rotation, targetRotation, rotationSpeed * deltaTime);
             }
         }
+    }
+
+    void UpdateCameraFollow(float deltaTime)
+    {
+        Vector3 cursorWorldPosition = Camera.main.ScreenToWorldPoint(new Vector3(mousePosition.x, mousePosition.y, cameraTransform.position.y));
+        Vector3 targetPosition = player.transform.position + cameraOffset + (cursorWorldPosition - player.transform.position) * cursorFollowFactor;
+        cameraTransform.position = Vector3.Lerp(cameraTransform.position, targetPosition, cameraFollowSpeed * deltaTime);
     }
 }

@@ -14,6 +14,11 @@ public class Player : MonoBehaviour, IAttackable
     [SerializeField] private bool isTimeStopped = false;
     [SerializeField] private CinemachineVirtualCamera cinemachineVirtualCamera;
 
+    [SerializeField] private InstallationBlueprint blueprintPrefab;
+    private InstallationBlueprint currentBlueprint;
+    private PlaceableItem currentPlaceableItem;
+    private Coroutine installationCoroutine;
+
     [SerializeField] private List<Item> hotbar = new List<Item> ();
     [SerializeField] private List<Debuff> activeDebuffs = new List<Debuff>();
 
@@ -62,6 +67,19 @@ public class Player : MonoBehaviour, IAttackable
         if (isTimeStopped)
         {
             cinemachineVirtualCamera.enabled = true;
+        }
+
+        if (currentBlueprint != null)
+        {
+            HandleBlueprintPlacement();
+        }
+
+        if (Input.GetKeyDown(KeyCode.F) && currentPlaceableItem != null)
+        {
+            if (currentBlueprint != null)
+            {
+                StartInstallation();
+            }
         }
     }
 
@@ -163,5 +181,88 @@ public class Player : MonoBehaviour, IAttackable
             item.Use(this);
             hotbar.RemoveAt(index); // 사용 후 핫바에서 제거
         }
+    }
+
+    private void HandleBlueprintPlacement()
+    {
+        Vector3 position = GetBlueprintPosition();
+        Quaternion rotation = GetBlueprintRotation();
+        currentBlueprint.SetPositionAndRotation(position, rotation);
+
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            CancelInstallation();
+        }
+    }
+
+    private Vector3 GetBlueprintPosition()
+    {
+        // 마우스 위치에서 레이캐스트하여 청사진 위치 결정
+        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+        if (Physics.Raycast(ray, out RaycastHit hit))
+        {
+            return hit.point;
+        }
+        return transform.position;
+    }
+
+    private Quaternion GetBlueprintRotation()
+    {
+        // 마우스 휠로 회전 각도 결정
+        float rotationY = Mathf.Round(Input.GetAxis("Mouse ScrollWheel") * 8) * 45f;
+        return Quaternion.Euler(0, rotationY, 0);
+    }
+
+    public void StartPlacingItem(PlaceableItem placeableItem)
+    {
+        currentPlaceableItem = placeableItem;
+        currentBlueprint = Instantiate(blueprintPrefab);
+        currentBlueprint.SetVisibility(true);
+    }
+
+    private void StartInstallation()
+    {
+        if (installationCoroutine != null)
+        {
+            StopCoroutine(installationCoroutine);
+        }
+        installationCoroutine = StartCoroutine(InstallItemCoroutine());
+    }
+
+    private IEnumerator InstallItemCoroutine()
+    {
+        float elapsedTime = 0f;
+        while (elapsedTime < currentPlaceableItem.installationTime)
+        {
+            if (Input.GetKeyDown(KeyCode.Escape))
+            {
+                CancelInstallation();
+                yield break;
+            }
+            elapsedTime += Time.deltaTime;
+            yield return null;
+        }
+        CompleteInstallation();
+    }
+
+    private void CancelInstallation()
+    {
+        if (installationCoroutine != null)
+        {
+            StopCoroutine(installationCoroutine);
+        }
+        if (currentBlueprint != null)
+        {
+            Destroy(currentBlueprint.gameObject);
+            currentBlueprint = null;
+        }
+        currentPlaceableItem = null;
+    }
+
+    private void CompleteInstallation()
+    {
+        Instantiate(currentPlaceableItem, currentBlueprint.transform.position, currentBlueprint.transform.rotation);
+        currentPlaceableItem.Use(this);
+        CancelInstallation();
     }
 }
