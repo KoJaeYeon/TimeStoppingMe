@@ -14,7 +14,8 @@ public class Monster_Melee : Monster
         base.Awake();
 
         var sphereCollider = AttackCollision.GetComponent<SphereCollider>();
-        sphereCollider.radius = monster_Data.projectile1_EndDistance;
+        var monster_Data_Melee = monster_Data as Monster_Data_Melee;
+        sphereCollider.radius = monster_Data_Melee.attack_MaxDistance;
         AttackCollision.SetActive(false);
     }
 
