@@ -11,29 +11,74 @@ public class Monster : MonoBehaviour,IAttackable
 
     public Monster_DATA monster_Data;
 
-    private void Awake()
+    public virtual void Awake()
     {
         health = monster_Data.MaxHealth;
     }
 
-    public virtual void Attack0()
+    #region Skill
+    public virtual void Attack1()
     {
 
     }
 
-    public void OnTakebuffed<T>(T buffed)
+    public virtual void Attack1_End()
+    {
+
+    }
+    public virtual void Attack2()
+    {
+
+    }
+
+    public virtual void Attack2_End()
+    {
+
+    }
+    public virtual void Attack3()
+    {
+
+    }
+
+    public virtual void Attack3_End()
+    {
+
+    }
+    public virtual void Attack4()
+    {
+
+    }
+
+    public virtual void Attack4_End()
+    {
+
+    }
+    #endregion
+    public void OnTakeBuffed<T>(BuffType buffType, T buffed)
     {
         throw new System.NotImplementedException();
     }
 
     public void OnTakeDamaged<T>(T damage)
     {
-        float _dmg = (float)Convert.ChangeType(damage, typeof(float));
+        if(damage is int)
+        {
+            int _dmg = (int)Convert.ChangeType(damage, typeof(int));
+            health -= (float)_dmg;
+        }
+        if(damage is float)
+        {
+            float _dmg = (float)Convert.ChangeType(damage, typeof(float));
 
-        health -= _dmg;
+            health -= _dmg;
+        }
+        if(health <= 0)
+        {
+            Destroy(gameObject);
+        }
     }
 
-    public void OnTakeDebuffed<T>(T debuff)
+    public void OnTakeDebuffed<T>(DebuffType debuffType, T debuff) where T : Debuff
     {
         throw new System.NotImplementedException();
     }

@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f5944cf504eb12640beca4b8d2522b13, type: 3}
+  m_Name: Monster_Data_Melee
+  m_EditorClassIdentifier: Assembly-CSharp::Monster_Data_Melee
+  AttackDistance: 2
+  TrackDistance: 20
+  MaxHealth: 100
+  Damage: 1
+  MoveSpeed: 1
+  AngularSpeed: 360
+  IdleRange_Min: 5
+  IdleRange_Max: 10
+  Search_Range: 150
+  attack_MaxDistance: 2

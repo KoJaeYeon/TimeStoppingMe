@@ -9,15 +9,19 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7676c9df58a84574e879e125a74cc93c, type: 3}
-  m_Name: Monster_Range
-  m_EditorClassIdentifier: 
-  AttackDistance: 10
-  TrackDistance: 20
+  m_Script: {fileID: 0}
+  m_Name: Monster_Data_Range
+  m_EditorClassIdentifier: Assembly-CSharp::Monster_DATA_Range
+  AttackDistance: 7.5
+  TrackDistance: 15
   MaxHealth: 75
   Damage: 1
   MoveSpeed: 1
   AngularSpeed: 360
-  Search_Range: 150
   IdleRange_Min: 5
   IdleRange_Max: 10
+  Search_Range: 150
+  projectile1_Prefab: {fileID: 5947030866179023587, guid: 292c10adc7c15fa4c9575f9a86180fbf,
+    type: 3}
+  projectile1_EndDistance: 15
+  projectile1_EndHeight: 8

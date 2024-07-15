@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "Scriptable_Range", menuName ="Monster")]
 public class Monster_DATA : ScriptableObject
 {
     public float AttackDistance;
@@ -13,9 +12,11 @@ public class Monster_DATA : ScriptableObject
 
     public float MoveSpeed;
     public float AngularSpeed;
-    //부채꼴
-    public float Search_Range;
 
+    [Header("대기상태 탐색 범위")]
     public float IdleRange_Min;
     public float IdleRange_Max;
+
+    [Header("원거리, 근거리 : 부채꼴 공격범위")]
+    public float Search_Range;
 }

@@ -127,6 +127,7 @@ MonoBehaviour:
   maxHeight: 5
   gravity: 9.81
   timeToTarget: 0
+  maxDistance: 15
 --- !u!54 &5705958243592260422
 Rigidbody:
   m_ObjectHideFlags: 0
