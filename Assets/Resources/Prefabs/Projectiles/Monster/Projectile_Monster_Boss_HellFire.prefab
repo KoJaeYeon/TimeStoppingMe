@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 8227642750339198680}
   - component: {fileID: 5705958243592260422}
   - component: {fileID: 2453543935571407507}
+  - component: {fileID: 1015772258559628064}
   m_Layer: 0
   m_Name: Projectile_Monster_Boss_HellFire
   m_TagString: Untagged
@@ -133,3 +134,17 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &1015772258559628064
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5947030866179023587}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 92b0d20ecf001f443955c0ef6b3058f9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damage: 0
+  launchSpeed: 0
