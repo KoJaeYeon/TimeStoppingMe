@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cd5d198eecab9be49894af537160fc43, type: 3}
   m_Name: Monster_Data_Boss
   m_EditorClassIdentifier: Assembly-CSharp::Monster_Data_Boss
-  AttackDistance: 2
+  AttackDistance: 900
   TrackDistance: 999
   MaxHealth: 400
   Damage: 2
