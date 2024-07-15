@@ -58,6 +58,37 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    public void OnInteract(InputAction.CallbackContext context)
+    {
+        if (context.performed)
+        {
+            if(player.currentPlaceableItem != null && player.currentBlueprint != null)
+            {
+                player.StartInstallation();
+            }
+            else
+            {
+                Ray ray = Camera.main.ScreenPointToRay(mousePosition);
+                if (Physics.Raycast(ray, out RaycastHit hit, 2f))
+                {
+                    Item item = hit.collider.GetComponent<Item>();
+                    if(item != null)
+                    {
+                        item.Use(player);
+                    }
+                }
+            }
+        }
+    }
+
+    public void OnCancel(InputAction.CallbackContext context)
+    {
+        if (context.performed)
+        {
+            player.CancelInstallation();
+        }
+    }
+
     void Update()
     {
         float deltaTime = player.IsTimeStopped() ? Time.unscaledDeltaTime : Time.deltaTime;

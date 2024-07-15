@@ -1,9 +1,6 @@
-using BehaviorDesigner.Runtime.Tasks.Unity.Timeline;
-using Cinemachine;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.InputSystem;
 
 public class Player : MonoBehaviour, IAttackable
 {
@@ -12,11 +9,10 @@ public class Player : MonoBehaviour, IAttackable
     [SerializeField] protected float moveSpeed;
     [SerializeField] private WeaponBase currentWeapon;
     [SerializeField] private bool isTimeStopped = false;
-    [SerializeField] private CinemachineVirtualCamera cinemachineVirtualCamera;
 
     [SerializeField] private InstallationBlueprint blueprintPrefab;
-    private InstallationBlueprint currentBlueprint;
-    private PlaceableItem currentPlaceableItem;
+    public InstallationBlueprint currentBlueprint;
+    public PlaceableItem currentPlaceableItem;
     private Coroutine installationCoroutine;
 
     [SerializeField] private List<Item> hotbar = new List<Item> ();
@@ -35,7 +31,6 @@ public class Player : MonoBehaviour, IAttackable
         {
             currentWeapon.Init();
         }
-        cinemachineVirtualCamera = FindObjectOfType<CinemachineVirtualCamera>();
     }
 
     public void SetWeapon(WeaponBase newWeapon)
@@ -59,27 +54,9 @@ public class Player : MonoBehaviour, IAttackable
             debuff.ApplyEffect(gameObject);
         }
 
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            TimeStop();
-        }
-
-        if (isTimeStopped)
-        {
-            cinemachineVirtualCamera.enabled = true;
-        }
-
         if (currentBlueprint != null)
         {
             HandleBlueprintPlacement();
-        }
-
-        if (Input.GetKeyDown(KeyCode.F) && currentPlaceableItem != null)
-        {
-            if (currentBlueprint != null)
-            {
-                StartInstallation();
-            }
         }
     }
 
@@ -155,11 +132,6 @@ public class Player : MonoBehaviour, IAttackable
         Time.timeScale = isTimeStopped ? 0f : 1f;
         Time.fixedDeltaTime = 0.02f * Time.timeScale;
         Debug.Log(isTimeStopped ? "Time stopped." : "Time resumed.");
-
-        if (cinemachineVirtualCamera != null)
-        {
-            cinemachineVirtualCamera.enabled = true;
-        }
     }
 
     public bool IsTimeStopped()
@@ -188,11 +160,6 @@ public class Player : MonoBehaviour, IAttackable
         Vector3 position = GetBlueprintPosition();
         Quaternion rotation = GetBlueprintRotation();
         currentBlueprint.SetPositionAndRotation(position, rotation);
-
-        if (Input.GetKeyDown(KeyCode.Escape))
-        {
-            CancelInstallation();
-        }
     }
 
     private Vector3 GetBlueprintPosition()
@@ -220,7 +187,7 @@ public class Player : MonoBehaviour, IAttackable
         currentBlueprint.SetVisibility(true);
     }
 
-    private void StartInstallation()
+    public void StartInstallation()
     {
         if (installationCoroutine != null)
         {
@@ -245,7 +212,7 @@ public class Player : MonoBehaviour, IAttackable
         CompleteInstallation();
     }
 
-    private void CancelInstallation()
+    public void CancelInstallation()
     {
         if (installationCoroutine != null)
         {

@@ -20,3 +20,14 @@ public enum FireMode // 연발, 단발
     Burst
 }
 #endregion
+
+#region Item
+public enum ItemEffectType
+{
+    IncreaseDamage,
+    IncreaseFireRate,
+    ChangeProjectile,
+    // 추가 효과 타입
+}
+
+#endregion
