@@ -18,9 +18,6 @@ public class Player : MonoBehaviour, IAttackable
     [SerializeField] private List<Item> hotbar = new List<Item> ();
     [SerializeField] private List<Debuff> activeDebuffs = new List<Debuff>();
 
-    private bool isCharmed = false;
-    private Coroutine charmCoroutine;
-
     public int MaxHP { get { return maxHP; } }
     public int CurrentHP { get { return  currentHP; } }
     public float MoveSpeed { get {  return moveSpeed; } }
@@ -105,9 +102,7 @@ public class Player : MonoBehaviour, IAttackable
 
     public void OnTakeBuffed<T>(BuffType bufftype, T buff) where T : Buff
     {
-        // 버프 처리 로직
-        Debug.Log("Player took buff: " + buff);
-        // 버프 적용 로직 추가 가능
+        buff.ApplyEffect(this);
     }
 
     private IEnumerator HandleDebuff(Debuff debuff)
