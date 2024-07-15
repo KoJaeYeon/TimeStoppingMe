@@ -70,12 +70,12 @@
                 },
                 {
                     "name": "ItemIndex",
-                    "type": "Button",
+                    "type": "Value",
                     "id": "0a82b289-cece-4f9c-87ff-b9564a23c606",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
-                    "initialStateCheck": false
+                    "initialStateCheck": true
                 }
             ],
             "bindings": [
