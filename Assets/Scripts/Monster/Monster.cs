@@ -61,11 +61,20 @@ public class Monster : MonoBehaviour,IAttackable
 
     public void OnTakeDamaged<T>(T damage)
     {
+        if(damage is int)
+        {
+            int _dmg = (int)Convert.ChangeType(damage, typeof(int));
+            health -= (float)_dmg;
+        }
         if(damage is float)
         {
             float _dmg = (float)Convert.ChangeType(damage, typeof(float));
 
             health -= _dmg;
+        }
+        if(health <= 0)
+        {
+            Destroy(gameObject);
         }
     }
 

@@ -97,20 +97,20 @@ public class WeaponBase : MonoBehaviour
     }
 
     // 아이템 효과 적용 메서드
-    public void ApplyItemEffect(ItemEffect effect)
-    {
-        switch (effect.EffectType)
-        {
-            case ItemEffectType.IncreaseDamage:
-                baseDamage += effect.Value;
-                break;
-            case ItemEffectType.IncreaseFireRate:
-                baseFireRate += effect.Value;
-                break;
-            case ItemEffectType.ChangeProjectile:
-                bulletPrefab = effect.NewBulletPrefab;
-                break;
-                // 추가 효과 처리
-        }
-    }
+    //public void ApplyItemEffect(ItemEffect effect)
+    //{
+    //    switch (effect.EffectType)
+    //    {
+    //        case ItemEffectType.IncreaseDamage:
+    //            baseDamage += effect.Value;
+    //            break;
+    //        case ItemEffectType.IncreaseFireRate:
+    //            baseFireRate += effect.Value;
+    //            break;
+    //        case ItemEffectType.ChangeProjectile:
+    //            bulletPrefab = effect.NewBulletPrefab;
+    //            break;
+    //            // 추가 효과 처리
+    //    }
+    //}
 }
