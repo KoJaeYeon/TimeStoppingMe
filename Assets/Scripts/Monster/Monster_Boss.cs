@@ -105,6 +105,8 @@ public class Monster_Boss : Monster
     {
         prefabRoot = new GameObject();
         var monster_Data_Boss = monster_Data as Monster_Data_Boss;
+
+        Projectile_HellFire.used = false;
         for (int i = 0; i < monster_Data_Boss.fireFlooring_number; i++)
         {
             Vector3 newPos = GetRandomNavMeshPoint(transform.position, 0, monster_Data_Boss.fiireFlooring_range);

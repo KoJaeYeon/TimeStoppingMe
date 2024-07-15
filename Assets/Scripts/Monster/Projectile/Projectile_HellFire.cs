@@ -2,11 +2,10 @@
 
 public class Projectile_HellFire : Projectile_Monster
 {
-    bool used;
+    public static bool used = false;
     private void Awake()
     {
         damage = 1;
-        used = false;
     }
     private void OnTriggerEnter(Collider other)
     {
