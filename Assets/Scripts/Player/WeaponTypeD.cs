@@ -23,21 +23,12 @@ public class WeaponTypeD : WeaponBase
     {
         base.Fire(enemyLayers);
 
-        if(Random.value < poisonChance)
+        foreach(var bullet in bullets)
         {
-            ApplyPoisonEffect(enemyLayers);
-        }
-    }
-
-    private void ApplyPoisonEffect(LayerMask enemyLayers)
-    {
-        Collider[] hitColliders = Physics.OverlapSphere(firePoint.position, baseRange, enemyLayers);
-        foreach (Collider hitCollider in hitColliders)
-        {
-            IAttackable attackable = hitCollider.GetComponent<IAttackable>();
-            if (attackable != null)
+            bullet.debuffType = DebuffType.Poison;
+            if(Random.value <= poisonChance)
             {
-                attackable.OnTakeDebuffed(new Debuff_Poison());
+                bullet.debuff = new Debuff_Poison();
             }
         }
     }

@@ -22,6 +22,8 @@ public class WeaponBase : MonoBehaviour
     private float nextFireTime = 0f;
     private bool isReloading = false;
 
+    [SerializeField] protected Bullet[] bullets; 
+
     public void Init()
     {
         currentAmmoSize = maxAmmoSize;
@@ -61,6 +63,7 @@ public class WeaponBase : MonoBehaviour
 
     private void FireParallel(LayerMask enemyLayers)
     {
+        bullets = new Bullet[projectileCount];
         for (int i = 0; i < projectileCount; i++)
         {
             Vector3 offset = firePoint.right * (i - projectileCount / 2f) * parallelSpacing;
@@ -75,6 +78,7 @@ public class WeaponBase : MonoBehaviour
         float spreadAngle = 10f; // 각 투사체 사이의 각도
         float startAngle = -spreadAngle * (projectileCount - 1) / 2;
 
+        bullets = new Bullet[projectileCount];
         for (int i = 0; i < projectileCount; i++)
         {
             Quaternion rotation = firePoint.rotation * Quaternion.Euler(0, startAngle + i * spreadAngle, 0);

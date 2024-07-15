@@ -36,3 +36,8 @@ public abstract class Debuff
         lastTickTime = Time.time;
     }
 }
+
+public class Debuff_Mind : Debuff
+{
+    public Debuff_Mind() : base(5f, 0, 0) { }
+}

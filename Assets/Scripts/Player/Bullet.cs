@@ -7,6 +7,8 @@ public class Bullet : MonoBehaviour
     private int damage;
     private LayerMask enemyLayers;
     private float remainingLifetime;
+    public DebuffType debuffType;
+    public Debuff debuff;
 
     public void Initialize(int damageAmount, LayerMask layers, float projectileSpeed)
     {
@@ -41,6 +43,12 @@ public class Bullet : MonoBehaviour
             {
                 attackable.OnTakeDamaged(damage);
                 Debug.Log("Bullet hit " + other.name);
+
+                if(debuff != null)
+                {
+                    attackable.OnTakeDebuffed(debuffType, debuff);
+                }
+
                 Destroy(gameObject);
             }
         }

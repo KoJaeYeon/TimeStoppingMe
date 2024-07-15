@@ -73,7 +73,7 @@ public class Player : MonoBehaviour, IAttackable
         }
     }
 
-    public void OnTakeDebuffed<T>(T debuff) where T : Debuff
+    public void OnTakeDebuffed<T>(DebuffType debuffType, T debuff) where T : Debuff
     {
         bool debuffExists = false;
         foreach (var activeDebuff in activeDebuffs)
@@ -93,7 +93,7 @@ public class Player : MonoBehaviour, IAttackable
         }
     }
 
-    public void OnTakeBuffed<T>(T buff)
+    public void OnTakeBuffed<T>(BuffType bufftype, T buff)
     {
         // 버프 처리 로직
         Debug.Log("Player took buff: " + buff);
@@ -126,7 +126,7 @@ public class Player : MonoBehaviour, IAttackable
         }
     }
 
-    private void TimeStop()
+    public void TimeStop()
     {
         isTimeStopped = !isTimeStopped;
         Time.timeScale = isTimeStopped ? 0f : 1f;

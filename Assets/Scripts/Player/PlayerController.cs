@@ -89,6 +89,14 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    public void OnTimeStop(InputAction.CallbackContext context)
+    {
+        if (context.performed)
+        {
+            player.TimeStop();
+        }
+    }
+
     void Update()
     {
         float deltaTime = player.IsTimeStopped() ? Time.unscaledDeltaTime : Time.deltaTime;
