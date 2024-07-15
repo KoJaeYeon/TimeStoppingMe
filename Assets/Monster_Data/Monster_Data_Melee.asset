@@ -9,7 +9,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 0}
+  m_Script: {fileID: 11500000, guid: f5944cf504eb12640beca4b8d2522b13, type: 3}
   m_Name: Monster_Data_Melee
   m_EditorClassIdentifier: Assembly-CSharp::Monster_Data_Melee
   AttackDistance: 2

@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 8540524906534942025}
   - component: {fileID: 5705958243592260422}
   - component: {fileID: -6458250260182578589}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Projectile_Monster_Boss_loveshot
   m_TagString: Untagged
   m_Icon: {fileID: 0}
