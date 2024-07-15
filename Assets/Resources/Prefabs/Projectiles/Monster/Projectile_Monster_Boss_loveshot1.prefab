@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 6870564979479817337}
   - component: {fileID: 5705958243592260422}
   m_Layer: 0
-  m_Name: Projectile_Monster_Range
+  m_Name: Projectile_Monster_Boss_loveshot1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -119,6 +119,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d8c25af64fbc03841b05c3f169b92ed7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  target: {x: 0, y: 0, z: 0}
   damage: 1
   launchSpeed: 2
   startPosition: {x: 0, y: 0, z: 0}
