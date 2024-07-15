@@ -19,6 +19,18 @@ public enum FireMode // 연발, 단발
     Single,
     Burst
 }
+
+public enum DebuffType
+{
+    Burn,
+    Poison,
+    Mind
+}
+
+public enum BuffType
+{
+
+}
 #endregion
 
 #region Item
@@ -31,3 +43,4 @@ public enum ItemEffectType
 }
 
 #endregion
+
