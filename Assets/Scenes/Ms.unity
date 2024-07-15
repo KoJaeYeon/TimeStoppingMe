@@ -131080,6 +131080,7 @@ GameObject:
   - component: {fileID: 9036577520818155426}
   - component: {fileID: 9036577520818155427}
   - component: {fileID: 9036577520818155428}
+  - component: {fileID: 9036577520818155429}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -131599,6 +131600,10 @@ MonoBehaviour:
       m_Calls: []
     m_ActionId: 0a82b289-cece-4f9c-87ff-b9564a23c606
     m_ActionName: Player/ItemIndex[/Keyboard/1,/Keyboard/2,/Keyboard/3,/Keyboard/4,/Keyboard/5,/Keyboard/6,/Keyboard/7,/Keyboard/8,/Keyboard/9,/Keyboard/0]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 4cf46c0e-0379-440f-941e-27706ff35545
+    m_ActionName: Player/SelectWheel[/Mouse/scroll]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Player
@@ -132229,21 +132234,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 277ac0ef0eb016f40bca72047b74d720, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  mainCamera: {fileID: 0}
+  range: 100
   inventoryIndex:
-  - {fileID: 1283871920}
-  - {fileID: 1621289019}
-  - {fileID: 1817240793}
-  - {fileID: 1344176744}
-  - {fileID: 994119730}
-  - {fileID: 2680428262561560702}
-  - {fileID: 768508952}
-  - {fileID: 1384652990}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
   inturectItem: {fileID: 0}
   path: 
   selectedSlot: 0
   inventory: {fileID: 0}
   throwSpeed: 0
   inventoryImage: []
+  playerInput: {fileID: 0}
 --- !u!65 &9036577520818155428
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -132265,6 +132273,33 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 2.43, y: 4.35, z: 4.32}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!54 &9036577520818155429
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1506600054373807797}
+  serializedVersion: 4
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 112
+  m_CollisionDetection: 0
 --- !u!224 &9059532289568737997
 RectTransform:
   m_ObjectHideFlags: 0

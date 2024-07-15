@@ -1,12 +1,18 @@
-using Unity.VisualScripting;
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
 
 public class Inventory : MonoBehaviour
 {
+    public Camera mainCamera;
+    Ray ray;
+    RaycastHit hit;
     [SerializeField]
-    public GameObject[] inventoryIndex = new GameObject[5];
+    public float range = 100f;
+    [SerializeField]
+    public GameObject[] inventoryIndex = new GameObject[8]; // 배열 크기 수정
     public GameObject inturectItem;
     public string path;
     [SerializeField]
@@ -14,40 +20,72 @@ public class Inventory : MonoBehaviour
     public Transform inventory;
     public float throwSpeed;
     private bool inBox;
-
-    public Image[] inventoryImage;
+    public Image[] inventoryImage = new Image[8]; // 배열 크기 수정
+    public PlayerInput playerInput;
 
     public void Awake()
     {
-        inventoryIndex = new GameObject[8];
-        inventoryImage = new Image[8];
+        playerInput = GetComponent<PlayerInput>();
+
+        // 이벤트 등록
+        playerInput.actions["Interact"].performed += OnInteract;
+        playerInput.actions["ItemIndex"].performed += OnItemIndex;
+        playerInput.actions["Use"].performed += OnUse;
+        playerInput.actions["SelectWheel"].performed += OnSelectWheel;
     }
 
     public void Start()
     {
-        inventory = transform.GetChild(2);
-        GameObject inventoryUI = GameObject.Find("InventoryUi");
-        for (int i = 0; i < inventoryImage.Length; i++)
+        // inventory의 자식 개수 확인 및 인덱스 오류 방지
+        if (transform.childCount > 2)
         {
-            inventoryImage[i] = inventoryUI.transform.GetChild(i).GetChild(0).GetComponent<Image>();
-            inventoryImage[i].sprite = null;
-            inventoryImage[i].enabled = false;
+            inventory = transform.GetChild(2);
         }
+        else
+        {
+            Debug.LogError("Inventory transform not properly set.");
+            return;
+        }
+
+        GameObject inventoryUI = GameObject.Find("InventoryUi");
+        if (inventoryUI != null)
+        {
+            for (int i = 0; i < inventoryImage.Length; i++)
+            {
+                if (inventoryUI.transform.childCount > i)
+                {
+                    inventoryImage[i] = inventoryUI.transform.GetChild(i).GetChild(0).GetComponent<Image>();
+                    inventoryImage[i].sprite = null;
+                    inventoryImage[i].enabled = false;
+                }
+                else
+                {
+                    Debug.LogError($"Inventory UI child {i} not found.");
+                }
+            }
+        }
+        else
+        {
+            Debug.LogError("InventoryUi GameObject not found.");
+        }
+
         selectedSlot = 0;
         SelectSlot();
     }
 
-    void OnInteract(InputAction.CallbackContext context) // F 키를 눌렀을 때 실행
+    void Update()
+    {
+    }
+
+    private void OnInteract(InputAction.CallbackContext context)
     {
         Debug.Log("F 인터렉트 ");
-        if (inventoryIndex[selectedSlot] != null) // 선택된 슬롯이 비어있지 않은 경우
+        if (inventoryIndex[selectedSlot] != null)
         {
-            //아이템 사용로직
-            ClearInventory();//아이템이 사용될시 해당 인벤토리 슬롯 초기화
+            ClearInventory();
         }
         else if (selectedSlot >= 0 && selectedSlot < inventoryIndex.Length && inventoryIndex[selectedSlot] == null && inturectItem != null)
         {
-            // 유효한 슬롯이 선택된 경우 인벤토리에 아이템을 삽입
             inventoryIndex[selectedSlot] = inturectItem;
             inturectItem.transform.SetParent(inventory);
             inturectItem.transform.position = inventory.position;
@@ -63,18 +101,12 @@ public class Inventory : MonoBehaviour
         }
     }
 
-
-
     private void OnItemIndex(InputAction.CallbackContext context)
     {
         Debug.Log(context.ToString());
-        // 액션이 실행 중인지 확인
         if (context.phase == InputActionPhase.Performed)
         {
-            // 입력된 키의 Path 가져오기
             path = context.control.path;
-
-            // Path 값을 기반으로 switch 문 실행
             Debug.Log(path);
 
             switch (path)
@@ -132,17 +164,18 @@ public class Inventory : MonoBehaviour
             }
         }
     }
+
     private void OnUse(InputAction.CallbackContext context)
     {
         bool use = false;
         ItemS item = null;
-        if (inventoryIndex[selectedSlot] != null)  // 선택된 슬롯에 아이템이 있는지 확인
+        if (inventoryIndex[selectedSlot] != null)
         {
-            item = inventoryIndex[selectedSlot].GetComponent<ItemS>();  // Item 컴포넌트 가져오기
-            if (item != null)  // Item 컴포넌트가 있는지 확인
+            item = inventoryIndex[selectedSlot].GetComponent<ItemS>();
+            if (item != null)
             {
-                use = item.UseBles;  // UseBles 속성 값 가져오기
-                Debug.Log("UseBles 값: " + use);  // 값 출력
+                use = item.UseBles;
+                Debug.Log("UseBles 값: " + use);
             }
             else
             {
@@ -159,7 +192,6 @@ public class Inventory : MonoBehaviour
                 case "Item_NightVision":
                     UseNightVision();
                     break;
-
                 default:
                     break;
             }
@@ -172,61 +204,71 @@ public class Inventory : MonoBehaviour
         //transform.GetComponent<HP>().PlusHP(20);
         //타바코 사용효과
     }
+
     void UseNightVision()
     {
         UseItem();
         transform.GetChild(3).transform.GetChild(1).gameObject.SetActive(true);
     }
+
     void UseItem()
     {
         GameObject item = inventoryIndex[selectedSlot];
         item.transform.SetParent(null);
         item.SetActive(false);
-        inventoryImage[selectedSlot].sprite = null; // 해당 슬롯의 이미지를 Null로 만듦
-        inventoryImage[selectedSlot].enabled = false;//해당아이템 이미지 비활성화
-        inventoryIndex[selectedSlot] = null; // 슬롯 비우기
+        inventoryImage[selectedSlot].sprite = null;
+        inventoryImage[selectedSlot].enabled = false;
+        inventoryIndex[selectedSlot] = null;
     }
+
     void SelectSlot()
     {
         inventoryImage[selectedSlot].transform.parent.transform.localScale = new Vector3(1.25f, 1.25f, 1.25f);
     }
+
     private void ResetSlot()
     {
         inventoryImage[selectedSlot].transform.parent.transform.localScale = Vector3.one;
     }
 
-    void OnSelectWheel(InputAction.CallbackContext context)
+    void OnDrawGizmos()
     {
-        Vector2 scrollValue = new Vector2(0f, 0f);
-        if (scrollValue.y > 0f) //슬롯 증가
+        if (ray.origin != Vector3.zero)
         {
-            if (4 > selectedSlot)//선택슬롯이 5보다 작을시
+            Gizmos.color = Color.red;
+            Gizmos.DrawLine(ray.origin, ray.origin + ray.direction * range);
+        }
+    }
+
+    private void OnSelectWheel(InputAction.CallbackContext context)
+    {
+        Vector2 scrollValue = context.ReadValue<Vector2>();
+        if (scrollValue.y > 0f)
+        {
+            if (4 > selectedSlot)
             {
                 ResetSlot();
-
                 selectedSlot++;
                 SelectSlot();
             }
         }
-        else if (scrollValue.y < 0f)//슬롯감소
+        else if (scrollValue.y < 0f)
         {
-            if (0 < selectedSlot) //선택한 슬롯이 1보다 클시
+            if (0 < selectedSlot)
             {
                 ResetSlot();
                 Debug.Log(selectedSlot);
                 selectedSlot--;
                 SelectSlot();
-
             }
         }
-
     }
 
     void ClearInventory()
     {
-        inventoryImage[selectedSlot].sprite = null; // 해당 슬롯의 이미지를 Null로 만듦
+        inventoryImage[selectedSlot].sprite = null;
         inventoryImage[selectedSlot].enabled = false;
-        inventoryIndex[selectedSlot] = null; // 슬롯 비우기
+        inventoryIndex[selectedSlot] = null;
     }
 
     private void OnTriggerEnter(Collider other)
@@ -236,7 +278,7 @@ public class Inventory : MonoBehaviour
             InstantItem item = other.GetComponent<InstantItem>();
             if (item != null)
             {
-                inturectItem = other.GameObject();
+                inturectItem = other.gameObject;
             }
         }
     }
