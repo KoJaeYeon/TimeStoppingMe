@@ -1,32 +1,45 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using static UnityEngine.GraphicsBuffer;
 
 public class Projectile_Range : Projectile_Monster
 {
     public Vector3 startPosition;
     public Vector3 targetPosition;
 
-    public float maxHeight = 8f; // ÃÖ´ë ³ôÀÌ
+    public float maxHeight = 8f; // ìµœëŒ€ ë†’ì´
     public float gravity = 9.81f;
     public float timeToTarget;
+    public float maxDistance = 15f;
 
-    public void Init(Vector3 startPos, Vector3 targetPos)
+    public void Init(Vector3 startPos, Vector3 targetPos, float maxDistance, float maxHeight)
     {
-        startPosition = transform.position;
-        targetPosition = target;
+        startPosition = startPos;
+        this.maxDistance = maxDistance;
+        this.maxHeight = maxHeight;
+        // ëª©í‘œ ìœ„ì¹˜ê¹Œì§€ì˜ ê±°ë¦¬
+        float distance = Vector3.Distance(startPosition, targetPos);
 
-        // ¸ñÇ¥ À§Ä¡±îÁöÀÇ °Å¸®
-        float distance = Vector3.Distance(startPosition, targetPosition);
+        // ëª©í‘œ ìœ„ì¹˜ê°€ ìµœëŒ€ ê±°ë¦¬ë¥¼ ì´ˆê³¼í•˜ë©´ ì¡°ì •
+        if (distance > maxDistance)
+        {
+            Vector3 direction = (targetPos - startPosition).normalized;
+            targetPosition = startPosition + direction * maxDistance;
+        }
+        else
+        {
+            targetPosition = targetPos;
+        }
 
-        // ¹ß»ç °¢µµ °è»ê
+        targetPosition.y = 0; // ëª©í‘œ ìœ„ì¹˜ì˜ yì¶• ê³ ì •
+
+        // ë°œì‚¬ ê°ë„ ê³„ì‚°
         float theta = Mathf.Atan((maxHeight * 2) / distance);
 
-        // ÃÊ±â ¼Óµµ °è»ê
+        // ì´ˆê¸° ì†ë„ ê³„ì‚°
         launchSpeed = Mathf.Sqrt((gravity * distance * distance) / (2 * maxHeight * Mathf.Cos(theta) * Mathf.Cos(theta)));
 
-        // ¸ñÇ¥ À§Ä¡±îÁöÀÇ ½Ã°£ °è»ê
+        // ëª©í‘œ ìœ„ì¹˜ê¹Œì§€ì˜ ì‹œê°„ ê³„ì‚°
         timeToTarget = distance / (launchSpeed * Mathf.Cos(theta));
 
         StartCoroutine(MoveInParabola());
@@ -41,7 +54,7 @@ public class Projectile_Range : Projectile_Monster
 
             float t = elapsedTime / timeToTarget;
 
-            float currentHeight = maxHeight * 4 * t * (1 - t); // Æ÷¹°¼±ÀÇ ³ôÀÌ °è»ê
+            float currentHeight = maxHeight * 4 * t * (1 - t); // í¬ë¬¼ì„ ì˜ ë†’ì´ ê³„ì‚°
 
             Vector3 currentPosition = Vector3.Lerp(startPosition, targetPosition, t);
             currentPosition.y += currentHeight;
@@ -51,7 +64,7 @@ public class Projectile_Range : Projectile_Monster
             yield return null;
         }
 
-        transform.position = targetPosition; // ÃÖÁ¾ À§Ä¡ ¼³Á¤
+        transform.position = targetPosition; // ìµœì¢… ìœ„ì¹˜ ì„¤ì •
     }
 
     private void OnCollisionEnter(Collision collision)
@@ -59,9 +72,16 @@ public class Projectile_Range : Projectile_Monster
         if (collision.gameObject.CompareTag("Monster")) return;
 
         var IAttackable = collision.gameObject.GetComponent<IAttackable>();
-        if(IAttackable != null )
+        if (IAttackable != null)
         {
             IAttackable.OnTakeDamaged(damage);
+        }
+        else
+        {
+            if (collision.gameObject.CompareTag("Player"))
+            {
+                Debug.LogAssertion("Player IAttack is null");
+            }
         }
 
         Destroy(gameObject);

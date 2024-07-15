@@ -8,8 +8,12 @@ public class DetectTargetDistance : Action
     public SharedMonsterState OwnerMonsterState;
     public SharedTransform TargetTrans;
     public SharedFloat LastTrackedTime;
-    //[TODO_J] 몬스터 정보 받아오는 스크립트 만들어야됨
-    public SharedMonster Monster;
+
+    public SharedFloat Speed;
+    public SharedFloat AnularSpeed;
+    public SharedFloat AttackDistance;
+    public SharedFloat TrackDistance;
+
     public override TaskStatus OnUpdate()
     {
         Vector3 ownerPos = Owner.transform.position;
@@ -18,14 +22,12 @@ public class DetectTargetDistance : Action
 
         float distance = Vector3.Distance(ownerPos, targetPos);
 
-        var monster = Monster.Value;
-
-        if(distance <= monster.AttackDistance)
+        if(distance <= AttackDistance.Value)
         {
             OwnerMonsterState.Value = MonsterState.Attack;
             LastTrackedTime.Value = Time.time;
         }
-        else if(distance <= monster.TrackDistance)
+        else if(distance <= TrackDistance.Value)
         {
             OwnerMonsterState.Value = MonsterState.Tracking;
             LastTrackedTime.Value = Time.time;

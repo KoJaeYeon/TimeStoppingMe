@@ -9,19 +9,18 @@ public class TrackingTarget : Action
     public SharedFloat speed = 10;
 
     [UnityEngine.Tooltip("The angular speed of the agent")]
-    public SharedFloat angularSpeed = 120;
-
-    [UnityEngine.Tooltip(
-        "The agent has arrived when the destination is less than the specified amount. This distance should be greater than or equal to the NavMeshAgent StoppingDistance.")]
-    public SharedFloat arriveDistance = 0.2f;
+    public SharedFloat angularSpeed;
 
     // Component references
     public SharedNavmeshAgent navMeshAgent;
 
     [UnityEngine.Tooltip("The GameObject that the agent is seeking")]
     public SharedTransform TargetTrans;
-    public SharedMonster SharedMonster;
-
+    [UnityEngine.Tooltip(
+     "The agent has arrived when the destination is less than the specified amount. This distance should be greater than or equal to the NavMeshAgent StoppingDistance.")]
+    public SharedFloat AttackDistance;
+    public SharedFloat TrackDistance;
+    public SharedFloat LastTrackedTime;
     /// <summary>
     /// Allow pathfinding to resume.
     /// </summary>
@@ -34,8 +33,6 @@ public class TrackingTarget : Action
 #else
         navMeshAgent.Value.isStopped = false;
 #endif
-
-        arriveDistance.Value = SharedMonster.Value.AttackDistance;
         SetDestination(TargetTrans.Value.position);
     }
 
@@ -48,6 +45,17 @@ public class TrackingTarget : Action
         {
             Debug.Log("HasArrived체크");
             return TaskStatus.Success;
+        }
+        if(navMeshAgent.Value.remainingDistance > TrackDistance.Value)
+        {
+            if (Time.time - LastTrackedTime.Value > 2)
+            {
+                return TaskStatus.Failure;
+            }           
+        }
+        else
+        {
+            LastTrackedTime.Value = Time.time;
         }
 
         SetDestination(TargetTrans.Value.position);
@@ -75,18 +83,9 @@ public class TrackingTarget : Action
     /// <returns>목적지에 도착했다면 True</returns>
     private bool HasArrived()
     {
-        // 경로가 보류 중인 경우 경로가 아직 계산되지 않았습니다.
-        float remainingDistance;
-        if (navMeshAgent.Value.pathPending)
-        {
-            remainingDistance = float.PositiveInfinity;
-        }
-        else
-        {
-            remainingDistance = navMeshAgent.Value.remainingDistance;
-        }
+        float distance = Vector3.Distance(Owner.transform.position, TargetTrans.Value.position);
 
-        return remainingDistance <= arriveDistance.Value;
+        return distance <= AttackDistance.Value;
     }
 
     /// <summary>
