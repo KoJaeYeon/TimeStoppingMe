@@ -108,6 +108,9 @@ public class PlayerController : MonoBehaviour
     void Move(float deltaTime)
     {
         Vector3 move = new Vector3(moveInput.x, 0, moveInput.y) * moveSpeed * deltaTime;
+
+        if (player.IsCharmed) move = -move;
+
         transform.position += move;
     }
 

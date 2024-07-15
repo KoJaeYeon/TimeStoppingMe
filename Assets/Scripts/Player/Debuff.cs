@@ -20,6 +20,7 @@ public abstract class Debuff
     }
 
     public virtual void ApplyEffect(GameObject target) { }
+    public virtual void RemoveEffect(GameObject target) { }
 
     public bool IsEffectOver()
     {
@@ -35,9 +36,4 @@ public abstract class Debuff
     {
         lastTickTime = Time.time;
     }
-}
-
-public class Debuff_Mind : Debuff
-{
-    public Debuff_Mind() : base(5f, 0, 0) { }
 }
