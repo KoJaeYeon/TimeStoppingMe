@@ -1,6 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics.Contracts;
+using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.AI;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
 
@@ -22,7 +25,10 @@ public class Inventory : MonoBehaviour
     private bool inBox;
     public Image[] inventoryImage = new Image[8]; // 배열 크기 수정
     public PlayerInput playerInput;
+    public Material[] materials;
+    public GameObject inven;
 
+    public bool construct;
     public void Awake()
     {
         playerInput = GetComponent<PlayerInput>();
@@ -34,41 +40,73 @@ public class Inventory : MonoBehaviour
         playerInput.actions["SelectWheel"].performed += OnSelectWheel;
     }
 
-    public void Start()
+    void FixedUpdate()
     {
-        // inventory의 자식 개수 확인 및 인덱스 오류 방지
-        if (transform.childCount > 2)
+        if (construct)
         {
-            inventory = transform.GetChild(2);
-        }
-        else
-        {
-            Debug.LogError("Inventory transform not properly set.");
-            return;
-        }
+            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+            RaycastHit hit;
 
-        GameObject inventoryUI = GameObject.Find("InventoryUi");
-        if (inventoryUI != null)
-        {
-            for (int i = 0; i < inventoryImage.Length; i++)
+            if (Physics.Raycast(ray, out hit, Mathf.Infinity))
             {
-                if (inventoryUI.transform.childCount > i)
+                NavMeshHit navMeshHit;
+                if (NavMesh.SamplePosition(hit.point, out navMeshHit, 100f, NavMesh.AllAreas))
                 {
-                    inventoryImage[i] = inventoryUI.transform.GetChild(i).GetChild(0).GetComponent<Image>();
-                    inventoryImage[i].sprite = null;
-                    inventoryImage[i].enabled = false;
+                    // 샘플링된 위치가 NavMesh 위에 있는지 확인
+                    if (Vector3.Distance(transform.position, navMeshHit.position) <= 5f)
+                    {
+                        foreach (GameObject obj in inventoryIndex)
+                        {
+                            if (obj != null)
+                            {
+                                obj.SetActive(true);
+                                obj.transform.position = navMeshHit.position;
+                                obj.GetComponent<Renderer>().material = materials[0]; // 설치 가능 영역
+                            }
+                        }
+                    }
+                    else
+                    {
+                        // 조건을 만족하지 않으면 비활성화
+                        foreach (GameObject obj in inventoryIndex)
+                        {
+                            if (obj != null)
+                            {
+                                //obj.SetActive(false);
+                                //obj.transform.position = navMeshHit.position;
+                                obj.GetComponent<Renderer>().material = materials[1]; // 설치 불가능 영역
+                            }
+                        }
+                    }
                 }
                 else
                 {
-                    Debug.LogError($"Inventory UI child {i} not found.");
+                    // NavMesh 샘플링이 실패하면 비활성화
+                    foreach (GameObject obj in inventoryIndex)
+                    {
+                        if (obj != null)
+                        {
+                            obj.SetActive(false);
+                            //obj.transform.position = navMeshHit.position;
+                            obj.GetComponent<Renderer>().material = materials[1]; // 설치 불가능 영역
+                        }
+                    }
                 }
             }
         }
-        else
-        {
-            Debug.LogError("InventoryUi GameObject not found.");
-        }
+    }
 
+
+    public void Start()
+    {
+        //GameObject inventoryUI = GameObject.Find("InventoryUi");
+        inven = GameObject.Find("InventoryUi");
+        for (int i = 0; i < inventoryImage.Length; i++)
+        {
+            inventoryImage[i] = inven.transform.GetChild(i).GetChild(0).GetComponent<Image>();
+            inventoryImage[i].sprite = null;
+            inventoryImage[i].enabled = false;
+        }
         selectedSlot = 0;
         SelectSlot();
     }
@@ -113,49 +151,49 @@ public class Inventory : MonoBehaviour
             {
                 case "/Keyboard/1":
                     Debug.Log("1을 입력했습니다.");
-                    ResetSlot();
+                    ResetSlotScale();
                     selectedSlot = 0;
                     SelectSlot();
                     break;
                 case "/Keyboard/2":
                     Debug.Log("2를 입력했습니다.");
-                    ResetSlot();
+                    ResetSlotScale();
                     selectedSlot = 1;
                     SelectSlot();
                     break;
                 case "/Keyboard/3":
                     Debug.Log("3을 입력했습니다.");
-                    ResetSlot();
+                    ResetSlotScale();
                     selectedSlot = 2;
                     SelectSlot();
                     break;
                 case "/Keyboard/4":
                     Debug.Log("4을 입력했습니다.");
-                    ResetSlot();
+                    ResetSlotScale();
                     selectedSlot = 3;
                     SelectSlot();
                     break;
                 case "/Keyboard/5":
                     Debug.Log("5을 입력했습니다.");
-                    ResetSlot();
+                    ResetSlotScale();
                     selectedSlot = 4;
                     SelectSlot();
                     break;
                 case "/Keyboard/6":
                     Debug.Log("6을 입력했습니다.");
-                    ResetSlot();
+                    ResetSlotScale();
                     selectedSlot = 5;
                     SelectSlot();
                     break;
                 case "/Keyboard/7":
                     Debug.Log("7을 입력했습니다.");
-                    ResetSlot();
+                    ResetSlotScale();
                     selectedSlot = 6;
                     SelectSlot();
                     break;
                 case "/Keyboard/8":
                     Debug.Log("8을 입력했습니다.");
-                    ResetSlot();
+                    ResetSlotScale();
                     selectedSlot = 7;
                     SelectSlot();
                     break;
@@ -167,37 +205,25 @@ public class Inventory : MonoBehaviour
 
     private void OnUse(InputAction.CallbackContext context)
     {
-        bool use = false;
-        ItemS item = null;
-        if (inventoryIndex[selectedSlot] != null)
+        if (construct)
         {
-            item = inventoryIndex[selectedSlot].GetComponent<ItemS>();
-            if (item != null)
-            {
-                use = item.UseBles;
-                Debug.Log("UseBles 값: " + use);
-            }
-            else
-            {
-                return;
-            }
+
+            inventoryIndex[selectedSlot].SetActive(true);
+            inventoryIndex[selectedSlot].GetComponent<Renderer>().material = inventoryIndex[selectedSlot].GetComponent<InstantItem>().originMaterial; // 머티리얼 초기화
+            inventoryIndex[selectedSlot].transform.SetParent(null);
+            ClearInventory();
+            construct = false; // construct 상태 종료
         }
-        if (use)
+        else
         {
-            switch (item.DataClassName)
+            bool use = false;
+            InstantItem item = null;
+            if (inventoryIndex[selectedSlot] != null)
             {
-                case "Item_Tabaco":
-                    UseTabacco();
-                    break;
-                case "Item_NightVision":
-                    UseNightVision();
-                    break;
-                default:
-                    break;
+                construct = true;
             }
         }
     }
-
     void UseTabacco()
     {
         UseItem();
@@ -226,7 +252,7 @@ public class Inventory : MonoBehaviour
         inventoryImage[selectedSlot].transform.parent.transform.localScale = new Vector3(1.25f, 1.25f, 1.25f);
     }
 
-    private void ResetSlot()
+    private void ResetSlotScale()
     {
         inventoryImage[selectedSlot].transform.parent.transform.localScale = Vector3.one;
     }
@@ -245,9 +271,9 @@ public class Inventory : MonoBehaviour
         Vector2 scrollValue = context.ReadValue<Vector2>();
         if (scrollValue.y > 0f)
         {
-            if (4 > selectedSlot)
+            if (7 > selectedSlot)
             {
-                ResetSlot();
+                ResetSlotScale();
                 selectedSlot++;
                 SelectSlot();
             }
@@ -256,7 +282,7 @@ public class Inventory : MonoBehaviour
         {
             if (0 < selectedSlot)
             {
-                ResetSlot();
+                ResetSlotScale();
                 Debug.Log(selectedSlot);
                 selectedSlot--;
                 SelectSlot();
