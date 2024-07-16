@@ -22,6 +22,11 @@ public abstract class Debuff
     public virtual void ApplyEffect(GameObject target) { }
     public virtual void RemoveEffect(GameObject target) { }
 
+    public void RefreshDuration()
+    {
+        endTime = Time.time + Duration;
+    }
+
     public bool IsEffectOver()
     {
         return Time.time >= endTime;

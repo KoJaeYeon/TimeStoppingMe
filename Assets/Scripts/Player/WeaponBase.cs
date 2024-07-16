@@ -39,9 +39,9 @@ public class WeaponBase : MonoBehaviour
             return;
         }
 
-        if (Time.time >= nextFireTime)
+        if (Time.unscaledTime >= nextFireTime)
         {
-            nextFireTime = Time.time + 1f / baseFireRate;
+            nextFireTime = Time.unscaledTime + 1f / baseFireRate;
 
             if (projectilePattern == ProjectilePattern.Parallel)
             {

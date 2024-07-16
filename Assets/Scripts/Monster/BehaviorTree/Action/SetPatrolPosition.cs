@@ -42,7 +42,7 @@ public class SetPatrolPosition : Action
         }
 
         float distance = Vector3.Distance(center, randomPoint);
-        Debug.Log("Selected Patrol Point Distance: " + distance);
+        //Debug.Log("Selected Patrol Point Distance: " + distance);
 
         return randomPoint;
     }

@@ -22,6 +22,9 @@ public class DetectTargetDistance : Action
 
         float distance = Vector3.Distance(ownerPos, targetPos);
 
+        //플레이어가 은신이면 몬스터의 상태를 Idle로 바꾼다
+        //은신조건 if()
+
         if(distance <= AttackDistance.Value)
         {
             OwnerMonsterState.Value = MonsterState.Attack;
