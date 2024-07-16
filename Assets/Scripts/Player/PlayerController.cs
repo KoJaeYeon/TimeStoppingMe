@@ -44,7 +44,7 @@ public class PlayerController : MonoBehaviour
 
     public void OnAttack(InputAction.CallbackContext context)
     {
-        if (context.performed && player.CurrentWeapon != null)
+        if (context.performed && player.CurrentWeapon != null && !player.IsSuppressed)
         {
             player.CurrentWeapon.Fire(enemyLayers);
         }
@@ -52,7 +52,7 @@ public class PlayerController : MonoBehaviour
 
     public void OnReload(InputAction.CallbackContext context)
     {
-        if(context.performed && player.CurrentWeapon != null)
+        if(context.performed && player.CurrentWeapon != null && !player.IsSuppressed)
         {
             player.ReloadWeapon();
         }
@@ -60,7 +60,7 @@ public class PlayerController : MonoBehaviour
 
     public void OnInteract(InputAction.CallbackContext context)
     {
-        if (context.performed)
+        if (context.performed && !player.IsSuppressed)
         {
             if(player.currentPlaceableItem != null && player.currentBlueprint != null)
             {
@@ -107,6 +107,8 @@ public class PlayerController : MonoBehaviour
 
     void Move(float deltaTime)
     {
+        if (player.IsSuppressed) return;
+
         Vector3 move = new Vector3(moveInput.x, 0, moveInput.y) * moveSpeed * deltaTime;
 
         if (player.IsCharmed) move = -move;
@@ -116,6 +118,8 @@ public class PlayerController : MonoBehaviour
 
     void Rotate(float deltaTime)
     {
+        if (player.IsSuppressed) return;
+
         Ray ray = Camera.main.ScreenPointToRay(mousePosition);
         Plane playerPlane = new Plane(Vector3.up, transform.position);
 

@@ -23,6 +23,7 @@ public class Player : MonoBehaviour, IAttackable
     public int CurrentHP { get { return currentHP; } set { currentHP = value; } }
     public float MoveSpeed { get { return moveSpeed; } set { moveSpeed = value; } }
     public bool IsCharmed { get; set; } = false;
+    public bool IsSuppressed { get; set; } = false;
     public WeaponBase CurrentWeapon { get { return currentWeapon; } }
 
     
