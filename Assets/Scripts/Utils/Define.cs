@@ -44,3 +44,11 @@ public enum ItemEffectType
 
 #endregion
 
+#region GameState
+public enum GameState
+{
+    StartStage,
+    CombatStage,
+    BossStage
+}
+#endregion
