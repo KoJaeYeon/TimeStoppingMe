@@ -11,6 +11,9 @@ public class Player : MonoBehaviour, IAttackable
     [SerializeField] private WeaponBase currentWeapon;
     [SerializeField] private bool isTimeStopped = false;
 
+    [SerializeField] private int maxTimeGauge = 50;
+    [SerializeField] private int currentTimeGauge;
+
     [SerializeField] private InstallationBlueprint blueprintPrefab;
     public InstallationBlueprint currentBlueprint;
     public PlaceableItem currentPlaceableItem;
@@ -26,9 +29,8 @@ public class Player : MonoBehaviour, IAttackable
     public bool IsSuppressed { get; set; } = false;
     public float MoveSpeed { get { return moveSpeed; } set { moveSpeed = value; } }
     public float RotationSpeed { get { return rotationSpeed; } set { rotationSpeed = value; } }
+    public int CurrentTimeGauge { get { return currentTimeGauge; } }
     public WeaponBase CurrentWeapon { get { return currentWeapon; } }
-
-    
 
     private void Start()
     {
@@ -36,6 +38,7 @@ public class Player : MonoBehaviour, IAttackable
         {
             currentWeapon.Init();
         }
+        currentTimeGauge = maxTimeGauge;
     }
 
     public void SetWeapon(WeaponBase newWeapon)
@@ -173,10 +176,27 @@ public class Player : MonoBehaviour, IAttackable
 
     public void TimeStop()
     {
+        if (currentTimeGauge <= 0 && !isTimeStopped) return;
+
         isTimeStopped = !isTimeStopped;
         Time.timeScale = isTimeStopped ? 0f : 1f;
         Time.fixedDeltaTime = 0.02f * Time.timeScale;
         Debug.Log(isTimeStopped ? "Time stopped." : "Time resumed.");
+
+        if (isTimeStopped)
+        {
+            StartCoroutine(TimeGaugeConsumption());
+        }
+    }
+
+    private IEnumerator TimeGaugeConsumption()
+    {
+        while (isTimeStopped && currentTimeGauge > 0)
+        {
+            yield return new WaitForSecondsRealtime(1f);
+            currentTimeGauge -= 1;
+            if (currentTimeGauge <= 0) TimeStop();
+        }
     }
 
     public bool IsTimeStopped()
