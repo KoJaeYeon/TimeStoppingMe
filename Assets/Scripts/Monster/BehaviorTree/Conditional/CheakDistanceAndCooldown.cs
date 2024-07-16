@@ -2,7 +2,7 @@ using BehaviorDesigner.Runtime;
 using BehaviorDesigner.Runtime.Tasks;
 using UnityEngine;
 [TaskCategory("Monster")]
-public class CheakCooldown : Conditional
+public class CheckCooldown : Conditional
 {
     public SharedFloat SkilCooldown;
     public SharedFloat SkillLastTime;
@@ -15,8 +15,34 @@ public class CheakCooldown : Conditional
     }
 }
 
+[TaskCategory("Monster/Elite")]
+public class CheckALLCooldown : Conditional
+{
+    public SharedFloat Skil1Cooldown;
+    public SharedFloat Skill1LastTime;
+
+    public SharedFloat Skil2Cooldown;
+    public SharedFloat Skill2LastTime;
+    public override TaskStatus OnUpdate()
+    {
+        float nowTime = Time.time;
+        if(nowTime - Skill1LastTime.Value >= Skil1Cooldown.Value)
+        {
+            return TaskStatus.Success;
+        }
+        else if(nowTime - Skill2LastTime.Value >= Skil2Cooldown.Value)
+        {
+            return TaskStatus.Success;
+        }
+        else
+        {
+            return TaskStatus.Running;
+        }
+    }
+}
+
 [TaskCategory("Monster")]
-public class CheakDistance : Conditional
+public class CheckDistance : Conditional
 {
     public SharedTransform TargetTrans;
     public SharedFloat SkillDistance;

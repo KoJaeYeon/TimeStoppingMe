@@ -1,7 +1,7 @@
 using BehaviorDesigner.Runtime;
 using BehaviorDesigner.Runtime.Tasks;
 [TaskCategory("Monster")]
-public class CheakState : Conditional
+public class CheckState : Conditional
 {
     public SharedMonsterState MonsterState;
     public MonsterState cheakState;
