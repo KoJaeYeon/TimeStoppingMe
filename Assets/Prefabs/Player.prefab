@@ -11,7 +11,6 @@ GameObject:
   - component: {fileID: 4168328244803695945}
   - component: {fileID: 8509860347873435492}
   - component: {fileID: 5550688971623976160}
-  - component: {fileID: 4806367353765549097}
   m_Layer: 6
   m_Name: Cylinder
   m_TagString: Untagged
@@ -84,29 +83,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!136 &4806367353765549097
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1146586673814970409}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.5000001
-  m_Height: 2
-  m_Direction: 1
-  m_Center: {x: 0.000000059604645, y: 0, z: -0.00000008940697}
 --- !u!1 &1202025768913997480
 GameObject:
   m_ObjectHideFlags: 0
@@ -118,7 +94,6 @@ GameObject:
   - component: {fileID: 2971561386975238596}
   - component: {fileID: 108340879002902690}
   - component: {fileID: 6249165236705717894}
-  - component: {fileID: 6498018231034919152}
   - component: {fileID: 2956732836615537440}
   m_Layer: 6
   m_Name: DummyWeapon
@@ -193,27 +168,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &6498018231034919152
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1202025768913997480}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &2956732836615537440
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -342,10 +296,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 594805f92a84e6f47be47191d1fc4c39, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 5
-  rotationSpeed: 720
-  cameraFollowSpeed: 0.1
-  cursorFollowFactor: 0.5
   enemyLayers:
     serializedVersion: 2
     m_Bits: 128
@@ -364,12 +314,14 @@ MonoBehaviour:
   maxHP: 0
   currentHP: 0
   moveSpeed: 0
+  rotationSpeed: 720
   currentWeapon: {fileID: 2956732836615537440}
   isTimeStopped: 0
   blueprintPrefab: {fileID: 0}
   currentBlueprint: {fileID: 0}
   currentPlaceableItem: {fileID: 0}
   hotbar: []
+  PlayerMaterial: {fileID: 2100000, guid: be6c685dc7eeadb4c94c75c7672e5439, type: 2}
 --- !u!114 &2324276514401682506
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -512,6 +464,14 @@ MonoBehaviour:
       m_Calls: []
     m_ActionId: 0a82b289-cece-4f9c-87ff-b9564a23c606
     m_ActionName: Player/ItemIndex[/Keyboard/1,/Keyboard/2,/Keyboard/3,/Keyboard/4,/Keyboard/5,/Keyboard/6,/Keyboard/7,/Keyboard/8,/Keyboard/9,/Keyboard/0]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 4cf46c0e-0379-440f-941e-27706ff35545
+    m_ActionName: Player/SelectWheel[/Mouse/scroll]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 0b724274-bfb6-47e5-976e-6c206bae26de
+    m_ActionName: Player/Use[/Keyboard/e]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Player
