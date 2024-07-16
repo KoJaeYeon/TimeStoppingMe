@@ -30,11 +30,15 @@ public class SetPatrolPosition : Action
         NavMeshHit hit;
         Vector3 randomPoint = Vector3.zero;
 
+        // HardWalkable 영역을 제외한 마스크 생성 (HardWalkable이 9999로 설정됨)
+        int hardWalkableArea = 9999;
+        int walkableMask = NavMesh.AllAreas & ~(1 << hardWalkableArea); // HardWalkable 비트 제거
+
         // NavMesh에서 무작위로 위치를 선택합니다.
         for (int i = 0; i < 10; i++) // 최대 10번 시도
         {
             Vector3 potentialPoint = RandomNavMeshLocation(center, minRadius, maxRadius);
-            if (NavMesh.SamplePosition(potentialPoint, out hit, maxRadius, NavMesh.AllAreas))
+            if (NavMesh.SamplePosition(potentialPoint, out hit, maxRadius, walkableMask))
             {
                 randomPoint = hit.position;
                 break;
