@@ -6,7 +6,8 @@ public class Player : MonoBehaviour, IAttackable
 {
     [SerializeField] protected int maxHP;
     [SerializeField] protected int currentHP;
-    [SerializeField] protected float moveSpeed;
+    [SerializeField] protected float moveSpeed = 5f;
+    [SerializeField] protected float rotationSpeed = 720f;
     [SerializeField] private WeaponBase currentWeapon;
     [SerializeField] private bool isTimeStopped = false;
 
@@ -17,11 +18,14 @@ public class Player : MonoBehaviour, IAttackable
 
     [SerializeField] private List<Item> hotbar = new List<Item> ();
     [SerializeField] private List<Debuff> activeDebuffs = new List<Debuff>();
+    [SerializeField] private List<Buff> activeBuffs = new List<Buff>();
 
     public int MaxHP { get { return maxHP; } }
-    public int CurrentHP { get { return  currentHP; } }
-    public float MoveSpeed { get {  return moveSpeed; } }
+    public int CurrentHP { get { return currentHP; } set { currentHP = value; } }
     public bool IsCharmed { get; set; } = false;
+    public bool IsSuppressed { get; set; } = false;
+    public float MoveSpeed { get { return moveSpeed; } set { moveSpeed = value; } }
+    public float RotationSpeed { get { return rotationSpeed; } set { rotationSpeed = value; } }
     public WeaponBase CurrentWeapon { get { return currentWeapon; } }
 
     
@@ -52,11 +56,26 @@ public class Player : MonoBehaviour, IAttackable
         // 디버프 상태 업데이트
         for (int i = activeDebuffs.Count - 1; i >= 0; i--)
         {
-            activeDebuffs[i].ApplyEffect(gameObject);
+            if (activeDebuffs[i].ShouldTick())
+            {
+                activeDebuffs[i].ApplyEffect(gameObject);
+                activeDebuffs[i].UpdateTickTime();
+            }
+
             if (activeDebuffs[i].IsEffectOver())
             {
                 activeDebuffs[i].RemoveEffect(gameObject);
                 activeDebuffs.RemoveAt(i);
+            }
+        }
+
+        // 버프 상태 업데이트
+        for (int i = activeBuffs.Count - 1; i >= 0; i--)
+        {
+            if (activeBuffs[i].IsTemporary && activeBuffs[i].IsEffectOver())
+            {
+                activeBuffs[i].RemoveEffect(this);
+                activeBuffs.RemoveAt(i);
             }
         }
 
@@ -87,7 +106,7 @@ public class Player : MonoBehaviour, IAttackable
             if (activeDebuff.GetType() == debuff.GetType())
             {
                 debuffExists = true;
-                activeDebuff.Duration = debuff.Duration; // 기존 효과의 지속시간 갱신
+                activeDebuff.RefreshDuration(); // 기존 효과의 지속시간 갱신
                 break;
             }
         }
@@ -100,21 +119,41 @@ public class Player : MonoBehaviour, IAttackable
         }
     }
 
-    public void OnTakeBuffed<T>(BuffType bufftype, T buff) where T : Buff
+    public void OnTakeBuffed<T>(BuffType buffType, T buff) where T : Buff
     {
+        activeBuffs.Add(buff);
         buff.ApplyEffect(this);
+        if (buff.IsTemporary)
+        {
+            StartCoroutine(HandleBuff(buff));
+        }
     }
 
     private IEnumerator HandleDebuff(Debuff debuff)
     {
         while (!debuff.IsEffectOver())
         {
-            debuff.ApplyEffect(gameObject);
-            yield return new WaitForSeconds(debuff.TickInterval);
+            if (debuff.ShouldTick())
+            {
+                debuff.ApplyEffect(gameObject);
+                debuff.UpdateTickTime();
+            }
+            yield return null;
         }
 
         debuff.RemoveEffect(gameObject);
         activeDebuffs.Remove(debuff);
+    }
+
+    private IEnumerator HandleBuff(Buff buff)
+    {
+        while (!buff.IsEffectOver())
+        {
+            yield return null;
+        }
+
+        buff.RemoveEffect(this);
+        activeBuffs.Remove(buff);
     }
 
     void Die()
