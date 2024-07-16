@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 808f47e1d040a1446b939b2a3675cbd2, type: 3}
+  m_Name: Debuff
+  m_EditorClassIdentifier: 
+  Burn_Duration: 0
+  Burn_TickInterval: 0
+  Burn_DamagePerTick: 0
+  Poision_Duration: 0
+  Poision_TickInterval: 0
+  Poision_DamagePerTick: 0
+  Mind_Duration: 0

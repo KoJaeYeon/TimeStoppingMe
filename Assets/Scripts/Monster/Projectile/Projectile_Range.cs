@@ -65,6 +65,7 @@ public class Projectile_Range : Projectile_Monster
         }
 
         transform.position = targetPosition; // 최종 위치 설정
+        Destroy(gameObject);
     }
 
     private void OnCollisionEnter(Collision collision)

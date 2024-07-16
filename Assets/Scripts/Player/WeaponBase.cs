@@ -70,6 +70,7 @@ public class WeaponBase : MonoBehaviour
             GameObject bullet = Instantiate(bulletPrefab, firePoint.position + offset, firePoint.rotation);
             Bullet bulletScript = bullet.GetComponent<Bullet>();
             bulletScript.Initialize(baseDamage, enemyLayers, projectileSpeed);
+            bullets[i] = bulletScript;
         }
     }
 
