@@ -1,5 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -105,6 +104,8 @@ public class Monster_Boss : Monster
     {
         prefabRoot = new GameObject();
         var monster_Data_Boss = monster_Data as Monster_Data_Boss;
+
+        Projectile_HellFire.used = false;
         for (int i = 0; i < monster_Data_Boss.fireFlooring_number; i++)
         {
             Vector3 newPos = GetRandomNavMeshPoint(transform.position, 0, monster_Data_Boss.fiireFlooring_range);
@@ -187,5 +188,17 @@ public class Monster_Boss : Monster
         randomDirection.y = center.y; // y 축을 맞춰 평면 상에서만 이동하도록 합니다.
 
         return randomDirection;
+    }
+
+    public override void DrawArc()
+    {
+        if(AttackCollision.activeSelf == true)
+        {
+            Handles.color = Color.red;
+            var monster_Data_Boss = monster_Data as Monster_Data_Boss;
+            Handles.DrawSolidArc(transform.position, Vector3.up, transform.forward, monster_Data.Search_Range / 2, monster_Data_Boss.skill_bite_Distance);
+            Handles.DrawSolidArc(transform.position, Vector3.up, transform.forward, -monster_Data.Search_Range / 2, monster_Data_Boss.skill_bite_Distance);
+        }
+        
     }
 }
