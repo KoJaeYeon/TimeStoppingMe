@@ -73,6 +73,7 @@ public class Inventory : MonoBehaviour
                     }
                     else
                     {
+                        inventoryIndex[selectedSlot].transform.position = constructPosition;
                         validPlacement = false;
                         inventoryIndex[selectedSlot].GetComponent<Renderer>().material = materials[1]; // 설치 불가능 영역
                     }
