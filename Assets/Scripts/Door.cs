@@ -1,20 +1,20 @@
-using UnityEngine;
+ï»¿using UnityEngine;
 
 public class Door : MonoBehaviour
 {
     public void Open()
     {
-        // ¹®À» ¿©´Â ¾Ö´Ï¸ŞÀÌ¼Ç ¶Ç´Â ·ÎÁ÷ ±¸Çö
+        // ë¬¸ì„ ì—¬ëŠ” ì• ë‹ˆë©”ì´ì…˜ ë˜ëŠ” ë¡œì§ êµ¬í˜„
         Debug.Log($"{gameObject.name} is opened.");
-        // ¹®ÀÌ ¿­¸± ¶§ Äİ¶óÀÌ´õ¸¦ ºñÈ°¼ºÈ­ÇÏ¿© Åë°ú °¡´ÉÇÏµµ·Ï ¼³Á¤
+        // ë¬¸ì´ ì—´ë¦´ ë•Œ ì½œë¼ì´ë”ë¥¼ ë¹„í™œì„±í™”í•˜ì—¬ í†µê³¼ ê°€ëŠ¥í•˜ë„ë¡ ì„¤ì •
         GetComponent<Collider>().enabled = false;
     }
 
     public void Close()
     {
-        // ¹®À» ´İ´Â ¾Ö´Ï¸ŞÀÌ¼Ç ¶Ç´Â ·ÎÁ÷ ±¸Çö
+        // ë¬¸ì„ ë‹«ëŠ” ì• ë‹ˆë©”ì´ì…˜ ë˜ëŠ” ë¡œì§ êµ¬í˜„
         Debug.Log($"{gameObject.name} is closed.");
-        // ¹®ÀÌ ´İÈú ¶§ Äİ¶óÀÌ´õ¸¦ È°¼ºÈ­ÇÏ¿© Åë°ú ºÒ°¡´ÉÇÏµµ·Ï ¼³Á¤
+        // ë¬¸ì´ ë‹«í ë•Œ ì½œë¼ì´ë”ë¥¼ í™œì„±í™”í•˜ì—¬ í†µê³¼ ë¶ˆê°€ëŠ¥í•˜ë„ë¡ ì„¤ì •
         GetComponent<Collider>().enabled = true;
     }
 }

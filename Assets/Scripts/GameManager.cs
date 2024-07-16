@@ -25,6 +25,9 @@ public class GameManager : MonoBehaviour
     private bool allCombatStagesCleared = false;
     private List<GameObject> droppedWeapons = new List<GameObject>();
 
+
+
+
     // 인스턴스에 접근할 수 있는 정적 프로퍼티
     public static GameManager Instance
     {
