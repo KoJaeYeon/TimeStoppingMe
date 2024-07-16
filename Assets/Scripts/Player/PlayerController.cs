@@ -6,11 +6,6 @@ using UnityEngine.InputSystem;
 
 public class PlayerController : MonoBehaviour
 {
-    public float moveSpeed = 5f;
-    public float rotationSpeed = 720f;
-    public float cameraFollowSpeed = 0.1f;
-    public float cursorFollowFactor = 0.5f;
-
     private Player player;
     private CinemachineVirtualCamera cinemachineVirtualCamera;
     private Transform cameraTransform;
@@ -76,6 +71,14 @@ public class PlayerController : MonoBehaviour
                     {
                         item.Use(player);
                     }
+                    else
+                    {
+                        GameObject weapon = hit.collider.GetComponent<GameObject>();
+                        if (weapon != null && weapon.CompareTag("Weapon"))
+                        {
+                            GameManager.Instance.OnWeaponSelected(weapon);
+                        }
+                    }
                 }
             }
         }
@@ -109,7 +112,7 @@ public class PlayerController : MonoBehaviour
     {
         if (player.IsSuppressed) return;
 
-        Vector3 move = new Vector3(moveInput.x, 0, moveInput.y) * moveSpeed * deltaTime;
+        Vector3 move = new Vector3(moveInput.x, 0, moveInput.y) * player.MoveSpeed * deltaTime;
 
         if (player.IsCharmed) move = -move;
 
@@ -132,7 +135,7 @@ public class PlayerController : MonoBehaviour
             if (direction != Vector3.zero)
             {
                 Quaternion targetRotation = Quaternion.LookRotation(direction);
-                transform.rotation = Quaternion.RotateTowards(transform.rotation, targetRotation, rotationSpeed * deltaTime);
+                transform.rotation = Quaternion.RotateTowards(transform.rotation, targetRotation, player.RotationSpeed * deltaTime);
             }
         }
     }
@@ -140,7 +143,7 @@ public class PlayerController : MonoBehaviour
     void UpdateCameraFollow(float deltaTime)
     {
         Vector3 cursorWorldPosition = Camera.main.ScreenToWorldPoint(new Vector3(mousePosition.x, mousePosition.y, cameraTransform.position.y));
-        Vector3 targetPosition = player.transform.position + cameraOffset + (cursorWorldPosition - player.transform.position) * cursorFollowFactor;
-        cameraTransform.position = Vector3.Lerp(cameraTransform.position, targetPosition, cameraFollowSpeed * deltaTime);
+        Vector3 targetPosition = player.transform.position + cameraOffset + (cursorWorldPosition - player.transform.position) * 0.5f;
+        cameraTransform.position = Vector3.Lerp(cameraTransform.position, targetPosition, 0.1f * deltaTime);
     }
 }

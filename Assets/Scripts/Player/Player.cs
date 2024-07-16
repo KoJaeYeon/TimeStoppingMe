@@ -6,7 +6,8 @@ public class Player : MonoBehaviour, IAttackable
 {
     [SerializeField] protected int maxHP;
     [SerializeField] protected int currentHP;
-    [SerializeField] protected float moveSpeed;
+    [SerializeField] protected float moveSpeed = 5f;
+    [SerializeField] protected float rotationSpeed = 720f;
     [SerializeField] private WeaponBase currentWeapon;
     [SerializeField] private bool isTimeStopped = false;
 
@@ -21,9 +22,10 @@ public class Player : MonoBehaviour, IAttackable
 
     public int MaxHP { get { return maxHP; } }
     public int CurrentHP { get { return currentHP; } set { currentHP = value; } }
-    public float MoveSpeed { get { return moveSpeed; } set { moveSpeed = value; } }
     public bool IsCharmed { get; set; } = false;
     public bool IsSuppressed { get; set; } = false;
+    public float MoveSpeed { get { return moveSpeed; } set { moveSpeed = value; } }
+    public float RotationSpeed { get { return rotationSpeed; } set { rotationSpeed = value; } }
     public WeaponBase CurrentWeapon { get { return currentWeapon; } }
 
     

@@ -7,6 +7,24 @@ public class GameManager : MonoBehaviour
     // 싱글톤 인스턴스를 저장할 정적 변수
     private static GameManager instance;
 
+    public GameState CurrentState { get; private set; }
+
+    [SerializeField] private GameObject playerPrefab;
+    [SerializeField] private Transform startStageSpawnPoint;
+    [SerializeField] private List<GameObject> availableWeapons;
+    [SerializeField] private Transform weaponDropPoint;
+    [SerializeField] private List<Transform> combatStageSpawnPoints;
+    [SerializeField] private Transform bossStageSpawnPoint;
+    [SerializeField] private List<GameObject> combatStageMonsters;
+    [SerializeField] private GameObject bossMonsterPrefab;
+    [SerializeField] private List<Door> combatStageDoors;
+    [SerializeField] private Door bossStageDoor;
+
+    private GameObject player;
+    private int currentCombatStage = 0;
+    private bool allCombatStagesCleared = false;
+    private List<GameObject> droppedWeapons = new List<GameObject>();
+
     // 인스턴스에 접근할 수 있는 정적 프로퍼티
     public static GameManager Instance
     {
@@ -26,23 +44,6 @@ public class GameManager : MonoBehaviour
             return instance;
         }
     }
-
-    public GameState CurrentState { get; private set; }
-
-    [SerializeField] private GameObject playerPrefab;
-    [SerializeField] private Transform startStageSpawnPoint;
-    [SerializeField] private List<GameObject> availableWeapons;
-    [SerializeField] private Transform weaponDropPoint;
-    [SerializeField] private List<Transform> combatStageSpawnPoints;
-    [SerializeField] private Transform bossStageSpawnPoint;
-    [SerializeField] private List<GameObject> combatStageMonsters;
-    [SerializeField] private GameObject bossMonsterPrefab;
-    [SerializeField] private List<Door> combatStageDoors;
-    [SerializeField] private Door bossStageDoor;
-
-    private GameObject player;
-    private int currentCombatStage = 0;
-    private bool allCombatStagesCleared = false;
 
     // 다른 스크립트가 이 클래스를 직접 생성하지 못하도록 private 생성자
     protected GameManager() { }
@@ -83,7 +84,8 @@ public class GameManager : MonoBehaviour
     {
         foreach (var weapon in availableWeapons)
         {
-            Instantiate(weapon, weaponDropPoint.position + Random.insideUnitSphere * 2, Quaternion.identity);
+            GameObject droppedWeapon = Instantiate(weapon, weaponDropPoint.position + Random.insideUnitSphere * 2, Quaternion.identity);
+            droppedWeapons.Add(droppedWeapon);
         }
     }
 
@@ -91,7 +93,20 @@ public class GameManager : MonoBehaviour
     {
         Player playerScript = player.GetComponent<Player>();
         playerScript.SetWeapon(selectedWeapon.GetComponent<WeaponBase>());
+        RemoveOtherWeapons(selectedWeapon);
         OpenCombatStageDoors();
+    }
+
+    private void RemoveOtherWeapons(GameObject selectedWeapon)
+    {
+        foreach (var weapon in droppedWeapons)
+        {
+            if (weapon != selectedWeapon)
+            {
+                Destroy(weapon);
+            }
+        }
+        droppedWeapons.Clear();
     }
 
     private void OpenCombatStageDoors()
@@ -176,6 +191,20 @@ public class GameManager : MonoBehaviour
     public void OnBossKilled()
     {
         Debug.Log("Boss defeated! You win!");
-        // ���� �¸� ������ �����մϴ�.
+        // 게임 승리 로직을 구현합니다.
+    }
+
+    public void OnPlayerEnterStage(Stage stage)
+    {
+        CurrentState = stage.StageType;
+        Debug.Log("Player entered " + stage.StageType);
+        if (CurrentState == GameState.CombatStage && !allCombatStagesCleared)
+        {
+            EnterCombatStage();
+        }
+        else if (CurrentState == GameState.BossStage)
+        {
+            EnterBossStage();
+        }
     }
 }
