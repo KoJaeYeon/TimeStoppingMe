@@ -20,6 +20,14 @@ public class Debuff_Slow : Debuff
             originalMoveSpeed = player.MoveSpeed;
             player.MoveSpeed *= (1 - slowPercentage / 100f);
         }
+        else
+        {
+            Monster monster = target.GetComponent<Monster>();
+            if (monster != null)
+            {
+                monster.bt.SetVariableValue("Speed", monster.monster_Data.MoveSpeed/2);
+            }
+        }
     }
 
     public override void RemoveEffect(GameObject target)
@@ -28,6 +36,15 @@ public class Debuff_Slow : Debuff
         if(player != null)
         {
             player.MoveSpeed = originalMoveSpeed;
+        }
+        else
+        {
+            Monster monster = target.GetComponent<Monster>();
+            if (monster != null)
+            {
+                monster.bt.SetVariableValue("Speed", monster.monster_Data.MoveSpeed);
+                Debug.Log("Remove");
+            }
         }
     }
 }

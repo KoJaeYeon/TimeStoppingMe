@@ -197,6 +197,7 @@ MonoBehaviour:
   TargetTrans: {fileID: 0}
   health: 0
   monster_Data: {fileID: 11400000, guid: 78347bfcf58bda04cbd0a2fca32b2681, type: 2}
+  bt: {fileID: -6457268569055352646}
   LaunchTrans:
   - {fileID: 5374568763078245750}
   - {fileID: 7218582529253653562}
