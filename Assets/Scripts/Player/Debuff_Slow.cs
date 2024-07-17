@@ -6,26 +6,39 @@ public class Debuff_Slow : Debuff
 {
     private float originalMoveSpeed;
     private float slowPercentage;
+    private bool isApplied = false;
 
-    public Debuff_Slow(float slowPercentage) : base(0, 0, 0) // 지속 시간 없음
+
+    public Debuff_Slow(float slowPercentage) : base(0.1f, 0, 0) // 지속 시간 없음
     {
         this.slowPercentage = slowPercentage;
     }
 
     public override void ApplyEffect(GameObject target)
     {
+        if (isApplied) return;
+
         Player player = target.GetComponent<Player>();
         if (player != null)
         {
             originalMoveSpeed = player.MoveSpeed;
-            player.MoveSpeed *= (1 - slowPercentage / 100f);
+            player.MoveSpeed *= (1 - slowPercentage);
+            isApplied = true;
         }
         else
         {
             Monster monster = target.GetComponent<Monster>();
             if (monster != null)
             {
+                monster.bt.SetVariableValue("Speed", monster.monster_Data.MoveSpeed * (1 - slowPercentage));
+                if (monster is Monster_Elite)
+                {
+                    var monsterE = monster as Monster_Elite;
+                    var data = monsterE.monster_Data as Monster_Data_Elite;
+                    monsterE.bt.SetVariableValue("Skill2Speed", data.skill_footWalk_Speed * (1 - slowPercentage));
+                }
                 monster.bt.SetVariableValue("Speed", monster.monster_Data.MoveSpeed/2);
+                isApplied = true;
             }
         }
     }
@@ -35,7 +48,9 @@ public class Debuff_Slow : Debuff
         Player player = target.GetComponent<Player>();
         if(player != null)
         {
+            Debug.Log(player.MoveSpeed);
             player.MoveSpeed = originalMoveSpeed;
+            isApplied = false;
         }
         else
         {
@@ -43,7 +58,13 @@ public class Debuff_Slow : Debuff
             if (monster != null)
             {
                 monster.bt.SetVariableValue("Speed", monster.monster_Data.MoveSpeed);
-                Debug.Log("Remove");
+                if(monster is Monster_Elite)
+                {
+                    var monsterE = monster as Monster_Elite;
+                    var data = monsterE.monster_Data as Monster_Data_Elite;
+                    monsterE.bt.SetVariableValue("Skill2Speed", data.skill_footWalk_Speed);
+                }
+                isApplied = false;
             }
         }
     }

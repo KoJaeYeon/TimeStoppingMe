@@ -4,11 +4,15 @@ using UnityEngine;
 
 public class Player : MonoBehaviour, IAttackable
 {
+    [SerializeField] private PlayerData playerData;
+    [SerializeField] private GameObject bulletPrefab;
+    [SerializeField] private Transform firePoint;
+
     [SerializeField] protected int maxHP;
     [SerializeField] protected int currentHP;
-    [SerializeField] protected float moveSpeed = 5f;
-    [SerializeField] protected float rotationSpeed = 720f;
-    [SerializeField] private WeaponBase currentWeapon;
+    [SerializeField] protected float moveSpeed;
+    [SerializeField] protected float rotationSpeed;
+    [SerializeField] private GameObject dummyWeapon;
     [SerializeField] private bool isTimeStopped = false;
 
     [SerializeField] private int maxTimeGauge = 50;
@@ -30,25 +34,39 @@ public class Player : MonoBehaviour, IAttackable
     public float MoveSpeed { get { return moveSpeed; } set { moveSpeed = value; } }
     public float RotationSpeed { get { return rotationSpeed; } set { rotationSpeed = value; } }
     public int CurrentTimeGauge { get { return currentTimeGauge; } }
-    public WeaponBase CurrentWeapon { get { return currentWeapon; } }
+    public WeaponBase CurrentWeapon { get; private set; }
 
     public Material PlayerMaterial;
     bool NoDamageMode = false;
 
     private void Start()
     {
-        if(currentWeapon != null)
-        {
-            currentWeapon.Init();
-        }
+        InitializePlayer();
+        dummyWeapon.SetActive(false);
         currentTimeGauge = maxTimeGauge;
     }
 
-    public void SetWeapon(WeaponBase newWeapon)
+    private void InitializePlayer()
     {
-        currentWeapon = newWeapon;
-        currentWeapon.Init();
+        maxHP = playerData.maxHP;
+        CurrentHP = maxHP;
+        moveSpeed = playerData.moveSpeed;
+        rotationSpeed = playerData.rotationSpeed;
     }
+
+    public void EquipWeapon<T>() where T : WeaponBase
+    {
+        if (dummyWeapon.TryGetComponent(out WeaponBase existingWeapon))
+        {
+            Destroy(existingWeapon);
+        }
+        WeaponBase newWeapon = dummyWeapon.AddComponent<T>();
+        newWeapon.SetBulletPrefabAndFirePoint(bulletPrefab, firePoint);
+        newWeapon.Init();
+        CurrentWeapon = newWeapon;
+        dummyWeapon.SetActive(true);
+    }
+
 
     public void OnUpdateStat(int maxHP,  int currentHP, float moveSpeed)
     {
@@ -195,9 +213,9 @@ public class Player : MonoBehaviour, IAttackable
 
     public void ReloadWeapon()
     {
-        if (currentWeapon != null)
+        if (CurrentWeapon != null)
         {
-            StartCoroutine(currentWeapon.Reload());
+            StartCoroutine(CurrentWeapon.Reload());
         }
     }
 

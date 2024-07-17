@@ -17,6 +17,8 @@ public class WeaponTypeD : WeaponBase
         fireMode = FireMode.Single;
         projectileCount = 5; // 예시로 산탄 발사체 5개
         projectilePattern = ProjectilePattern.Spread;
+
+        Init();
     }
 
     public override void Fire(LayerMask enemyLayers)

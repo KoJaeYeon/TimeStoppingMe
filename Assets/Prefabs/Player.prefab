@@ -94,7 +94,6 @@ GameObject:
   - component: {fileID: 2971561386975238596}
   - component: {fileID: 108340879002902690}
   - component: {fileID: 6249165236705717894}
-  - component: {fileID: 2956732836615537440}
   m_Layer: 6
   m_Name: DummyWeapon
   m_TagString: Untagged
@@ -168,32 +167,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!114 &2956732836615537440
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1202025768913997480}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a9968d7e8c35dab41a4f18b22f54e906, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  bulletPrefab: {fileID: 6268056124104497011, guid: 3c8acda65cbea544b9b462484b2a617b,
-    type: 3}
-  firePoint: {fileID: 6307005309533821178}
-  baseDamage: 0
-  baseFireRate: 0
-  baseRange: 0
-  projectileSpeed: 0
-  projectileCount: 0
-  parallelSpacing: 0.5
-  maxAmmoSize: 0
-  reloadTime: 0
-  projectilePattern: 0
-  fireMode: 0
-  bullets: []
 --- !u!1 &2749082093588800496
 GameObject:
   m_ObjectHideFlags: 0
@@ -210,12 +183,14 @@ GameObject:
   - component: {fileID: 2324276514401682506}
   - component: {fileID: 1674721458728525256}
   - component: {fileID: 450198742396549511}
+  - component: {fileID: 81333727514890254}
+  - component: {fileID: 8919055681565450528}
   m_Layer: 6
   m_Name: Player
   m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 8
   m_IsActive: 1
 --- !u!4 &1092824427976129861
 Transform:
@@ -311,12 +286,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1533be7ce97f0124eb6178fe11720e13, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHP: 0
-  currentHP: 0
-  moveSpeed: 0
+  playerData: {fileID: 11400000, guid: 45ff78b090680dc4d9d582c7c5d90fa4, type: 2}
+  bulletPrefab: {fileID: 6268056124104497011, guid: 3c8acda65cbea544b9b462484b2a617b,
+    type: 3}
+  firePoint: {fileID: 6307005309533821178}
+  maxHP: 6
+  currentHP: 6
+  moveSpeed: 5
   rotationSpeed: 720
-  currentWeapon: {fileID: 2956732836615537440}
+  dummyWeapon: {fileID: 1202025768913997480}
   isTimeStopped: 0
+  maxTimeGauge: 50
+  currentTimeGauge: 0
   blueprintPrefab: {fileID: 0}
   currentBlueprint: {fileID: 0}
   currentPlaceableItem: {fileID: 0}
@@ -492,12 +473,12 @@ CapsuleCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.5
-  m_Height: 2
+  m_Radius: 2.31
+  m_Height: 2.47
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!54 &450198742396549511
@@ -525,8 +506,77 @@ Rigidbody:
   m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 126
+  m_Constraints: 112
   m_CollisionDetection: 0
+--- !u!114 &81333727514890254
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2749082093588800496}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 277ac0ef0eb016f40bca72047b74d720, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mainCamera: {fileID: 0}
+  range: 100
+  inventoryIndex:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  inturectItem: {fileID: 0}
+  path: 
+  selectedSlot: 0
+  inventory: {fileID: 1092824427976129861}
+  throwSpeed: 0
+  inventoryImage:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  playerInput: {fileID: 2324276514401682506}
+  materials:
+  - {fileID: 2100000, guid: 7ca1a4ad14265b147bf9dccf253bc7fb, type: 2}
+  - {fileID: 2100000, guid: 274f1900fdbc83d4da39b1223d12e02a, type: 2}
+  inven: {fileID: 2749082093588800496}
+  construct: 0
+  MaxDistance: 10
+  rotatSpeed: 15
+  item: {fileID: 0}
+--- !u!136 &8919055681565450528
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2749082093588800496}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.5
+  m_Height: 2
+  m_Direction: 1
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &4675167837256558132
 GameObject:
   m_ObjectHideFlags: 0

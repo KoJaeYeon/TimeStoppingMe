@@ -57,3 +57,20 @@ public class CheckDistance : Conditional
             : TaskStatus.Running;
     }
 }
+
+[TaskCategory("Monster")]
+public class CheckDistance_Fail : Conditional
+{
+    public SharedTransform TargetTrans;
+    public SharedFloat SkillDistance;
+    public override TaskStatus OnUpdate()
+    {
+        Transform targetTrans = TargetTrans.Value;
+        Transform ownerTrans = Owner.transform;
+
+        float distance = Vector3.Distance(ownerTrans.position, targetTrans.position);
+        return (distance <= SkillDistance.Value)
+            ? TaskStatus.Success
+            : TaskStatus.Failure;
+    }
+}

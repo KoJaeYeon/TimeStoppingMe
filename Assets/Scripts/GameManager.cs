@@ -1,3 +1,4 @@
+using Cinemachine;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -10,13 +11,12 @@ public class GameManager : MonoBehaviour
 
     [SerializeField] private GameObject playerPrefab;
     [SerializeField] private Transform startStageSpawnPoint;
-    [SerializeField] private List<GameObject> availableWeapons;
     [SerializeField] private Transform weaponDropPoint;
     [SerializeField] private List<Door> combatStageDoors;
     [SerializeField] private Door bossStageDoor;
+    [SerializeField] private CinemachineVirtualCamera virtualCamera;
 
     private GameObject player;
-    private List<GameObject> droppedWeapons = new List<GameObject>();
 
     public static GameManager Instance
     {
@@ -57,41 +57,16 @@ public class GameManager : MonoBehaviour
     {
         CurrentState = GameState.StartStage;
         SpawnPlayer(startStageSpawnPoint.position);
-        DropWeapons();
     }
 
     private void SpawnPlayer(Vector3 spawnPoint)
     {
         player = Instantiate(playerPrefab, spawnPoint, Quaternion.identity);
-    }
-
-    private void DropWeapons()
-    {
-        foreach (var weapon in availableWeapons)
+        CinemachineVirtualCamera virtualCamera = FindObjectOfType<CinemachineVirtualCamera>();
+        if (virtualCamera != null)
         {
-            GameObject droppedWeapon = Instantiate(weapon, weaponDropPoint.position + Random.insideUnitSphere * 2, Quaternion.identity);
-            droppedWeapons.Add(droppedWeapon);
+            virtualCamera.Follow = player.transform;
         }
-    }
-
-    public void OnWeaponSelected(GameObject selectedWeapon)
-    {
-        Player playerScript = player.GetComponent<Player>();
-        playerScript.SetWeapon(selectedWeapon.GetComponent<WeaponBase>());
-        RemoveOtherWeapons(selectedWeapon);
-        OpenCombatStageDoors();
-    }
-
-    private void RemoveOtherWeapons(GameObject selectedWeapon)
-    {
-        foreach (var weapon in droppedWeapons)
-        {
-            if (weapon != selectedWeapon)
-            {
-                Destroy(weapon);
-            }
-        }
-        droppedWeapons.Clear();
     }
 
     private void OpenCombatStageDoors()

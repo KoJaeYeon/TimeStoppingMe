@@ -10,7 +10,7 @@ public class Monster_Data_Elite : Monster_DATA
     public float skill_scratch_Cooldown;
     public float skill_scratch_Distance;
     public float skill_scratch_LaunchSpeed;
-    [Header("스킬2 깨물기")]
+    [Header("스킬2 재빠른 발놀림")]
     public float skill_footWalk_Cooldown;
     public float skill_footWalk_Distance;
     public float skill_footWalk_Speed;

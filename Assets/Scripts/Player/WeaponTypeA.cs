@@ -17,6 +17,8 @@ public class WeaponTypeA : WeaponBase
         fireMode = FireMode.Burst;
         projectileCount = 2;
         projectilePattern = ProjectilePattern.Parallel;
+
+        Init();
     }
 
     public override void Fire(LayerMask enemyLayers)
