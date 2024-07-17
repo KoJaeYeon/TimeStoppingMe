@@ -156,6 +156,7 @@ GameObject:
   - component: {fileID: -3676751325729682001}
   - component: {fileID: -6457268569055352646}
   - component: {fileID: 1704483102835690248}
+  - component: {fileID: 967031457127523685}
   m_Layer: 7
   m_Name: Monster_Boss
   m_TagString: Monster
@@ -196,6 +197,7 @@ MonoBehaviour:
   TargetTrans: {fileID: 0}
   health: 0
   monster_Data: {fileID: 11400000, guid: 78347bfcf58bda04cbd0a2fca32b2681, type: 2}
+  bt: {fileID: -6457268569055352646}
   LaunchTrans:
   - {fileID: 5374568763078245750}
   - {fileID: 7218582529253653562}
@@ -285,9 +287,36 @@ CapsuleCollider:
   m_Enabled: 1
   serializedVersion: 2
   m_Radius: 1
-  m_Height: 2
+  m_Height: 2.3
   m_Direction: 1
   m_Center: {x: 0, y: 1, z: 0}
+--- !u!54 &967031457127523685
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1731922210431051255}
+  serializedVersion: 4
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 0
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 126
+  m_CollisionDetection: 0
 --- !u!1 &2946057251669892678
 GameObject:
   m_ObjectHideFlags: 0
