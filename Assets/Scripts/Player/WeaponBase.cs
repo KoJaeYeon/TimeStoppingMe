@@ -39,9 +39,9 @@ public class WeaponBase : MonoBehaviour
             return;
         }
 
-        if (Time.time >= nextFireTime)
+        if (Time.unscaledTime >= nextFireTime)
         {
-            nextFireTime = Time.time + 1f / baseFireRate;
+            nextFireTime = Time.unscaledTime + 1f / baseFireRate;
 
             if (projectilePattern == ProjectilePattern.Parallel)
             {
@@ -70,6 +70,7 @@ public class WeaponBase : MonoBehaviour
             GameObject bullet = Instantiate(bulletPrefab, firePoint.position + offset, firePoint.rotation);
             Bullet bulletScript = bullet.GetComponent<Bullet>();
             bulletScript.Initialize(baseDamage, enemyLayers, projectileSpeed);
+            bullets[i] = bulletScript;
         }
     }
 

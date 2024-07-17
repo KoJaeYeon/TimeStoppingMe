@@ -8,7 +8,7 @@ public abstract class Debuff
     public float TickInterval { get; set; }
     public int DamagePerTick {  get; set; }
     protected float lastTickTime;
-    protected float endTime;
+    public float endTime;
 
     public Debuff(float duration, float tickInterval, int damagePerTick)
     {
@@ -21,6 +21,11 @@ public abstract class Debuff
 
     public virtual void ApplyEffect(GameObject target) { }
     public virtual void RemoveEffect(GameObject target) { }
+
+    public void RefreshDuration()
+    {
+        endTime = Time.time + Duration;
+    }
 
     public bool IsEffectOver()
     {

@@ -47,7 +47,7 @@ public class Projectile_LoveShot : Projectile_Monster
             }
         }
 
-        Debug.Log("Collsion");
+        //Debug.Log($"Collsion : {collision.gameObject.name}");
         Destroy(gameObject);
     }
 }

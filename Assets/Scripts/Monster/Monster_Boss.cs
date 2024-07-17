@@ -1,11 +1,10 @@
-using System.Collections;
-using System.Collections.Generic;
+ï»¿using UnityEditor;
 using UnityEngine;
 using UnityEngine.AI;
 
 public class Monster_Boss : Monster
 {
-    public Transform[] LaunchTrans; // ¿©·¯ ¹ß»ç À§Ä¡¸¦ °¡Áö´Â ¹è¿­
+    public Transform[] LaunchTrans; // ì—¬ëŸ¬ ë°œì‚¬ ìœ„ì¹˜ë¥¼ ê°€ì§€ëŠ” ë°°ì—´
 
     public GameObject AttackCollision;
 
@@ -22,43 +21,19 @@ public class Monster_Boss : Monster
         AttackCollision.SetActive(false);
     }
 
-    private void Update()
-    {
-        if(Input.GetKeyDown(KeyCode.F1))
-        {
-            Attack1();
-        }
-        else if(Input.GetKeyDown(KeyCode.F3))
-        {
-            Attack3();
-        }
-        else if (Input.GetKeyDown(KeyCode.Alpha3))
-        {
-            Attack3_End();
-        }
-        else if (Input.GetKeyDown(KeyCode.F4))
-        {
-            Attack4();
-        }
-        else if (Input.GetKeyDown(KeyCode.Alpha4))
-        {
-            Attack4_End();
-        }
-    }
-
     public void SpawnProjectile_loveshot()
     {
         var monster_Data_Boss = monster_Data as Monster_Data_Boss;
         projectile_Prefab = monster_Data_Boss.loveshot_Prefab;
 
-        // Ã¹ ¹øÂ° ¹ß»ç À§Ä¡: Å¸°ÙÀ» Á÷Á¢ ÇâÇÔ
+        // ì²« ë²ˆì§¸ ë°œì‚¬ ìœ„ì¹˜: íƒ€ê²Ÿì„ ì§ì ‘ í–¥í•¨
         SpawnProjectile(LaunchTrans[0], TargetTrans.position, monster_Data_Boss);
 
-        // µÎ ¹øÂ° ¹ß»ç À§Ä¡: Å¸°ÙÀ» ÇâÇØ ¿ŞÂÊ 30µµ °¢µµ·Î
+        // ë‘ ë²ˆì§¸ ë°œì‚¬ ìœ„ì¹˜: íƒ€ê²Ÿì„ í–¥í•´ ì™¼ìª½ 30ë„ ê°ë„ë¡œ
         Vector3 leftDirection = Quaternion.Euler(0, -30, 0) * (TargetTrans.position - LaunchTrans[1].position);
         SpawnProjectile(LaunchTrans[1], LaunchTrans[1].position + leftDirection, monster_Data_Boss);
 
-        // ¼¼ ¹øÂ° ¹ß»ç À§Ä¡: Å¸°ÙÀ» ÇâÇØ ¿À¸¥ÂÊ 30µµ °¢µµ·Î
+        // ì„¸ ë²ˆì§¸ ë°œì‚¬ ìœ„ì¹˜: íƒ€ê²Ÿì„ í–¥í•´ ì˜¤ë¥¸ìª½ 30ë„ ê°ë„ë¡œ
         Vector3 rightDirection = Quaternion.Euler(0, 30, 0) * (TargetTrans.position - LaunchTrans[2].position);
         SpawnProjectile(LaunchTrans[2], LaunchTrans[2].position + rightDirection, monster_Data_Boss);
     }
@@ -68,10 +43,10 @@ public class Monster_Boss : Monster
         var projecile = Instantiate(projectile_Prefab, launchTransform.position, Quaternion.identity);
         var projectile_Loveshot = projecile.GetComponent<Projectile_LoveShot>();
 
-        // Å¸°Ù ¹æÇâ °è»ê
+        // íƒ€ê²Ÿ ë°©í–¥ ê³„ì‚°
         Vector3 direction = (targetPosition - launchTransform.position).normalized;
 
-        // ÀûÀıÇÑ °ªÀ¸·Î ÃÊ±âÈ­
+        // ì ì ˆí•œ ê°’ìœ¼ë¡œ ì´ˆê¸°í™”
         projectile_Loveshot.Init(launchTransform.position, direction, monsterData.skill_loveshot_Distance, monsterData.skill_loveshot_LaunchSpeed);
     }
 
@@ -105,6 +80,8 @@ public class Monster_Boss : Monster
     {
         prefabRoot = new GameObject();
         var monster_Data_Boss = monster_Data as Monster_Data_Boss;
+
+        Projectile_HellFire.used = false;
         for (int i = 0; i < monster_Data_Boss.fireFlooring_number; i++)
         {
             Vector3 newPos = GetRandomNavMeshPoint(transform.position, 0, monster_Data_Boss.fiireFlooring_range);
@@ -140,19 +117,19 @@ public class Monster_Boss : Monster
     }
 
     /// <summary>
-    /// Áß½É¿¡¼­ ÀÏÁ¤ ¹İ°æ ³»¿¡¼­ NavMesh À§ÀÇ ¹«ÀÛÀ§ À§Ä¡¸¦ ¹İÈ¯ÇÕ´Ï´Ù.
+    /// ì¤‘ì‹¬ì—ì„œ ì¼ì • ë°˜ê²½ ë‚´ì—ì„œ NavMesh ìœ„ì˜ ë¬´ì‘ìœ„ ìœ„ì¹˜ë¥¼ ë°˜í™˜í•©ë‹ˆë‹¤.
     /// </summary>
-    /// <param name="center">Áß½É À§Ä¡</param>
-    /// <param name="minRadius">ÃÖ¼Ò ¹İ°æ</param>
-    /// <param name="maxRadius">ÃÖ´ë ¹İ°æ</param>
-    /// <returns>NavMesh À§ÀÇ ¹«ÀÛÀ§ À§Ä¡</returns>
+    /// <param name="center">ì¤‘ì‹¬ ìœ„ì¹˜</param>
+    /// <param name="minRadius">ìµœì†Œ ë°˜ê²½</param>
+    /// <param name="maxRadius">ìµœëŒ€ ë°˜ê²½</param>
+    /// <returns>NavMesh ìœ„ì˜ ë¬´ì‘ìœ„ ìœ„ì¹˜</returns>
     private Vector3 GetRandomNavMeshPoint(Vector3 center, float minRadius, float maxRadius)
     {
         NavMeshHit hit;
         Vector3 randomPoint = Vector3.zero;
 
-        // NavMesh¿¡¼­ ¹«ÀÛÀ§·Î À§Ä¡¸¦ ¼±ÅÃÇÕ´Ï´Ù.
-        for (int i = 0; i < 10; i++) // ÃÖ´ë 10¹ø ½Ãµµ
+        // NavMeshì—ì„œ ë¬´ì‘ìœ„ë¡œ ìœ„ì¹˜ë¥¼ ì„ íƒí•©ë‹ˆë‹¤.
+        for (int i = 0; i < 10; i++) // ìµœëŒ€ 10ë²ˆ ì‹œë„
         {
             Vector3 potentialPoint = RandomNavMeshLocation(center, minRadius, maxRadius);
             if (NavMesh.SamplePosition(potentialPoint, out hit, maxRadius, NavMesh.AllAreas))
@@ -169,23 +146,35 @@ public class Monster_Boss : Monster
     }
 
     /// <summary>
-    /// NavMesh ³»ÀÇ ¹«ÀÛÀ§ À§Ä¡¸¦ ¹İÈ¯ÇÕ´Ï´Ù.
+    /// NavMesh ë‚´ì˜ ë¬´ì‘ìœ„ ìœ„ì¹˜ë¥¼ ë°˜í™˜í•©ë‹ˆë‹¤.
     /// </summary>
-    /// <param name="center">Áß½É À§Ä¡</param>
-    /// <param name="minRadius">ÃÖ¼Ò ¹İ°æ</param>
-    /// <param name="maxRadius">ÃÖ´ë ¹İ°æ</param>
-    /// <returns>¹«ÀÛÀ§ À§Ä¡</returns>
+    /// <param name="center">ì¤‘ì‹¬ ìœ„ì¹˜</param>
+    /// <param name="minRadius">ìµœì†Œ ë°˜ê²½</param>
+    /// <param name="maxRadius">ìµœëŒ€ ë°˜ê²½</param>
+    /// <returns>ë¬´ì‘ìœ„ ìœ„ì¹˜</returns>
     private Vector3 RandomNavMeshLocation(Vector3 center, float minRadius, float maxRadius)
     {
         Vector3 randomDirection = Vector3.zero;
 
-        // ÃÖ¼Ò ¹İ°æ°ú ÃÖ´ë ¹İ°æ »çÀÌÀÇ °Å¸®¸¦ »ı¼º
+        // ìµœì†Œ ë°˜ê²½ê³¼ ìµœëŒ€ ë°˜ê²½ ì‚¬ì´ì˜ ê±°ë¦¬ë¥¼ ìƒì„±
         float randomDistance = Random.Range(minRadius, maxRadius);
 
-        // ¹«ÀÛÀ§ ¹æÇâÀ¸·Î ÀÌµ¿
+        // ë¬´ì‘ìœ„ ë°©í–¥ìœ¼ë¡œ ì´ë™
         randomDirection = Random.insideUnitSphere * randomDistance + center;
-        randomDirection.y = center.y; // y ÃàÀ» ¸ÂÃç Æò¸é »ó¿¡¼­¸¸ ÀÌµ¿ÇÏµµ·Ï ÇÕ´Ï´Ù.
+        randomDirection.y = center.y; // y ì¶•ì„ ë§ì¶° í‰ë©´ ìƒì—ì„œë§Œ ì´ë™í•˜ë„ë¡ í•©ë‹ˆë‹¤.
 
         return randomDirection;
+    }
+
+    public override void DrawArc()
+    {
+        if(AttackCollision.activeSelf == true)
+        {
+            Handles.color = Color.red;
+            var monster_Data_Boss = monster_Data as Monster_Data_Boss;
+            Handles.DrawSolidArc(transform.position, Vector3.up, transform.forward, monster_Data.Search_Range / 2, monster_Data_Boss.skill_bite_Distance);
+            Handles.DrawSolidArc(transform.position, Vector3.up, transform.forward, -monster_Data.Search_Range / 2, monster_Data_Boss.skill_bite_Distance);
+        }
+        
     }
 }

@@ -17,7 +17,7 @@ MonoBehaviour:
   MaxHealth: 400
   Damage: 2
   MoveSpeed: 2
-  AngularSpeed: 360
+  AngularSpeed: 36
   IdleRange_Min: 5
   IdleRange_Max: 10
   Search_Range: 150

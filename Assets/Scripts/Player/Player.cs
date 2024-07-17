@@ -1,4 +1,4 @@
-using System.Collections;
+Ôªøusing System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -6,9 +6,13 @@ public class Player : MonoBehaviour, IAttackable
 {
     [SerializeField] protected int maxHP;
     [SerializeField] protected int currentHP;
-    [SerializeField] protected float moveSpeed;
+    [SerializeField] protected float moveSpeed = 5f;
+    [SerializeField] protected float rotationSpeed = 720f;
     [SerializeField] private WeaponBase currentWeapon;
     [SerializeField] private bool isTimeStopped = false;
+
+    [SerializeField] private int maxTimeGauge = 50;
+    [SerializeField] private int currentTimeGauge;
 
     [SerializeField] private InstallationBlueprint blueprintPrefab;
     public InstallationBlueprint currentBlueprint;
@@ -17,14 +21,19 @@ public class Player : MonoBehaviour, IAttackable
 
     [SerializeField] private List<Item> hotbar = new List<Item> ();
     [SerializeField] private List<Debuff> activeDebuffs = new List<Debuff>();
+    [SerializeField] private List<Buff> activeBuffs = new List<Buff>();
 
     public int MaxHP { get { return maxHP; } }
-    public int CurrentHP { get { return  currentHP; } }
-    public float MoveSpeed { get {  return moveSpeed; } }
+    public int CurrentHP { get { return currentHP; } set { currentHP = value; } }
     public bool IsCharmed { get; set; } = false;
+    public bool IsSuppressed { get; set; } = false;
+    public float MoveSpeed { get { return moveSpeed; } set { moveSpeed = value; } }
+    public float RotationSpeed { get { return rotationSpeed; } set { rotationSpeed = value; } }
+    public int CurrentTimeGauge { get { return currentTimeGauge; } }
     public WeaponBase CurrentWeapon { get { return currentWeapon; } }
 
-    
+    public Material PlayerMaterial;
+    bool NoDamageMode = false;
 
     private void Start()
     {
@@ -32,6 +41,7 @@ public class Player : MonoBehaviour, IAttackable
         {
             currentWeapon.Init();
         }
+        currentTimeGauge = maxTimeGauge;
     }
 
     public void SetWeapon(WeaponBase newWeapon)
@@ -49,14 +59,29 @@ public class Player : MonoBehaviour, IAttackable
 
     private void Update()
     {
-        // µπˆ«¡ ªÛ≈¬ æ˜µ•¿Ã∆Æ
+        // ÎîîÎ≤ÑÌîÑ ÏÉÅÌÉú ÏóÖÎç∞Ïù¥Ìä∏
         for (int i = activeDebuffs.Count - 1; i >= 0; i--)
         {
-            activeDebuffs[i].ApplyEffect(gameObject);
+            if (activeDebuffs[i].ShouldTick())
+            {
+                activeDebuffs[i].ApplyEffect(gameObject);
+                activeDebuffs[i].UpdateTickTime();
+            }
+
             if (activeDebuffs[i].IsEffectOver())
             {
                 activeDebuffs[i].RemoveEffect(gameObject);
                 activeDebuffs.RemoveAt(i);
+            }
+        }
+
+        // Î≤ÑÌîÑ ÏÉÅÌÉú ÏóÖÎç∞Ïù¥Ìä∏
+        for (int i = activeBuffs.Count - 1; i >= 0; i--)
+        {
+            if (activeBuffs[i].IsTemporary && activeBuffs[i].IsEffectOver())
+            {
+                activeBuffs[i].RemoveEffect(this);
+                activeBuffs.RemoveAt(i);
             }
         }
 
@@ -70,6 +95,10 @@ public class Player : MonoBehaviour, IAttackable
     {
         if (damage is int)
         {
+            if (NoDamageMode == true) return;
+
+            StartCoroutine(DamagedEffect());
+
             currentHP -= (int)(object)damage;
             Debug.Log("Player took damage: " + damage + " Current health: " + currentHP);
             if (currentHP <= 0)
@@ -87,7 +116,7 @@ public class Player : MonoBehaviour, IAttackable
             if (activeDebuff.GetType() == debuff.GetType())
             {
                 debuffExists = true;
-                activeDebuff.Duration = debuff.Duration; // ±‚¡∏ »ø∞˙¿« ¡ˆº”Ω√∞£ ∞ªΩ≈
+                activeDebuff.RefreshDuration(); // Í∏∞Ï°¥ Ìö®Í≥ºÏùò ÏßÄÏÜçÏãúÍ∞Ñ Í∞±Ïã†
                 break;
             }
         }
@@ -100,28 +129,68 @@ public class Player : MonoBehaviour, IAttackable
         }
     }
 
-    public void OnTakeBuffed<T>(BuffType bufftype, T buff) where T : Buff
+    public void OnTakeBuffed<T>(BuffType buffType, T buff) where T : Buff
     {
+        activeBuffs.Add(buff);
         buff.ApplyEffect(this);
+        if (buff.IsTemporary)
+        {
+            StartCoroutine(HandleBuff(buff));
+        }
     }
 
     private IEnumerator HandleDebuff(Debuff debuff)
     {
         while (!debuff.IsEffectOver())
         {
-            debuff.ApplyEffect(gameObject);
-            yield return new WaitForSeconds(debuff.TickInterval);
+            if (debuff.ShouldTick())
+            {
+                debuff.ApplyEffect(gameObject);
+                debuff.UpdateTickTime();
+            }
+            yield return null;
         }
 
         debuff.RemoveEffect(gameObject);
         activeDebuffs.Remove(debuff);
     }
 
+    private IEnumerator HandleBuff(Buff buff)
+    {
+        while (!buff.IsEffectOver())
+        {
+            yield return null;
+        }
+
+        buff.RemoveEffect(this);
+        activeBuffs.Remove(buff);
+    }
+
+    private IEnumerator DamagedEffect()
+    {
+        NoDamageMode = true;
+        Color color = PlayerMaterial.color;
+
+        PlayerMaterial.color = new Color(0.5f, 0.5f, 0);
+        yield return new WaitForSeconds(0.2f);
+        PlayerMaterial.color = color;
+        yield return new WaitForSeconds(0.2f);
+        PlayerMaterial.color = new Color(0.5f, 0.5f,0);
+        yield return new WaitForSeconds(0.2f);
+        PlayerMaterial.color = color;
+        yield return new WaitForSeconds(0.2f);
+        PlayerMaterial.color = new Color(0.5f, 0.5f, 0);
+        yield return new WaitForSeconds(0.2f);
+        PlayerMaterial.color = color;
+
+        NoDamageMode = false;
+    }
+
     void Die()
     {
-        // «√∑π¿ÃæÓ ªÁ∏¡ √≥∏Æ ∑Œ¡˜
+        // ÌîåÎ†àÏù¥Ïñ¥ ÏÇ¨Îßù Ï≤òÎ¶¨ Î°úÏßÅ
         Debug.Log("Player died");
-        // ∞‘¿” ø¿πˆ √≥∏Æ
+        // Í≤åÏûÑ Ïò§Î≤Ñ Ï≤òÎ¶¨
     }
 
     public void ReloadWeapon()
@@ -134,10 +203,27 @@ public class Player : MonoBehaviour, IAttackable
 
     public void TimeStop()
     {
+        if (currentTimeGauge <= 0 && !isTimeStopped) return;
+
         isTimeStopped = !isTimeStopped;
         Time.timeScale = isTimeStopped ? 0f : 1f;
         Time.fixedDeltaTime = 0.02f * Time.timeScale;
         Debug.Log(isTimeStopped ? "Time stopped." : "Time resumed.");
+
+        if (isTimeStopped)
+        {
+            StartCoroutine(TimeGaugeConsumption());
+        }
+    }
+
+    private IEnumerator TimeGaugeConsumption()
+    {
+        while (isTimeStopped && currentTimeGauge > 0)
+        {
+            yield return new WaitForSecondsRealtime(1f);
+            currentTimeGauge -= 1;
+            if (currentTimeGauge <= 0) TimeStop();
+        }
     }
 
     public bool IsTimeStopped()
@@ -157,7 +243,7 @@ public class Player : MonoBehaviour, IAttackable
         {
             Item item = hotbar[index];
             item.Use(this);
-            hotbar.RemoveAt(index); // ªÁøÎ »ƒ «÷πŸø°º≠ ¡¶∞≈
+            hotbar.RemoveAt(index); // ÏÇ¨Ïö© ÌõÑ Ìï´Î∞îÏóêÏÑú Ï†úÍ±∞
         }
     }
 
@@ -170,7 +256,7 @@ public class Player : MonoBehaviour, IAttackable
 
     private Vector3 GetBlueprintPosition()
     {
-        // ∏∂øÏΩ∫ ¿ßƒ°ø°º≠ ∑π¿Ãƒ≥Ω∫∆Æ«œø© √ªªÁ¡¯ ¿ßƒ° ∞·¡§
+        // ÎßàÏö∞Ïä§ ÏúÑÏπòÏóêÏÑú Î†àÏù¥Ï∫êÏä§Ìä∏ÌïòÏó¨ Ï≤≠ÏÇ¨ÏßÑ ÏúÑÏπò Í≤∞Ï†ï
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
         if (Physics.Raycast(ray, out RaycastHit hit))
         {
@@ -181,7 +267,7 @@ public class Player : MonoBehaviour, IAttackable
 
     private Quaternion GetBlueprintRotation()
     {
-        // ∏∂øÏΩ∫ »Ÿ∑Œ »∏¿¸ ∞¢µµ ∞·¡§
+        // ÎßàÏö∞Ïä§ Ìú†Î°ú ÌöåÏ†Ñ Í∞ÅÎèÑ Í≤∞Ï†ï
         float rotationY = Mathf.Round(Input.GetAxis("Mouse ScrollWheel") * 8) * 45f;
         return Quaternion.Euler(0, rotationY, 0);
     }

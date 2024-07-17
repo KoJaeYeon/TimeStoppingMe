@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 
 
-[CreateAssetMenu(fileName = "Monster_DATA_Range", menuName = "Monster/Range")]
+[CreateAssetMenu(fileName = "Monster_DATA_Range", menuName = "Scriptable/Monster/Range")]
 public class Monster_DATA_Range : Monster_DATA
 {
     [Header("원거리 : 투사체 프리팹")]
