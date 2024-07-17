@@ -38,6 +38,7 @@ public class Inventory : MonoBehaviour
     [Header("RotateSpeed")]
     public float rotatSpeed = 15f;
 
+    public Item item;
     public void Awake()
     {
         playerInput = GetComponent<PlayerInput>();
@@ -108,53 +109,65 @@ public class Inventory : MonoBehaviour
     {
         Debug.Log("F 인터렉트 ");
 
-        if (selectedSlot >= 0 && selectedSlot < inventoryIndex.Length && inturectItem != null)
+        if (inturectItem != null)
         {
-            if (inventoryIndex[selectedSlot] != null)
+            if (inturectItem.GetComponent<Item>() is PlaceableItem)
             {
-                // inventoryIndex를 순회하여 null인 인덱스를 찾아 inturectItem 할당
-                bool full = false;
-                for (int i = 0; i < inventoryIndex.Length; i++)
+                if (selectedSlot >= 0 && selectedSlot < inventoryIndex.Length && inturectItem != null)
                 {
-                    if (inventoryIndex[i] == null)
+                    if (inventoryIndex[selectedSlot] != null)
                     {
-                        inventoryIndex[i] = inturectItem;
+                        // inventoryIndex를 순회하여 null인 인덱스를 찾아 inturectItem 할당
+                        bool full = false;
+                        for (int i = 0; i < inventoryIndex.Length; i++)
+                        {
+                            if (inventoryIndex[i] == null)
+                            {
+                                inventoryIndex[i] = inturectItem;
+                                inturectItem.transform.SetParent(inventory);
+                                inturectItem.transform.position = inventory.position;
+                                inturectItem.transform.rotation = Quaternion.Euler(0f, 0f, 0f);
+                                inturectItem.SetActive(false);
+                                Debug.Log($"Item added to slot {i + 1}");
+                                inventoryImage[i].sprite = inturectItem.GetComponent<Item>().icon;
+                                inventoryImage[i].enabled = true;
+                                inturectItem = null; // 인터렉트 아이템을 할당한 후 null로 초기화
+                                full = true;
+                                break;
+                            }
+                        }
+
+                        if (!full)
+                        {
+                            Debug.Log("ㅁㄴㅇㄹ"); // 모든 인덱스가 꽉 차 있는 경우
+                            UIManager.inst.SendinturectMessage("인벤토리가 꽉 찼습니다.");
+                        }
+                    }
+                    else
+                    {
+                        // 선택된 슬롯이 비어 있으면, 그 슬롯에 inturectItem 할당
+                        inventoryIndex[selectedSlot] = inturectItem;
                         inturectItem.transform.SetParent(inventory);
                         inturectItem.transform.position = inventory.position;
                         inturectItem.transform.rotation = Quaternion.Euler(0f, 0f, 0f);
                         inturectItem.SetActive(false);
-                        Debug.Log($"Item added to slot {i + 1}");
-                        inventoryImage[i].sprite = inturectItem.GetComponent<Item>().icon;
-                        inventoryImage[i].enabled = true;
+                        Debug.Log($"Item added to slot {selectedSlot + 1}");
+                        inventoryImage[selectedSlot].sprite = inturectItem.GetComponent<Item>().icon;
+                        inventoryImage[selectedSlot].enabled = true;
                         inturectItem = null; // 인터렉트 아이템을 할당한 후 null로 초기화
-                        full = true;
-                        break;
                     }
                 }
-
-                if (!full)
+                else
                 {
-                    Debug.Log("ㅁㄴㅇㄹ"); // 모든 인덱스가 꽉 차 있는 경우
-                    UIManager.inst.SendinturectMessage("인벤토리가 꽉 찼습니다.");
+                    Debug.Log("No interactable item or invalid slot selected.");
                 }
+
             }
-            else
+            else if (inturectItem.GetComponent<Item>() is InstantItem)
             {
-                // 선택된 슬롯이 비어 있으면, 그 슬롯에 inturectItem 할당
-                inventoryIndex[selectedSlot] = inturectItem;
-                inturectItem.transform.SetParent(inventory);
-                inturectItem.transform.position = inventory.position;
-                inturectItem.transform.rotation = Quaternion.Euler(0f, 0f, 0f);
-                inturectItem.SetActive(false);
-                Debug.Log($"Item added to slot {selectedSlot + 1}");
-                inventoryImage[selectedSlot].sprite = inturectItem.GetComponent<Item>().icon;
-                inventoryImage[selectedSlot].enabled = true;
-                inturectItem = null; // 인터렉트 아이템을 할당한 후 null로 초기화
+                inturectItem.GetComponent<Item>().Use(transform.GetComponent<Player>());
+                //해당스크립트가 있는 트랜스폼에서 Player 스크립트를불러와 instantitem의 Player에게 Use를 넘겨줌
             }
-        }
-        else
-        {
-            Debug.Log("No interactable item or invalid slot selected.");
         }
     }
 
@@ -234,7 +247,8 @@ public class Inventory : MonoBehaviour
         {
             inventoryIndex[selectedSlot].transform.position = constructPosition;
             inventoryIndex[selectedSlot].SetActive(true);
-            inventoryIndex[selectedSlot].GetComponent<Renderer>().material = inventoryIndex[selectedSlot].GetComponent<InstantItem>().originMaterial; // 머티리얼 초기화
+            inventoryIndex[selectedSlot].GetComponent<Renderer>().material = inventoryIndex[selectedSlot].GetComponent<PlaceableItem>().originMaterial; // 머티리얼 초기화
+            inventoryIndex[selectedSlot].layer = 0;
             inventoryIndex[selectedSlot].transform.SetParent(null);
 
             ClearInventory();
@@ -244,7 +258,16 @@ public class Inventory : MonoBehaviour
         {
             if (inventoryIndex[selectedSlot] != null)
             {
-                construct = true;
+                if (inventoryIndex[selectedSlot].GetComponent<Item>() is PlaceableItem)
+                {
+                    //설치아이템일 경우에만 construct가 true로 설정함
+                    construct = true;
+                }
+                if (inventoryIndex[selectedSlot].GetComponent<Item>() is InstantItem)
+                {
+                    inventoryIndex[selectedSlot].GetComponent<Item>().Use(transform.GetComponent<Player>());
+                    //해당스크립트가 있는 트랜스폼에서 Player 스크립트를불러와 instantitem의 Player에게 Use를 넘겨줌
+                }
             }
         }
     }
@@ -313,7 +336,9 @@ public class Inventory : MonoBehaviour
     {
         if (other.gameObject.layer == LayerMask.NameToLayer("Item"))
         {
-            InstantItem item = other.GetComponent<InstantItem>();
+            item = other.GetComponent<Item>();
+
+
             if (item != null)
             {
                 inturectItem = other.gameObject;
