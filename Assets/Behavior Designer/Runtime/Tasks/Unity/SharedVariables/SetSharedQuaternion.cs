@@ -25,3 +25,30 @@ namespace BehaviorDesigner.Runtime.Tasks.Unity.SharedVariables
         }
     }
 }
+
+namespace BehaviorDesigner.Runtime.Tasks.Unity.SharedVariables
+{
+    [TaskCategory("Unity/SharedVariable")]
+    [TaskDescription("Sets the SharedQuaternion variable to the specified object. Returns Success.")]
+    public class SetSharedMonsterState : Action
+    {
+        [RequiredField]
+        [Tooltip("The SharedQuaternion to set")]
+        public SharedMonsterState targetVariable;
+        [Tooltip("The value to set the SharedQuaternion to")]
+        public MonsterState targetValue;
+
+        public override TaskStatus OnUpdate()
+        {
+            targetVariable.Value = targetValue;
+
+            return TaskStatus.Success;
+        }
+
+        public override void OnReset()
+        {
+            targetValue = MonsterState.Idle;
+            targetVariable = MonsterState.Idle;
+        }
+    }
+}
