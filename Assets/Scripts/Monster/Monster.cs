@@ -1,3 +1,4 @@
+using BehaviorDesigner.Runtime;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -10,6 +11,7 @@ public class Monster : MonoBehaviour, IAttackable
     public float health;
     public Monster_DATA monster_Data;
     private List<Debuff> activeDebuffs = new List<Debuff>();
+    public BehaviorTree bt;
 
     public bool IsBurned { get; set; } = false;
     public bool IsPosioned { get; set; } = false;
@@ -22,6 +24,8 @@ public class Monster : MonoBehaviour, IAttackable
     private void Update()
     {
         CalculateDebuff();
+        var variable = bt.GetVariable("Speed");
+        Debug.Log(variable);
     }
 
     #region Skill

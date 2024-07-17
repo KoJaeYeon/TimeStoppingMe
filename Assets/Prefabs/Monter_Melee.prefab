@@ -1165,6 +1165,7 @@ MonoBehaviour:
   TargetTrans: {fileID: 0}
   health: 0
   monster_Data: {fileID: 11400000, guid: 2e71cd80a42c083408813f9f3ec7edd4, type: 2}
+  bt: {fileID: 6625512612592646248}
   LaunchTrans: {fileID: 0}
   AttackCollision: {fileID: 4836591074194275891}
 --- !u!114 &6625512612592646248
