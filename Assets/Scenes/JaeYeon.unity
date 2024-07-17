@@ -244,7 +244,7 @@ PrefabInstance:
     - target: {fileID: 8450472497815377464, guid: 8e95295b1d96a864e90216bb67151e13,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 14.216778
+      value: -12.96
       objectReference: {fileID: 0}
     - target: {fileID: 8450472497815377464, guid: 8e95295b1d96a864e90216bb67151e13,
         type: 3}
@@ -254,7 +254,7 @@ PrefabInstance:
     - target: {fileID: 8450472497815377464, guid: 8e95295b1d96a864e90216bb67151e13,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -13.105393
+      value: -19.82
       objectReference: {fileID: 0}
     - target: {fileID: 8450472497815377464, guid: 8e95295b1d96a864e90216bb67151e13,
         type: 3}
@@ -923,6 +923,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Monster_Elite_2
       objectReference: {fileID: 0}
+    - target: {fileID: 292390439611656214, guid: db5f2f2b532f5e041ba7b6e0b69b2914,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4903046116389891263, guid: db5f2f2b532f5e041ba7b6e0b69b2914,
         type: 3}
       propertyPath: mBehaviorSource.mTaskData.JSONSerialization
@@ -1001,6 +1006,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: MagmaFlooring (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 4157228078798209517, guid: ded2e28ee850e2d4b8f5ff208992298c,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4157228078798209517, guid: ded2e28ee850e2d4b8f5ff208992298c,
         type: 3}
