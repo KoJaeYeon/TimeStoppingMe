@@ -52,7 +52,7 @@
                 },
                 {
                     "name": "Cancel",
-                    "type": "Button",
+                    "type": "Value",
                     "id": "b041cf1f-5416-43e1-9cb2-1e81db874f95",
                     "expectedControlType": "Button",
                     "processors": "",

@@ -169,6 +169,7 @@ public class Inventory : MonoBehaviour
             construct = false;
             if (inventoryIndex[selectedSlot]!=null)
             {
+
                 inventoryIndex[selectedSlot].gameObject.SetActive(false);
             }
             switch (path)
@@ -247,20 +248,6 @@ public class Inventory : MonoBehaviour
             }
         }
     }
-
-    void UseTabacco()
-    {
-        UseItem();
-        //transform.GetComponent<HP>().PlusHP(20);
-        //타바코 사용효과
-    }
-
-    void UseNightVision()
-    {
-        UseItem();
-        transform.GetChild(3).transform.GetChild(1).gameObject.SetActive(true);
-    }
-
     void UseItem()
     {
         GameObject item = inventoryIndex[selectedSlot];
@@ -309,15 +296,19 @@ public class Inventory : MonoBehaviour
 
     private void OnCancel(InputAction.CallbackContext context)
     {
+        construct = false;
+        if (inventoryIndex[selectedSlot]!=null)
+        {
+            inventoryIndex[selectedSlot].gameObject.SetActive(false);
+        }
         Debug.Log("Cnacel");
     }
-        void ClearInventory()
+    void ClearInventory()
     {
         inventoryImage[selectedSlot].sprite = null;
         inventoryImage[selectedSlot].enabled = false;
         inventoryIndex[selectedSlot] = null;
     }
-
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.layer == LayerMask.NameToLayer("Item"))
