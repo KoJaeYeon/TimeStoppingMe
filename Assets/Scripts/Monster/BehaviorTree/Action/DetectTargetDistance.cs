@@ -34,7 +34,11 @@ public class DetectTargetDistance : Action
         }
         else
         {
-            if (Time.time - LastTrackedTime.Value <= 2 )
+            //if (Time.time - LastTrackedTime.Value <= 2 )
+            //{
+            //    OwnerMonsterState.Value = MonsterState.Tracking;
+            //}
+            if(OwnerMonsterState.Value == MonsterState.Attack || OwnerMonsterState.Value == MonsterState.Tracking)
             {
                 OwnerMonsterState.Value = MonsterState.Tracking;
             }

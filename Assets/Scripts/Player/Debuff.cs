@@ -20,6 +20,7 @@ public abstract class Debuff
     }
 
     public virtual void ApplyEffect(GameObject target) { }
+    public virtual void RemoveEffect(GameObject target) { }
 
     public bool IsEffectOver()
     {

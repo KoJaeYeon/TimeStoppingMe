@@ -48,7 +48,7 @@ public class TrackingTarget : Action
         }
         if(navMeshAgent.Value.remainingDistance > TrackDistance.Value)
         {
-            if (Time.time - LastTrackedTime.Value > 2)
+            if (Time.time - LastTrackedTime.Value > 10000)
             {
                 return TaskStatus.Failure;
             }           

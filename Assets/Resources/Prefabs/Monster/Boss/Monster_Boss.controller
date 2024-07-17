@@ -59,7 +59,7 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Skiil_1
+  m_Name: Skill_1
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions: []
@@ -117,13 +117,13 @@ AnimatorStateMachine:
     m_Position: {x: 375, y: 185, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -8508363199006210224}
-    m_Position: {x: 410, y: 250, z: 0}
+    m_Position: {x: 380, y: 250, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 7185565658838351416}
-    m_Position: {x: 445, y: 315, z: 0}
+    m_Position: {x: 380, y: 320, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 8996171848781626773}
-    m_Position: {x: 440, y: 400, z: 0}
+    m_Position: {x: 390, y: 390, z: 0}
   m_ChildStateMachines: []
   m_AnyStateTransitions: []
   m_EntryTransitions: []

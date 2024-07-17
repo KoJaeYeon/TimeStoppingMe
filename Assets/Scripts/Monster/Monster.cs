@@ -54,7 +54,7 @@ public class Monster : MonoBehaviour,IAttackable
 
     }
     #endregion
-    public void OnTakeBuffed<T>(BuffType buffType, T buffed)
+    public void OnTakeBuffed<T>(BuffType buffType, T buffed) where T : Buff
     {
         throw new System.NotImplementedException();
     }

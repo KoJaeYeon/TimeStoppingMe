@@ -110,6 +110,7 @@ public class Monster_Boss : Monster
             Vector3 newPos = GetRandomNavMeshPoint(transform.position, 0, monster_Data_Boss.fiireFlooring_range);
             var hellFire = Instantiate(monster_Data_Boss.hellfire_Prefab, newPos, Quaternion.identity);
             hellFire.transform.localScale = Vector3.one * monster_Data_Boss.fireFlooring_size;
+            hellFire.transform.LookAt(transform.position);
             hellFire.transform.SetParent(prefabRoot.transform);
         }
     }
@@ -128,6 +129,7 @@ public class Monster_Boss : Monster
             Vector3 newPos = GetRandomNavMeshPoint(transform.position, 0, monster_Data_Boss.mindFlooring_range);
             var mindFlooring = Instantiate(monster_Data_Boss.mindFlooring_Prefab, newPos, Quaternion.identity);
             mindFlooring.transform.localScale = Vector3.one * monster_Data_Boss.mindFlooring_size;
+            mindFlooring.transform.LookAt(transform.position);
             mindFlooring.transform.SetParent(prefabRoot.transform);
         }
     }

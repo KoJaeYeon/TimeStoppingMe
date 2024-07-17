@@ -21,6 +21,7 @@ public class Player : MonoBehaviour, IAttackable
     public int MaxHP { get { return maxHP; } }
     public int CurrentHP { get { return  currentHP; } }
     public float MoveSpeed { get {  return moveSpeed; } }
+    public bool IsCharmed { get; set; } = false;
     public WeaponBase CurrentWeapon { get { return currentWeapon; } }
 
     
@@ -49,9 +50,14 @@ public class Player : MonoBehaviour, IAttackable
     private void Update()
     {
         // 디버프 상태 업데이트
-        foreach (var debuff in activeDebuffs)
+        for (int i = activeDebuffs.Count - 1; i >= 0; i--)
         {
-            debuff.ApplyEffect(gameObject);
+            activeDebuffs[i].ApplyEffect(gameObject);
+            if (activeDebuffs[i].IsEffectOver())
+            {
+                activeDebuffs[i].RemoveEffect(gameObject);
+                activeDebuffs.RemoveAt(i);
+            }
         }
 
         if (currentBlueprint != null)
@@ -73,7 +79,7 @@ public class Player : MonoBehaviour, IAttackable
         }
     }
 
-    public void OnTakeDebuffed<T>(T debuff) where T : Debuff
+    public void OnTakeDebuffed<T>(DebuffType debuffType, T debuff) where T : Debuff
     {
         bool debuffExists = false;
         foreach (var activeDebuff in activeDebuffs)
@@ -89,15 +95,14 @@ public class Player : MonoBehaviour, IAttackable
         if (!debuffExists)
         {
             activeDebuffs.Add(debuff);
+            debuff.ApplyEffect(gameObject);
             StartCoroutine(HandleDebuff(debuff));
         }
     }
 
-    public void OnTakeBuffed<T>(T buff)
+    public void OnTakeBuffed<T>(BuffType bufftype, T buff) where T : Buff
     {
-        // 버프 처리 로직
-        Debug.Log("Player took buff: " + buff);
-        // 버프 적용 로직 추가 가능
+        buff.ApplyEffect(this);
     }
 
     private IEnumerator HandleDebuff(Debuff debuff)
@@ -108,6 +113,7 @@ public class Player : MonoBehaviour, IAttackable
             yield return new WaitForSeconds(debuff.TickInterval);
         }
 
+        debuff.RemoveEffect(gameObject);
         activeDebuffs.Remove(debuff);
     }
 
@@ -126,7 +132,7 @@ public class Player : MonoBehaviour, IAttackable
         }
     }
 
-    private void TimeStop()
+    public void TimeStop()
     {
         isTimeStopped = !isTimeStopped;
         Time.timeScale = isTimeStopped ? 0f : 1f;

@@ -23,21 +23,12 @@ public class WeaponTypeA : WeaponBase
     {
         base.Fire(enemyLayers);
 
-        if(Random.value < burnChance)
+        foreach(var bullet in bullets)
         {
-            ApplyBurnEffect(enemyLayers);
-        }
-    }
-
-    private void ApplyBurnEffect(LayerMask enemyLayers)
-    {
-        Collider[] hitColliders = Physics.OverlapSphere(firePoint.position, baseRange, enemyLayers);
-        foreach (Collider hitCollider in hitColliders)
-        {
-            IAttackable attackable = hitCollider.GetComponent<IAttackable>();
-            if (attackable != null)
+            bullet.debuffType = DebuffType.Burn;
+            if(Random.value <= burnChance)
             {
-                attackable.OnTakeDebuffed(new Debuff_Burn());
+                bullet.debuff = new Debuff_Burn();
             }
         }
     }

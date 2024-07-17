@@ -17,6 +17,6 @@ public class Roation : Action
 
         // 일정한 속도로 회전
         transform.rotation = Quaternion.RotateTowards(transform.rotation, targetRotation, angularSpeed.Value * Time.deltaTime);
-        return TaskStatus.Success;
+        return TaskStatus.Running;
     }
 }
