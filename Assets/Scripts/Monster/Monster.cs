@@ -28,6 +28,11 @@ public class Monster : MonoBehaviour, IAttackable
         Debug.Log(variable);
     }
 
+    private void Start()
+    {
+        
+    }
+
     #region Skill
     public virtual void Attack1() { }
     public virtual void Attack1_End() { }

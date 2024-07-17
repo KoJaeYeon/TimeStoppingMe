@@ -31,7 +31,7 @@ public enum DebuffType
 
 public enum BuffType
 {
-
+    Speed
 }
 #endregion
 
