@@ -9,9 +9,11 @@ public class InitalizeMonterData_Elite_2 : Action
     public SharedTransform TargetTrans;
     public SharedMonster Monster;
     public SharedNavmeshAgent NavMeshAgent;
+    public SharedFloat SkillDistance;
 
     public SharedFloat[] SkillCooldown;
     public SharedFloat[] SkillLastTiem;
+
     public override TaskStatus OnUpdate()
     {
         var targetObject = GameObject.FindGameObjectWithTag("Player");
@@ -28,6 +30,9 @@ public class InitalizeMonterData_Elite_2 : Action
             Monster.Value.TargetTrans = targetObject.transform;
 
             var monsterData = monster.monster_Data as Monster_Data_Elite_2;
+
+            SkillDistance.Value = monsterData.skill_bite_Distance;
+
             SkillCooldown[0].Value = monsterData.skill_bite_Cooldown;
             SkillCooldown[1].Value = monsterData.skill_footWalk_Cooldown;
 

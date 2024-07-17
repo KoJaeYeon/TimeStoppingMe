@@ -8,11 +8,19 @@ public class Monster_Elite_2 : Monster
 
     public float overDistance;
     Vector3 previous_Pos;
+
+    public GameObject AttackCollision;
     
 
     public override void Awake()
     {
         base.Awake();
+
+        var sphereCollider = AttackCollision.GetComponent<SphereCollider>();
+        var monster_Data_Boss = monster_Data as Monster_Data_Elite_2;
+        sphereCollider.radius = monster_Data_Boss.skill_bite_Distance;
+        AttackCollision.SetActive(false);
+
         overDistance = 0f;
         previous_Pos = transform.position;
     }
@@ -57,20 +65,20 @@ public class Monster_Elite_2 : Monster
 
     public override void Attack2()
     {
-
+        AttackCollision.SetActive(true);
     }
     public override void Attack2_End()
     {
-
+        AttackCollision.SetActive(false);
     }
     public override void DrawArc()
     {
-        //if(AttackCollision.activeSelf == true)
-        //{
-        //    Handles.color = Color.red;
-        //    var monster_Data_Boss = monster_Data as Monster_Data_Boss;
-        //    Handles.DrawSolidArc(transform.position, Vector3.up, transform.forward, monster_Data.Search_Range / 2, monster_Data_Boss.skill_bite_Distance);
-        //    Handles.DrawSolidArc(transform.position, Vector3.up, transform.forward, -monster_Data.Search_Range / 2, monster_Data_Boss.skill_bite_Distance);
-        //}        
+        if (AttackCollision.activeSelf == true)
+        {
+            Handles.color = Color.red;
+            var monster_Data_Elite2 = monster_Data as Monster_Data_Elite_2;
+            Handles.DrawSolidArc(transform.position, Vector3.up, transform.forward, monster_Data.Search_Range / 2, monster_Data_Elite2.skill_bite_Distance);
+            Handles.DrawSolidArc(transform.position, Vector3.up, transform.forward, -monster_Data.Search_Range / 2, monster_Data_Elite2.skill_bite_Distance);
+        }
     }
 }
