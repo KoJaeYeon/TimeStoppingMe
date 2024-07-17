@@ -1,3 +1,4 @@
+using Cinemachine;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -14,9 +15,11 @@ public class GameManager : MonoBehaviour
     [SerializeField] private Transform weaponDropPoint;
     [SerializeField] private List<Door> combatStageDoors;
     [SerializeField] private Door bossStageDoor;
+    [SerializeField] private CinemachineVirtualCamera virtualCamera;
 
     private GameObject player;
     private List<GameObject> droppedWeapons = new List<GameObject>();
+    private HashSet<Vector3> usedDropPositions = new HashSet<Vector3>();
 
     public static GameManager Instance
     {
@@ -63,15 +66,49 @@ public class GameManager : MonoBehaviour
     private void SpawnPlayer(Vector3 spawnPoint)
     {
         player = Instantiate(playerPrefab, spawnPoint, Quaternion.identity);
+        CinemachineVirtualCamera virtualCamera = FindObjectOfType<CinemachineVirtualCamera>();
+        if (virtualCamera != null)
+        {
+            virtualCamera.Follow = player.transform;
+        }
     }
 
     private void DropWeapons()
     {
         foreach (var weapon in availableWeapons)
         {
-            GameObject droppedWeapon = Instantiate(weapon, weaponDropPoint.position + Random.insideUnitSphere * 2, Quaternion.identity);
+            Vector3 dropPosition = GetValidDropPosition();
+            GameObject droppedWeapon = Instantiate(weapon, dropPosition, Quaternion.identity);
+            Debug.Log(GetValidDropPosition() + " " + droppedWeapon.name);
             droppedWeapons.Add(droppedWeapon);
         }
+    }
+
+    private Vector3 GetValidDropPosition()
+    {
+        Vector3 randomPosition;
+        int attempts = 0;
+        do
+        {
+            randomPosition = weaponDropPoint.position + Random.insideUnitSphere * 2;
+            randomPosition.y = weaponDropPoint.position.y; // Keep the y position consistent
+            attempts++;
+        } while (IsPositionUsed(randomPosition) && attempts < 100);
+
+        usedDropPositions.Add(randomPosition);
+        return randomPosition;
+    }
+
+    private bool IsPositionUsed(Vector3 position)
+    {
+        foreach (var usedPosition in usedDropPositions)
+        {
+            if (Vector3.Distance(position, usedPosition) < 1f) // Ensure there's at least 1 unit distance between positions
+            {
+                return true;
+            }
+        }
+        return false;
     }
 
     public void OnWeaponSelected(GameObject selectedWeapon)
