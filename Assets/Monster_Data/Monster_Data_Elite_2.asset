@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Monster_Data_Elite_2
   m_EditorClassIdentifier: 
   AttackDistance: 2
-  TrackDistance: 300
+  TrackDistance: 30
   MaxHealth: 150
   Damage: 1
   MoveSpeed: 2
@@ -21,8 +21,7 @@ MonoBehaviour:
   IdleRange_Min: 5
   IdleRange_Max: 10
   Search_Range: 0
-  skill_scratch_Cooldown: 8
-  skill_scratch_Distance: 2
+  skill_bite_Cooldown: 5
+  skill_bite_Distance: 2
   skill_footWalk_Cooldown: 5
-  skill_footWalk_Distance: 20
-  skill_footWalk_Speed: 4
+  skill_footWalk_Distance: 100

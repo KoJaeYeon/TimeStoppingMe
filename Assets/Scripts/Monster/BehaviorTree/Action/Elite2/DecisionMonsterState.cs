@@ -14,17 +14,15 @@ public class DecisionMonsterState : Action
 
     public override TaskStatus OnUpdate()
     {
-        var targetObject = GameObject.FindGameObjectWithTag("Player");
-        var monster = Owner.GetComponent<Monster>();
-        var navmeshAgent = Owner.GetComponent<NavMeshAgent>();
-        if (targetObject == null || monster == null || navmeshAgent == null)
-        {
-            return TaskStatus.Failure;
-        }
-        else
-        {
+        var monsterData = SharedMonster.Value.monster_Data;
+        float distance = Vector3.Distance(TargetTrans.Value.position, Owner.transform.position);
 
-            return TaskStatus.Running;
+        if(distance < monsterData.TrackDistance)
+        {
+            SharedMonsterState.Value = MonsterState.Tracking;
         }
+
+
+        return TaskStatus.Running;
     }
 }

@@ -9,7 +9,6 @@ using UnityEngine.AI;
 public class SetPatrolPosition_2 : Action
 {
     public SharedMonster SharedMonster;
-    public SharedFloat PatrolRadius; // 최대 반경
     public SharedVector3 PatrolPosition;
 
     private float PatrolRadius_Min;
@@ -24,7 +23,7 @@ public class SetPatrolPosition_2 : Action
 
     public override TaskStatus OnUpdate()
     {
-        PatrolPosition.Value = GetRandomNavMeshPoint(transform.position, PatrolRadius_Min, PatrolRadius.Value);
+        PatrolPosition.Value = GetRandomNavMeshPoint(transform.position, PatrolRadius_Min, PatrolRadius_Max);
         return TaskStatus.Success;
     }
 
