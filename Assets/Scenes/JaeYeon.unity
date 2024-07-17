@@ -307,17 +307,17 @@ PrefabInstance:
     - target: {fileID: 1092824427976129861, guid: 33b56ca14f76b744c850fc436c79bc6f,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -12.37654
+      value: -12.75
       objectReference: {fileID: 0}
     - target: {fileID: 1092824427976129861, guid: 33b56ca14f76b744c850fc436c79bc6f,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.5
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1092824427976129861, guid: 33b56ca14f76b744c850fc436c79bc6f,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -34.27276
+      value: -33.44
       objectReference: {fileID: 0}
     - target: {fileID: 1092824427976129861, guid: 33b56ca14f76b744c850fc436c79bc6f,
         type: 3}
@@ -989,7 +989,12 @@ PrefabInstance:
     - target: {fileID: 292390439611656214, guid: db5f2f2b532f5e041ba7b6e0b69b2914,
         type: 3}
       propertyPath: m_Name
-      value: Monster_Elite 1
+      value: Monster_Elite_2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2663640872782599107, guid: db5f2f2b532f5e041ba7b6e0b69b2914,
+        type: 3}
+      propertyPath: bt
+      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 5527994642532389091, guid: db5f2f2b532f5e041ba7b6e0b69b2914,
         type: 3}
