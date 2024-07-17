@@ -135,10 +135,11 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4966396211287086216}
+  - component: {fileID: 7454163564815830578}
   - component: {fileID: 6967114950068480922}
   - component: {fileID: -930164340393075536}
-  - component: {fileID: 7454163564815830578}
   - component: {fileID: -6301664601265309890}
+  - component: {fileID: 7600838199979831021}
   m_Layer: 7
   m_Name: Monster_Range
   m_TagString: Monster
@@ -162,6 +163,22 @@ Transform:
   - {fileID: 913946979119353958}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &7454163564815830578
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1334493055497012160}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7569912d6fb3b964f8ef1a21819b4610, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  TargetTrans: {fileID: 0}
+  health: 0
+  monster_Data: {fileID: 11400000, guid: b00a121bf44968d4191fa8c7009d7ee8, type: 2}
+  LaunchTrans: {fileID: 8444077149286104094}
 --- !u!114 &6967114950068480922
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -227,22 +244,6 @@ NavMeshAgent:
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
---- !u!114 &7454163564815830578
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1334493055497012160}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7569912d6fb3b964f8ef1a21819b4610, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  TargetTrans: {fileID: 0}
-  health: 0
-  monster_Data: {fileID: 11400000, guid: b00a121bf44968d4191fa8c7009d7ee8, type: 2}
-  LaunchTrans: {fileID: 8444077149286104094}
 --- !u!136 &-6301664601265309890
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -263,9 +264,36 @@ CapsuleCollider:
   m_Enabled: 1
   serializedVersion: 2
   m_Radius: 0.5
-  m_Height: 2
+  m_Height: 2.3
   m_Direction: 1
   m_Center: {x: 0, y: 1, z: 0}
+--- !u!54 &7600838199979831021
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1334493055497012160}
+  serializedVersion: 4
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 0
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 126
+  m_CollisionDetection: 0
 --- !u!1 &1457445065988429051
 GameObject:
   m_ObjectHideFlags: 0
