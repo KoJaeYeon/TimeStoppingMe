@@ -3,7 +3,7 @@ using BehaviorDesigner.Runtime.Tasks;
 using UnityEngine;
 using UnityEngine.AI;
 
-[TaskCategory("Monster")]
+[TaskCategory("Monster/Initial")]
 public class InitalizeMonterData : Action
 {
     public SharedTransform TargetTrans;
@@ -21,7 +21,7 @@ public class InitalizeMonterData : Action
         var targetObject = GameObject.FindGameObjectWithTag("Player");
         var monster = Owner.GetComponent<Monster>();
         var navmeshAgent = Owner.GetComponent<NavMeshAgent>();
-        if (targetObject == null || Monster == null || navmeshAgent == null)
+        if (targetObject == null || monster == null || navmeshAgent == null)
         {
             return TaskStatus.Failure;
         }
@@ -45,7 +45,7 @@ public class InitalizeMonterData : Action
     }
 }
 
-[TaskCategory("Monster")]
+[TaskCategory("Monster/Initial")]
 public class InitalizeMonterData_Boss : Action
 {
     public SharedTransform TargetTrans;
@@ -112,7 +112,7 @@ public class InitalizeMonterData_Boss : Action
     }
 }
 
-[TaskCategory("Monster")]
+[TaskCategory("Monster/Initial")]
 public class InitalizeMonterData_Elite : Action
 {
     public SharedTransform TargetTrans;
