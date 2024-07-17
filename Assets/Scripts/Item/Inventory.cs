@@ -250,6 +250,7 @@ public class Inventory : MonoBehaviour
             inventoryIndex[selectedSlot].GetComponent<Renderer>().material = inventoryIndex[selectedSlot].GetComponent<PlaceableItem>().originMaterial; // 머티리얼 초기화
             inventoryIndex[selectedSlot].layer = 0;
             inventoryIndex[selectedSlot].transform.SetParent(null);
+            inventoryIndex[selectedSlot].GetComponent<PlaceableItem>().Use(transform.GetComponent<Player>());
 
             ClearInventory();
             construct = false; // construct 상태 종료
