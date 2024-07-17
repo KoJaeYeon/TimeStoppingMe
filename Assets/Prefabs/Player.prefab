@@ -311,12 +311,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1533be7ce97f0124eb6178fe11720e13, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerData: {fileID: 11400000, guid: 45ff78b090680dc4d9d582c7c5d90fa4, type: 2}
   maxHP: 0
   currentHP: 0
   moveSpeed: 0
   rotationSpeed: 720
   currentWeapon: {fileID: 2956732836615537440}
   isTimeStopped: 0
+  maxTimeGauge: 50
+  currentTimeGauge: 0
   blueprintPrefab: {fileID: 0}
   currentBlueprint: {fileID: 0}
   currentPlaceableItem: {fileID: 0}

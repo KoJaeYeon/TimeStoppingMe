@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class Player : MonoBehaviour, IAttackable
 {
+    [SerializeField] private PlayerData playerData;
+
     [SerializeField] protected int maxHP;
     [SerializeField] protected int currentHP;
     [SerializeField] protected float moveSpeed = 5f;
@@ -37,11 +39,19 @@ public class Player : MonoBehaviour, IAttackable
 
     private void Start()
     {
+        InitializePlayer();
         if(currentWeapon != null)
         {
             currentWeapon.Init();
         }
         currentTimeGauge = maxTimeGauge;
+    }
+
+    private void InitializePlayer()
+    {
+        maxHP = playerData.maxHP;
+        CurrentHP = maxHP;
+        moveSpeed = playerData.moveSpeed;
     }
 
     public void SetWeapon(WeaponBase newWeapon)
