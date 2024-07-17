@@ -11,15 +11,12 @@ public class GameManager : MonoBehaviour
 
     [SerializeField] private GameObject playerPrefab;
     [SerializeField] private Transform startStageSpawnPoint;
-    [SerializeField] private List<GameObject> availableWeapons;
     [SerializeField] private Transform weaponDropPoint;
     [SerializeField] private List<Door> combatStageDoors;
     [SerializeField] private Door bossStageDoor;
     [SerializeField] private CinemachineVirtualCamera virtualCamera;
 
     private GameObject player;
-    private List<GameObject> droppedWeapons = new List<GameObject>();
-    private HashSet<Vector3> usedDropPositions = new HashSet<Vector3>();
 
     public static GameManager Instance
     {
@@ -60,7 +57,6 @@ public class GameManager : MonoBehaviour
     {
         CurrentState = GameState.StartStage;
         SpawnPlayer(startStageSpawnPoint.position);
-        DropWeapons();
     }
 
     private void SpawnPlayer(Vector3 spawnPoint)
@@ -71,64 +67,6 @@ public class GameManager : MonoBehaviour
         {
             virtualCamera.Follow = player.transform;
         }
-    }
-
-    private void DropWeapons()
-    {
-        foreach (var weapon in availableWeapons)
-        {
-            Vector3 dropPosition = GetValidDropPosition();
-            GameObject droppedWeapon = Instantiate(weapon, dropPosition, Quaternion.identity);
-            Debug.Log(GetValidDropPosition() + " " + droppedWeapon.name);
-            droppedWeapons.Add(droppedWeapon);
-        }
-    }
-
-    private Vector3 GetValidDropPosition()
-    {
-        Vector3 randomPosition;
-        int attempts = 0;
-        do
-        {
-            randomPosition = weaponDropPoint.position + Random.insideUnitSphere * 2;
-            randomPosition.y = weaponDropPoint.position.y; // Keep the y position consistent
-            attempts++;
-        } while (IsPositionUsed(randomPosition) && attempts < 100);
-
-        usedDropPositions.Add(randomPosition);
-        return randomPosition;
-    }
-
-    private bool IsPositionUsed(Vector3 position)
-    {
-        foreach (var usedPosition in usedDropPositions)
-        {
-            if (Vector3.Distance(position, usedPosition) < 1f) // Ensure there's at least 1 unit distance between positions
-            {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    public void OnWeaponSelected(GameObject selectedWeapon)
-    {
-        Player playerScript = player.GetComponent<Player>();
-        playerScript.SetWeapon(selectedWeapon.GetComponent<WeaponBase>());
-        RemoveOtherWeapons(selectedWeapon);
-        OpenCombatStageDoors();
-    }
-
-    private void RemoveOtherWeapons(GameObject selectedWeapon)
-    {
-        foreach (var weapon in droppedWeapons)
-        {
-            if (weapon != selectedWeapon)
-            {
-                Destroy(weapon);
-            }
-        }
-        droppedWeapons.Clear();
     }
 
     private void OpenCombatStageDoors()

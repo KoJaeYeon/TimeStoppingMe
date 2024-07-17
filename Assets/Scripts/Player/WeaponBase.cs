@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class WeaponBase : MonoBehaviour
@@ -18,22 +17,30 @@ public class WeaponBase : MonoBehaviour
     [SerializeField] protected ProjectilePattern projectilePattern = ProjectilePattern.Parallel;
     [SerializeField] protected FireMode fireMode = FireMode.Single;
 
+    [SerializeField] protected Bullet[] bullets;
+
     private int currentAmmoSize;
     private float nextFireTime = 0f;
     private bool isReloading = false;
 
-    [SerializeField] protected Bullet[] bullets; 
-
     public void Init()
     {
         currentAmmoSize = maxAmmoSize;
+        isReloading = false;
+        nextFireTime = 0f;
+    }
+
+    public void SetBulletPrefabAndFirePoint(GameObject bulletPrefab, Transform firePoint)
+    {
+        this.bulletPrefab = bulletPrefab;
+        this.firePoint = firePoint;
     }
 
     public virtual void Fire(LayerMask enemyLayers)
     {
         if (isReloading) return;
 
-        if(currentAmmoSize <= 0)
+        if(currentAmmoSize <= 0 || currentAmmoSize < projectileCount)
         {
             StartCoroutine(Reload());
             return;
@@ -43,6 +50,7 @@ public class WeaponBase : MonoBehaviour
         {
             nextFireTime = Time.unscaledTime + 1f / baseFireRate;
 
+            bullets = new Bullet[projectileCount];
             if (projectilePattern == ProjectilePattern.Parallel)
             {
                 FireParallel(enemyLayers);
@@ -52,9 +60,9 @@ public class WeaponBase : MonoBehaviour
                 FireSpread(enemyLayers);
             }
 
-            currentAmmoSize--;
+            currentAmmoSize -= projectileCount;
 
-            if(currentAmmoSize <= 0)
+            if(currentAmmoSize < 0)
             {
                 StartCoroutine(Reload());
             }
@@ -63,7 +71,6 @@ public class WeaponBase : MonoBehaviour
 
     private void FireParallel(LayerMask enemyLayers)
     {
-        bullets = new Bullet[projectileCount];
         for (int i = 0; i < projectileCount; i++)
         {
             Vector3 offset = firePoint.right * (i - projectileCount / 2f) * parallelSpacing;
@@ -79,7 +86,6 @@ public class WeaponBase : MonoBehaviour
         float spreadAngle = 10f; // 각 투사체 사이의 각도
         float startAngle = -spreadAngle * (projectileCount - 1) / 2;
 
-        bullets = new Bullet[projectileCount];
         for (int i = 0; i < projectileCount; i++)
         {
             Quaternion rotation = firePoint.rotation * Quaternion.Euler(0, startAngle + i * spreadAngle, 0);
