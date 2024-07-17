@@ -8,8 +8,8 @@ public class Player : MonoBehaviour, IAttackable
 
     [SerializeField] protected int maxHP;
     [SerializeField] protected int currentHP;
-    [SerializeField] protected float moveSpeed = 5f;
-    [SerializeField] protected float rotationSpeed = 720f;
+    [SerializeField] protected float moveSpeed;
+    [SerializeField] protected float rotationSpeed;
     [SerializeField] private WeaponBase currentWeapon;
     [SerializeField] private bool isTimeStopped = false;
 
@@ -52,6 +52,7 @@ public class Player : MonoBehaviour, IAttackable
         maxHP = playerData.maxHP;
         CurrentHP = maxHP;
         moveSpeed = playerData.moveSpeed;
+        rotationSpeed = playerData.rotationSpeed;
     }
 
     public void SetWeapon(WeaponBase newWeapon)
