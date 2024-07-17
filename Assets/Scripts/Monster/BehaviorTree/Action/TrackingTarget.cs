@@ -164,17 +164,6 @@ public class TrackingTarget_Running : Action
             Debug.Log("HasArrived체크");
             return TaskStatus.Running;
         }
-        if (navMeshAgent.Value.remainingDistance > TrackDistance.Value)
-        {
-            if (Time.time - LastTrackedTime.Value > 10000)
-            {
-                return TaskStatus.Failure;
-            }
-        }
-        else
-        {
-            LastTrackedTime.Value = Time.time;
-        }
 
         SetDestination(TargetTrans.Value.position);
         return TaskStatus.Running;
@@ -204,36 +193,5 @@ public class TrackingTarget_Running : Action
         float distance = Vector3.Distance(Owner.transform.position, TargetTrans.Value.position);
 
         return distance <= AttackDistance.Value;
-    }
-
-    /// <summary>
-    /// 길찾기 중지.
-    /// </summary>
-    private void Stop()
-    {
-        if (navMeshAgent.Value.hasPath)
-        {
-#if UNITY_5_1 || UNITY_5_2 || UNITY_5_3 || UNITY_5_4 || UNITY_5_5
-                navMeshAgent.Value.Stop();
-#else
-            navMeshAgent.Value.isStopped = true;
-#endif
-        }
-    }
-
-    /// <summary>
-    /// The task has ended. Stop moving.
-    /// </summary>
-    public override void OnEnd()
-    {
-        Stop();
-    }
-
-    /// <summary>
-    /// The behavior tree has ended. Stop moving.
-    /// </summary>
-    public override void OnBehaviorComplete()
-    {
-        Stop();
     }
 }
