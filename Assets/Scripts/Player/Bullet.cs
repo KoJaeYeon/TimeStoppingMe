@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 public class Bullet : MonoBehaviour
@@ -9,18 +10,39 @@ public class Bullet : MonoBehaviour
     private float remainingLifetime;
     public DebuffType debuffType;
     public Debuff debuff;
+    public int piercingCount;
+    public float knockbackForce;
+    private HashSet<GameObject> hasPierced;
 
-    public void Initialize(int damageAmount, LayerMask layers, float projectileSpeed)
+    private bool isKnockbackActive = false;
+    private bool isPiercingActive = false;
+
+    public void Initialize(int damageAmount, LayerMask layers, float projectileSpeed, int piercingCount, float knockbackForce)
     {
         damage = damageAmount;
         enemyLayers = layers;
         speed = projectileSpeed;
         remainingLifetime = lifetime;
+        this.piercingCount = piercingCount;
+        this.knockbackForce = knockbackForce;
+        hasPierced = new HashSet<GameObject>();
     }
 
     private void Start()
     {
         Destroy(gameObject, lifetime);
+    }
+
+    public void ActivateKnockbackSkill(float force)
+    {
+        isKnockbackActive = true;
+        knockbackForce += force;
+    }
+
+    public void ActivatePiercingSkill(int additionalPiercing)
+    {
+        isPiercingActive = true;
+        piercingCount += additionalPiercing;
     }
 
     void Update()
@@ -38,6 +60,11 @@ public class Bullet : MonoBehaviour
     {
         if (((1 << other.gameObject.layer) & enemyLayers) != 0)
         {
+            if(hasPierced.Contains(other.gameObject))
+            {
+                return;
+            }
+
             IAttackable attackable = other.GetComponent<IAttackable>();
             if (attackable != null)
             {
@@ -49,7 +76,23 @@ public class Bullet : MonoBehaviour
                     attackable.OnTakeDebuffed(debuffType, debuff);
                 }
 
-                Destroy(gameObject);
+                if (isKnockbackActive)
+                {
+                    Rigidbody rb = other.GetComponent<Rigidbody>();
+                    if (rb != null)
+                    {
+                        Vector3 knockbackDirection = other.transform.position - transform.position;
+                        knockbackDirection.y = 0; // Keep knockback horizontal
+                        rb.AddForce(knockbackDirection.normalized * knockbackForce, ForceMode.Impulse);
+                    }
+                }
+
+                hasPierced.Add(other.gameObject);
+
+                if(!isPiercingActive || --piercingCount <= 0)
+                {
+                    Destroy(gameObject);
+                }
             }
         }
     }

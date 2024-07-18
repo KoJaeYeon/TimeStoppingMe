@@ -44,6 +44,12 @@ public enum ItemEffectType
     // 추가 효과 타입
 }
 
+public enum SkillType
+{
+    Knockback,
+    Piercing
+}
+
 #endregion
 
 #region GameState

@@ -67,6 +67,13 @@ public class Player : MonoBehaviour, IAttackable
         dummyWeapon.SetActive(true);
     }
 
+    public void AddSkillToWeapon(SkillItem skillItem)
+    {
+        if (CurrentWeapon != null)
+        {
+            CurrentWeapon.AddSkill(skillItem);
+        }
+    }
 
     public void OnUpdateStat(int maxHP,  int currentHP, float moveSpeed)
     {
