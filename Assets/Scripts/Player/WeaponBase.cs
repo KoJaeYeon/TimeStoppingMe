@@ -46,13 +46,23 @@ public class WeaponBase : MonoBehaviour
     {
         if (skillItem.skillType == SkillType.Knockback)
         {
+            if (isPiercingActive)
+            {
+                isPiercingActive = false;
+                additionalPiercing = 0;
+            }
             isKnockbackActive = true;
-            knockbackForce = skillItem.knockbackForce;
+            knockbackForce += skillItem.knockbackForce;
         }
         else if (skillItem.skillType == SkillType.Piercing)
         {
+            if (isKnockbackActive)
+            {
+                isKnockbackActive = false;
+                knockbackForce = 0;
+            }
             isPiercingActive = true;
-            additionalPiercing = skillItem.additionalPiercing;
+            additionalPiercing += skillItem.additionalPiercing;
         }
     }
 

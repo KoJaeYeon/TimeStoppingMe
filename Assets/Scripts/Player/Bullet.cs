@@ -36,7 +36,7 @@ public class Bullet : MonoBehaviour
     public void ActivateKnockbackSkill(float force)
     {
         isKnockbackActive = true;
-        knockbackForce = force;
+        knockbackForce += force;
     }
 
     public void ActivatePiercingSkill(int additionalPiercing)
