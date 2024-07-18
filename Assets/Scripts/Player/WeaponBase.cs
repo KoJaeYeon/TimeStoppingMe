@@ -157,4 +157,14 @@ public class WeaponBase : MonoBehaviour
         isReloading = false;
         Debug.Log("Reloaded");
     }
+    public void OnUpdateStatToWeapon(int itembaseDamage, float itembaseFireRate, float itembaseRange, float itemprojectileSpeed, int itemmaxAmmoSize, float itemreloadTime, int itemprojectileCount)
+    {
+        baseDamage = Mathf.Max(baseDamage + itembaseDamage, 1);
+        baseFireRate = Mathf.Max(baseFireRate + itembaseFireRate, 1f);
+        baseRange = Mathf.Max(baseRange + itembaseRange, 1f);
+        projectileSpeed = Mathf.Max(projectileSpeed + itemprojectileSpeed, 1f);
+        maxAmmoSize = Mathf.Max(maxAmmoSize + itemmaxAmmoSize, 1);
+        reloadTime = Mathf.Max(reloadTime + itemreloadTime, 0f);
+        projectileCount = Mathf.Max(projectileCount + itemprojectileCount, 1);
+    }
 }
