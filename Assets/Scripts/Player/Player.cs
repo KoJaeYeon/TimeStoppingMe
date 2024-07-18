@@ -74,6 +74,13 @@ public class Player : MonoBehaviour, IAttackable
             CurrentWeapon.AddSkill(skillItem);
         }
     }
+    public void OnUpdateStatToWeapon(int baseDamage, float baseFireRate,float baseRange,float projectileSpeed,int maxAmmoSize,float reloadTime, int projectileCount)
+    {
+        if (CurrentWeapon != null)
+        {
+            CurrentWeapon.OnUpdateStatToWeapon( baseDamage,  baseFireRate,  baseRange,  projectileSpeed,  maxAmmoSize,  reloadTime,  projectileCount);
+        }
+    }
 
     public void OnUpdateStat(int maxHP,  int currentHP, float moveSpeed)
     {
