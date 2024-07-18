@@ -85640,6 +85640,16 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1431530912211830, guid: 585a1ef8c48a0cf4f97332139e4344de,
         type: 3}
+    - target: {fileID: 4344413208977689473, guid: 0e8c58c4237621d4f8e2af1cdbad8acb,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4344413208977689473, guid: 0e8c58c4237621d4f8e2af1cdbad8acb,
+        type: 3}
+      propertyPath: PlayerDamage
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7136456773870295946, guid: 0e8c58c4237621d4f8e2af1cdbad8acb,
         type: 3}
       propertyPath: m_Name
