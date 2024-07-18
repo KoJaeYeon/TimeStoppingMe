@@ -51,7 +51,7 @@ public class Inventory : MonoBehaviour
         playerInput.actions["Cancel"].performed += OnCancel;
     }
 
-    void FixedUpdate()
+    void Update()
     {
         if (construct)
         {
@@ -101,9 +101,7 @@ public class Inventory : MonoBehaviour
         SelectSlot();
     }
 
-    void Update()
-    {
-    }
+ 
 
     private void OnInteract(InputAction.CallbackContext context)
     {
@@ -168,6 +166,10 @@ public class Inventory : MonoBehaviour
                 inturectItem.GetComponent<Item>().Use(transform.GetComponent<Player>());
                 //해당스크립트가 있는 트랜스폼에서 Player 스크립트를불러와 instantitem의 Player에게 Use를 넘겨줌
             }
+            else if (inturectItem.GetComponent<Item>() is InstantWeaponItem)
+            {
+                inturectItem.GetComponent<Item>().Use(transform.GetComponent<Player>());
+            }
         }
     }
 
@@ -180,7 +182,7 @@ public class Inventory : MonoBehaviour
             path = context.control.path;
             Debug.Log(path);
             construct = false;
-            if (inventoryIndex[selectedSlot]!=null)
+            if (inventoryIndex[selectedSlot] != null)
             {
 
                 inventoryIndex[selectedSlot].gameObject.SetActive(false);
@@ -250,6 +252,7 @@ public class Inventory : MonoBehaviour
             inventoryIndex[selectedSlot].GetComponent<Renderer>().material = inventoryIndex[selectedSlot].GetComponent<PlaceableItem>().originMaterial; // 머티리얼 초기화
             inventoryIndex[selectedSlot].layer = 0;
             inventoryIndex[selectedSlot].transform.SetParent(null);
+            inventoryIndex[selectedSlot].GetComponent<PlaceableItem>().Use(transform.GetComponent<Player>());
 
             ClearInventory();
             construct = false; // construct 상태 종료
@@ -266,6 +269,7 @@ public class Inventory : MonoBehaviour
                 if (inventoryIndex[selectedSlot].GetComponent<Item>() is InstantItem)
                 {
                     inventoryIndex[selectedSlot].GetComponent<Item>().Use(transform.GetComponent<Player>());
+                    Debug.Log("UseItem");
                     //해당스크립트가 있는 트랜스폼에서 Player 스크립트를불러와 instantitem의 Player에게 Use를 넘겨줌
                 }
             }
@@ -303,28 +307,28 @@ public class Inventory : MonoBehaviour
     private void OnSelectWheel(InputAction.CallbackContext context)
     {
         Vector2 scrollValue = context.ReadValue<Vector2>();
-        if (inventoryIndex[selectedSlot]!=null)
+        if (inventoryIndex[selectedSlot] != null)
         {
             if (scrollValue.y > 0f)
             {
-                inventoryIndex[selectedSlot].transform.rotation *= Quaternion.Euler(0f, rotatSpeed, 0f);
+                inventoryIndex[selectedSlot].transform.rotation *= Quaternion.Euler(0f, rotatSpeed * Time.unscaledDeltaTime, 0f); // Time.unscaledDeltaTime 사용
             }
             else if (scrollValue.y < 0f)
             {
-                inventoryIndex[selectedSlot].transform.rotation *= Quaternion.Euler(0f, -rotatSpeed, 0f);
+                inventoryIndex[selectedSlot].transform.rotation *= Quaternion.Euler(0f, -rotatSpeed * Time.unscaledDeltaTime, 0f); // Time.unscaledDeltaTime 사용
             }
         }
-        
+
     }
 
     private void OnCancel(InputAction.CallbackContext context)
     {
         construct = false;
-        if (inventoryIndex[selectedSlot]!=null)
+        if (inventoryIndex[selectedSlot] != null)
         {
             inventoryIndex[selectedSlot].gameObject.SetActive(false);
         }
-        Debug.Log("Cnacel");
+        Debug.Log("Cancel");
     }
     void ClearInventory()
     {
@@ -338,12 +342,11 @@ public class Inventory : MonoBehaviour
         {
             item = other.GetComponent<Item>();
 
-
             if (item != null)
             {
                 inturectItem = other.gameObject;
 
-                bool isfull=true;
+                bool isfull = true;
                 for (int i = 0; i < inventoryIndex.Length; i++)
                 {
                     if (inventoryIndex[i] == null)
@@ -353,11 +356,10 @@ public class Inventory : MonoBehaviour
                         break;
                     }
                 }
-                if(isfull)
+                if (isfull)
                 {
                     UIManager.inst.SendinturectMessage("인벤토리가 꽉 찼습니다..");
                 }
-                
             }
         }
     }
@@ -368,9 +370,5 @@ public class Inventory : MonoBehaviour
         {
             inturectItem = null;
         }
-        //else if(other.gameObject.layer==LayerMask.NameToLayer("Item"))
-        //{
-        //    inturectItem = null;
-        //}
     }
 }

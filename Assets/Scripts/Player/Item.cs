@@ -12,6 +12,6 @@ public abstract class Item : MonoBehaviour
 
     private void Start()
     {
-        originMaterial= transform.GetComponent<MeshRenderer>().material;   
+        originMaterial= transform.GetComponent<MeshRenderer>().material;
     }
 }

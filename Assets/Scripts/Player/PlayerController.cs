@@ -71,14 +71,6 @@ public class PlayerController : MonoBehaviour
                     {
                         item.Use(player);
                     }
-                    else
-                    {
-                        GameObject weapon = hit.collider.GetComponent<GameObject>();
-                        if (weapon != null && weapon.CompareTag("Weapon"))
-                        {
-                            GameManager.Instance.OnWeaponSelected(weapon);
-                        }
-                    }
                 }
             }
         }
