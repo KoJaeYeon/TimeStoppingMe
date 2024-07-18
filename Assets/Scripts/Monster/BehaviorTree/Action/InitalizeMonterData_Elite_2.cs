@@ -44,3 +44,43 @@ public class InitalizeMonterData_Elite_2 : Action
         }
     }
 }
+
+[TaskCategory("Monster/Initial")]
+public class InitalizeMonterData_Air : Action
+{
+    public SharedTransform TargetTrans;
+    public SharedMonster Monster;
+    public SharedNavmeshAgent NavMeshAgent;
+    public SharedFloat SkillDistance;
+
+    public SharedFloat[] SkillCooldown;
+    public SharedFloat[] SkillLastTiem;
+
+    public override TaskStatus OnUpdate()
+    {
+        var targetObject = GameObject.FindGameObjectWithTag("Player");
+        var monster = Owner.GetComponent<Monster>();
+        var navmeshAgent = Owner.GetComponent<NavMeshAgent>();
+        if (targetObject == null || monster == null || navmeshAgent == null)
+        {
+            return TaskStatus.Failure;
+        }
+        else
+        {
+            TargetTrans.Value = targetObject.transform;
+            Monster.Value = monster;
+            Monster.Value.TargetTrans = targetObject.transform;
+
+            var monsterData = monster.monster_Data as Monster_Data_Air;
+
+            SkillDistance.Value = monsterData.skill_grap_Distance;
+
+            SkillCooldown[0].Value = monsterData.skill_grap_Cooldown;
+
+            SkillLastTiem[0].Value = monsterData.skill_grap_Cooldown * -1;
+
+            NavMeshAgent.Value = navmeshAgent;
+            return TaskStatus.Success;
+        }
+    }
+}

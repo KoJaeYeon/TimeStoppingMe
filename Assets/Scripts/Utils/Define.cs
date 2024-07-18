@@ -26,7 +26,7 @@ public enum DebuffType
     Poison,
     Mind,
     Slow,
-    Surpress
+    Supress
 }
 
 public enum BuffType

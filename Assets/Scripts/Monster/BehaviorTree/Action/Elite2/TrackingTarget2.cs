@@ -92,3 +92,72 @@ public class TrackingTarget2_Running : Action
         return navMeshAgent.Value.SetDestination(destination);
     }
 }
+[TaskCategory("Monster/Air")]
+public class TrackingTarget2_WithoutNav : Action
+{
+    public SharedMonster SharedMonster;
+
+    [UnityEngine.Tooltip("The GameObject that the agent is seeking")]
+    public SharedTransform TargetTrans;
+    private Transform monsterTransform;
+    private float angularSpeed;
+
+    public override void OnStart()
+    {
+        monsterTransform = SharedMonster.Value.transform;
+        angularSpeed = SharedMonster.Value.monster_Data.AngularSpeed;
+    }
+
+    public override TaskStatus OnUpdate()
+    {
+        Vector3 direction = (TargetTrans.Value.position - monsterTransform.position).normalized;
+        direction.y = 0; // Keep the y component zero to only rotate on the xz plane
+
+        // Rotate towards the target
+        Quaternion targetRotation = Quaternion.LookRotation(direction);
+        targetRotation.x = 0; // Keep the x component zero to only rotate on the xz plane
+        targetRotation.z = 0; // Keep the z component zero to only rotate on the xz plane
+        monsterTransform.rotation = Quaternion.RotateTowards(monsterTransform.rotation, targetRotation, angularSpeed * Time.deltaTime);
+
+        // Move towards the target
+        Vector3 moveDirection = new Vector3(direction.x, 0, direction.z);
+        monsterTransform.position += moveDirection * SharedMonster.Value.moveSpeed * Time.deltaTime;
+
+        return TaskStatus.Success;
+    }
+}
+
+[TaskCategory("Monster/Air")]
+public class TrackingTarget2_Running_WithoutNav : Action
+{
+    public SharedMonster SharedMonster;
+
+    [UnityEngine.Tooltip("The GameObject that the agent is seeking")]
+    public SharedTransform TargetTrans;
+    private Transform monsterTransform;
+    private float angularSpeed;
+
+    public override void OnStart()
+    {
+        monsterTransform = SharedMonster.Value.transform;
+        angularSpeed = SharedMonster.Value.monster_Data.AngularSpeed;
+    }
+
+    public override TaskStatus OnUpdate()
+    {
+        Vector3 direction = (TargetTrans.Value.position - monsterTransform.position).normalized;
+        direction.y = 0; // Keep the y component zero to only rotate on the xz plane
+
+        // Rotate towards the target
+        Quaternion targetRotation = Quaternion.LookRotation(direction);
+        targetRotation.x = 0; // Keep the x component zero to only rotate on the xz plane
+        targetRotation.z = 0; // Keep the z component zero to only rotate on the xz plane
+        monsterTransform.rotation = Quaternion.RotateTowards(monsterTransform.rotation, targetRotation, angularSpeed * Time.deltaTime);
+
+        // Move towards the target
+        Vector3 moveDirection = new Vector3(direction.x, 0, direction.z);
+        monsterTransform.position += moveDirection * SharedMonster.Value.moveSpeed * Time.deltaTime;
+
+        return TaskStatus.Running;
+    }
+}
