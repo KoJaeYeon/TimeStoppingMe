@@ -166,6 +166,10 @@ public class Inventory : MonoBehaviour
                 inturectItem.GetComponent<Item>().Use(transform.GetComponent<Player>());
                 //해당스크립트가 있는 트랜스폼에서 Player 스크립트를불러와 instantitem의 Player에게 Use를 넘겨줌
             }
+            else if (inturectItem.GetComponent<Item>() is InstantWeaponItem)
+            {
+                inturectItem.GetComponent<Item>().Use(transform.GetComponent<Player>());
+            }
         }
     }
 
@@ -265,6 +269,7 @@ public class Inventory : MonoBehaviour
                 if (inventoryIndex[selectedSlot].GetComponent<Item>() is InstantItem)
                 {
                     inventoryIndex[selectedSlot].GetComponent<Item>().Use(transform.GetComponent<Player>());
+                    Debug.Log("UseItem");
                     //해당스크립트가 있는 트랜스폼에서 Player 스크립트를불러와 instantitem의 Player에게 Use를 넘겨줌
                 }
             }
