@@ -30,14 +30,23 @@ public class Debuff_Slow : Debuff
             Monster monster = target.GetComponent<Monster>();
             if (monster != null)
             {
-                monster.bt.SetVariableValue("Speed", monster.monster_Data.MoveSpeed * (1 - slowPercentage));
-                if (monster is Monster_Elite)
+                if (monster is Monster_Elite_2)
                 {
                     var monsterE = monster as Monster_Elite;
                     var data = monsterE.monster_Data as Monster_Data_Elite;
-                    monsterE.bt.SetVariableValue("Skill2Speed", data.skill_footWalk_Speed * (1 - slowPercentage));
+                    monsterE.moveSpeed = data.MoveSpeed / 2;
                 }
-                monster.bt.SetVariableValue("Speed", monster.monster_Data.MoveSpeed/2);
+                else
+                {
+                    monster.bt.SetVariableValue("Speed", monster.monster_Data.MoveSpeed * (1 - slowPercentage));
+                    if (monster is Monster_Elite)
+                    {
+                        var monsterE = monster as Monster_Elite;
+                        var data = monsterE.monster_Data as Monster_Data_Elite;
+                        monsterE.bt.SetVariableValue("Skill2Speed", data.skill_footWalk_Speed * (1 - slowPercentage));
+                    }
+                }
+
                 isApplied = true;
             }
         }
@@ -57,13 +66,24 @@ public class Debuff_Slow : Debuff
             Monster monster = target.GetComponent<Monster>();
             if (monster != null)
             {
-                monster.bt.SetVariableValue("Speed", monster.monster_Data.MoveSpeed);
-                if(monster is Monster_Elite)
+                if (monster is Monster_Elite_2)
                 {
                     var monsterE = monster as Monster_Elite;
                     var data = monsterE.monster_Data as Monster_Data_Elite;
-                    monsterE.bt.SetVariableValue("Skill2Speed", data.skill_footWalk_Speed);
+                    monsterE.moveSpeed = data.MoveSpeed;
                 }
+                else
+                {
+                    monster.bt.SetVariableValue("Speed", monster.monster_Data.MoveSpeed);
+                    if (monster is Monster_Elite)
+                    {
+                        var monsterE = monster as Monster_Elite;
+                        var data = monsterE.monster_Data as Monster_Data_Elite;
+                        monsterE.bt.SetVariableValue("Skill2Speed", data.skill_footWalk_Speed);
+                    }
+                }
+
+
                 isApplied = false;
             }
         }

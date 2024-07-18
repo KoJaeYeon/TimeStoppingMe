@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Debuff_Suppress : Debuff
 {
-    public Debuff_Suppress() : base(5f, 0, 0) { }
+    public Debuff_Suppress() : base(2.2f, 0, 0) { }
 
     public override void ApplyEffect(GameObject target)
     {

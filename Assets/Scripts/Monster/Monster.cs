@@ -13,12 +13,16 @@ public class Monster : MonoBehaviour, IAttackable
     private List<Debuff> activeDebuffs = new List<Debuff>();
     public BehaviorTree bt;
 
+
     public bool IsBurned { get; set; } = false;
     public bool IsPosioned { get; set; } = false;
+    [Header("MonsterBt_Version2")]
+    public float moveSpeed;
 
     public virtual void Awake()
     {
         health = monster_Data.MaxHealth;
+        moveSpeed = monster_Data.MoveSpeed;
     }
 
     private void Update()
@@ -26,6 +30,11 @@ public class Monster : MonoBehaviour, IAttackable
         CalculateDebuff();
         var variable = bt.GetVariable("Speed");
         Debug.Log(variable);
+    }
+
+    private void Start()
+    {
+        
     }
 
     #region Skill
