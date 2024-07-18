@@ -6087,7 +6087,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 12341234
+  m_text: projectileSpeed
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8b6ab5c139ff5c0429f823878c55ee0c, type: 2}
   m_sharedMaterial: {fileID: 5553602957697168685, guid: 8b6ab5c139ff5c0429f823878c55ee0c,
