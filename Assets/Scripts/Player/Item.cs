@@ -10,8 +10,10 @@ public abstract class Item : MonoBehaviour
 
     public abstract void Use(Player player);
 
+    
     private void Start()
     {
-        originMaterial= transform.GetComponent<MeshRenderer>().material;
+        gameObject.name = icon.name;    
+        originMaterial = transform.GetComponent<MeshRenderer>().material;
     }
 }

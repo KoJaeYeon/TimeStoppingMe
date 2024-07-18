@@ -86281,52 +86281,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 4535433800064941753, guid: c636369365a82b247a3e981153481f17,
-        type: 3}
-      propertyPath: baseRange
-      value: 20
-      objectReference: {fileID: 0}
-    - target: {fileID: 4535433800064941753, guid: c636369365a82b247a3e981153481f17,
-        type: 3}
-      propertyPath: skillItem
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 4535433800064941753, guid: c636369365a82b247a3e981153481f17,
-        type: 3}
-      propertyPath: baseDamage
-      value: 50
-      objectReference: {fileID: 0}
-    - target: {fileID: 4535433800064941753, guid: c636369365a82b247a3e981153481f17,
-        type: 3}
-      propertyPath: reloadTime
-      value: -5
-      objectReference: {fileID: 0}
-    - target: {fileID: 4535433800064941753, guid: c636369365a82b247a3e981153481f17,
-        type: 3}
-      propertyPath: maxAmmoSize
-      value: 100
-      objectReference: {fileID: 0}
-    - target: {fileID: 4535433800064941753, guid: c636369365a82b247a3e981153481f17,
-        type: 3}
-      propertyPath: baseFireRate
-      value: -5
-      objectReference: {fileID: 0}
-    - target: {fileID: 4535433800064941753, guid: c636369365a82b247a3e981153481f17,
-        type: 3}
-      propertyPath: originMaterial
-      value: 
-      objectReference: {fileID: -876546973899608171, guid: 0b56fa09f5a01db4d9a66803f96592bc,
-        type: 3}
-    - target: {fileID: 4535433800064941753, guid: c636369365a82b247a3e981153481f17,
-        type: 3}
-      propertyPath: projectileCount
-      value: 50
-      objectReference: {fileID: 0}
-    - target: {fileID: 4535433800064941753, guid: c636369365a82b247a3e981153481f17,
-        type: 3}
-      propertyPath: projectileSpeed
-      value: 10
-      objectReference: {fileID: 0}
     - target: {fileID: 7279669172327804762, guid: c636369365a82b247a3e981153481f17,
         type: 3}
       propertyPath: m_LocalPosition.x

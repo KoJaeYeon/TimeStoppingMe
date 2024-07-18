@@ -281,8 +281,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemName: 
   icon: {fileID: 21300000, guid: 0ef65bb1234951b4cb679be653d61093, type: 3}
-  originMaterial: {fileID: 0}
-  skillItem: {fileID: 11400000, guid: d0501ad5544223f40a57de8cb252f04c, type: 2}
+  originMaterial: {fileID: -876546973899608171, guid: 0b56fa09f5a01db4d9a66803f96592bc,
+    type: 3}
+  baseDamage: 50
+  baseFireRate: -5
+  baseRange: 20
+  projectileSpeed: 10
+  maxAmmoSize: 100
+  reloadTime: -5
+  projectileCount: 50
+  skillItem: {fileID: 0}
 --- !u!23 &5709610158441074809
 MeshRenderer:
   m_ObjectHideFlags: 0
