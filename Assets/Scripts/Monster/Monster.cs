@@ -13,12 +13,16 @@ public class Monster : MonoBehaviour, IAttackable
     private List<Debuff> activeDebuffs = new List<Debuff>();
     public BehaviorTree bt;
 
+
     public bool IsBurned { get; set; } = false;
     public bool IsPosioned { get; set; } = false;
+    [Header("MonsterBt_Version2")]
+    public float moveSpeed;
 
     public virtual void Awake()
     {
         health = monster_Data.MaxHealth;
+        moveSpeed = monster_Data.MoveSpeed;
     }
 
     private void Update()
@@ -122,5 +126,14 @@ public class Monster : MonoBehaviour, IAttackable
         Handles.color = new Color(1, 1, 1, 0.2f);
         Handles.DrawSolidArc(transform.position, Vector3.up, transform.forward, monster_Data.Search_Range / 2, monster_Data.AttackDistance);
         Handles.DrawSolidArc(transform.position, Vector3.up, transform.forward, -monster_Data.Search_Range / 2, monster_Data.AttackDistance);
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("Player"))
+        {
+            var Iattack = other.GetComponent<IAttackable>();
+            Iattack.OnTakeDamaged(monster_Data.Damage);
+        }
     }
 }

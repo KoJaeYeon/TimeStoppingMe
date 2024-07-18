@@ -38,10 +38,10 @@ MonoBehaviour:
   fireFlooring_time: 5
   fiireFlooring_range: 5
   fireFlooring_number: 6
-  fireFlooring_size: 5
+  fireFlooring_size: 6
   skill_MindFlooring_Cooldown: 15
   skill_MindFlooring_Distance: 999
   mindFlooring_time: 5
   mindFlooring_range: 5
   mindFlooring_number: 8
-  mindFlooring_size: 6
+  mindFlooring_size: 8
