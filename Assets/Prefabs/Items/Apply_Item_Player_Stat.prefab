@@ -72,9 +72,9 @@ MonoBehaviour:
   itemName: SpeedStar
   icon: {fileID: 21300000, guid: 7c1f05d83eb2c1648b1de36963b64a46, type: 3}
   originMaterial: {fileID: 0}
-  maxHp: -5
+  maxHp: -1
   currentHP: 0
-  moveSpeed: 30
+  moveSpeed: 10
 --- !u!23 &2491988719333007329
 MeshRenderer:
   m_ObjectHideFlags: 0

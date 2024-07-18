@@ -5430,6 +5430,7 @@ MonoBehaviour:
   health: 0
   monster_Data: {fileID: 11400000, guid: b00a121bf44968d4191fa8c7009d7ee8, type: 2}
   bt: {fileID: 7559878576958330683}
+  moveSpeed: 0
   LaunchTrans: {fileID: 1044784549723290302}
 --- !u!114 &7559878576958330683
 MonoBehaviour:
@@ -8831,6 +8832,7 @@ MonoBehaviour:
   health: 0
   monster_Data: {fileID: 11400000, guid: 2e71cd80a42c083408813f9f3ec7edd4, type: 2}
   bt: {fileID: 7402190717466406097}
+  moveSpeed: 0
   LaunchTrans: {fileID: 0}
   AttackCollision: {fileID: 3589948862505238073}
 --- !u!114 &7402190717466406097
@@ -12977,6 +12979,7 @@ MonoBehaviour:
   health: 0
   monster_Data: {fileID: 11400000, guid: b00a121bf44968d4191fa8c7009d7ee8, type: 2}
   bt: {fileID: 6967114950068480922}
+  moveSpeed: 0
   LaunchTrans: {fileID: 8444077149286104094}
 --- !u!114 &6967114950068480922
 MonoBehaviour:
@@ -26330,6 +26333,7 @@ MonoBehaviour:
   health: 0
   monster_Data: {fileID: 11400000, guid: 2e71cd80a42c083408813f9f3ec7edd4, type: 2}
   bt: {fileID: 7946387915905624621}
+  moveSpeed: 0
   LaunchTrans: {fileID: 0}
   AttackCollision: {fileID: 3429881788497195565}
 --- !u!114 &7946387915905624621
@@ -28793,6 +28797,7 @@ MonoBehaviour:
   health: 0
   monster_Data: {fileID: 11400000, guid: 2e71cd80a42c083408813f9f3ec7edd4, type: 2}
   bt: {fileID: 6625512612592646248}
+  moveSpeed: 0
   LaunchTrans: {fileID: 0}
   AttackCollision: {fileID: 4836591074194275891}
 --- !u!114 &6625512612592646248
@@ -43729,6 +43734,7 @@ MonoBehaviour:
   health: 0
   monster_Data: {fileID: 11400000, guid: b00a121bf44968d4191fa8c7009d7ee8, type: 2}
   bt: {fileID: 2610717397336441450}
+  moveSpeed: 0
   LaunchTrans: {fileID: 2537791508386916620}
 --- !u!114 &2610717397336441450
 MonoBehaviour:
@@ -55265,6 +55271,7 @@ MonoBehaviour:
   health: 0
   monster_Data: {fileID: 11400000, guid: b00a121bf44968d4191fa8c7009d7ee8, type: 2}
   bt: {fileID: 3957700400574405338}
+  moveSpeed: 0
   LaunchTrans: {fileID: 8706551462661584369}
 --- !u!114 &3957700400574405338
 MonoBehaviour:
@@ -60044,6 +60051,7 @@ MonoBehaviour:
   health: 0
   monster_Data: {fileID: 11400000, guid: b00a121bf44968d4191fa8c7009d7ee8, type: 2}
   bt: {fileID: 3318221054864810602}
+  moveSpeed: 0
   LaunchTrans: {fileID: 3050141000288649607}
 --- !u!114 &3318221054864810602
 MonoBehaviour:
@@ -60641,6 +60649,7 @@ MonoBehaviour:
   health: 0
   monster_Data: {fileID: 11400000, guid: 2e71cd80a42c083408813f9f3ec7edd4, type: 2}
   bt: {fileID: 1505674739426507185}
+  moveSpeed: 0
   LaunchTrans: {fileID: 0}
   AttackCollision: {fileID: 590028680483906307}
 --- !u!114 &1505674739426507185

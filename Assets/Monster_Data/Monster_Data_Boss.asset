@@ -16,7 +16,7 @@ MonoBehaviour:
   TrackDistance: 999
   MaxHealth: 400
   Damage: 2
-  MoveSpeed: 4
+  MoveSpeed: 5
   AngularSpeed: 36
   IdleRange_Min: 5
   IdleRange_Max: 10
@@ -27,21 +27,21 @@ MonoBehaviour:
     type: 3}
   mindFlooring_Prefab: {fileID: 5947030866179023587, guid: 68b25fe95777645438a2363cabc0ba69,
     type: 3}
-  skill_loveshot_Cooldown: 3
+  skill_loveshot_Cooldown: 1
   skill_loveshot_Distance: 18
-  skill_loveshot_LaunchSpeed: 10
+  skill_loveshot_LaunchSpeed: 25
   skill_bite_Cooldown: 10
   skill_bite_Distance: 2
   skiil_bite_Drain: 3
   skill_hellfire_Cooldown: 10
   skill_hellfire_Distance: 999
   fireFlooring_time: 5
-  fiireFlooring_range: 5
-  fireFlooring_number: 6
+  fiireFlooring_range: 20
+  fireFlooring_number: 8
   fireFlooring_size: 6
   skill_MindFlooring_Cooldown: 15
   skill_MindFlooring_Distance: 999
   mindFlooring_time: 5
-  mindFlooring_range: 5
+  mindFlooring_range: 20
   mindFlooring_number: 8
   mindFlooring_size: 8
