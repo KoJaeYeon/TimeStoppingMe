@@ -71,7 +71,6 @@ public class Monster_Elite_2 : Monster
     }
     public override void DrawArc()
     {
-        Debug.LogAssertion("dsf");
         if (AttackCollision.activeSelf == true)
         {
             Handles.color = Color.red;
