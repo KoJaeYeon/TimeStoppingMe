@@ -166,7 +166,7 @@ PrefabInstance:
     - target: {fileID: 1334493055497012160, guid: 3a8848a789e269f46b76e783c622ca06,
         type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4966396211287086216, guid: 3a8848a789e269f46b76e783c622ca06,
         type: 3}
@@ -239,7 +239,7 @@ PrefabInstance:
     - target: {fileID: 1731922210431051255, guid: 8e95295b1d96a864e90216bb67151e13,
         type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8450472497815377464, guid: 8e95295b1d96a864e90216bb67151e13,
         type: 3}
@@ -447,7 +447,7 @@ PrefabInstance:
     - target: {fileID: 3274126625501670101, guid: a96dd094fc715294681f6926fd488c67,
         type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6088930799190671722, guid: a96dd094fc715294681f6926fd488c67,
         type: 3}
@@ -643,7 +643,7 @@ PrefabInstance:
     - target: {fileID: 1334493055497012160, guid: 3a8848a789e269f46b76e783c622ca06,
         type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4966396211287086216, guid: 3a8848a789e269f46b76e783c622ca06,
         type: 3}
@@ -853,7 +853,7 @@ PrefabInstance:
     - target: {fileID: 292390439611656214, guid: eebc17d999a1dc2429a33dee340120f7,
         type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5527994642532389091, guid: eebc17d999a1dc2429a33dee340120f7,
         type: 3}
@@ -922,21 +922,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Monster_Elite_2
-      objectReference: {fileID: 0}
-    - target: {fileID: 292390439611656214, guid: db5f2f2b532f5e041ba7b6e0b69b2914,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3772340530306709489, guid: db5f2f2b532f5e041ba7b6e0b69b2914,
-        type: 3}
-      propertyPath: m_Controller
-      value: 
-      objectReference: {fileID: 9100000, guid: 0797fd5d28936c2418f838de49fc232c, type: 2}
-    - target: {fileID: 4903046116389891263, guid: db5f2f2b532f5e041ba7b6e0b69b2914,
-        type: 3}
-      propertyPath: mBehaviorSource.mTaskData.JSONSerialization
-      value: '{"Variables":[{"Type":"BehaviorDesigner.Runtime.SharedGameObject","Name":"Owner","IsShared":true},{"Type":"BehaviorDesigner.Runtime.SharedGameObject","Name":"Model","IsShared":true},{"Type":"BehaviorDesigner.Runtime.SharedTransform","Name":"TargetTrans","IsShared":true},{"Type":"BehaviorDesigner.Runtime.SharedMonster","Name":"Monster","IsShared":true},{"Type":"SharedNavmeshAgent","Name":"NavmeshAgent","IsShared":true},{"Type":"BehaviorDesigner.Runtime.SharedVector3","Name":"PatrolPos","IsShared":true,"Vector3mValue":"(0,0,0)"},{"Type":"BehaviorDesigner.Runtime.SharedMonsterState","Name":"MonsterState","IsShared":true,"MonsterStatemValue":"Idle"},{"Type":"BehaviorDesigner.Runtime.SharedFloat","Name":"SkillCooldown1","IsShared":true,"SinglemValue":0},{"Type":"BehaviorDesigner.Runtime.SharedFloat","Name":"SkillCooldown2","IsShared":true,"SinglemValue":0},{"Type":"BehaviorDesigner.Runtime.SharedFloat","Name":"LastSkillTime1","IsShared":true,"SinglemValue":0},{"Type":"BehaviorDesigner.Runtime.SharedFloat","Name":"LastSkillTime2","IsShared":true,"SinglemValue":0},{"Type":"BehaviorDesigner.Runtime.SharedFloat","Name":"SkillDistance","IsShared":true,"SinglemValue":0}]}'
       objectReference: {fileID: 0}
     - target: {fileID: 5527994642532389091, guid: db5f2f2b532f5e041ba7b6e0b69b2914,
         type: 3}
@@ -1009,7 +994,7 @@ PrefabInstance:
     - target: {fileID: 4157228078798209517, guid: ded2e28ee850e2d4b8f5ff208992298c,
         type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4157228078798209517, guid: ded2e28ee850e2d4b8f5ff208992298c,
         type: 3}
@@ -1240,6 +1225,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: WaterRoad
       objectReference: {fileID: 0}
+    - target: {fileID: 2002831562935820654, guid: 058ae9318af60b4438c7ac0a64d8d076,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1262,6 +1252,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Layer
       value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 4157228078798209517, guid: ded2e28ee850e2d4b8f5ff208992298c,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4157228078798209517, guid: ded2e28ee850e2d4b8f5ff208992298c,
         type: 3}

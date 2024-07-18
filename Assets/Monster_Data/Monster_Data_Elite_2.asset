@@ -20,7 +20,7 @@ MonoBehaviour:
   AngularSpeed: 360
   IdleRange_Min: 5
   IdleRange_Max: 10
-  Search_Range: 0
+  Search_Range: 150
   skill_bite_Cooldown: 5
   skill_bite_Distance: 2
   skill_footWalk_Cooldown: 5

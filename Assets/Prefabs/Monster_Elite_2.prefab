@@ -30,7 +30,7 @@ Transform:
   m_GameObject: {fileID: 292390439611656214}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 10.579712, y: 0, z: -13.451606}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -55,7 +55,6 @@ MonoBehaviour:
   monster_Data: {fileID: 11400000, guid: 853b0dfc959ab2c40b3eee18fe934174, type: 2}
   bt: {fileID: 4903046116389891263}
   moveSpeed: 0
-  LaunchTrans: []
   overDistance: 0
   AttackCollision: {fileID: 6879656347425896870}
 --- !u!114 &4903046116389891263
@@ -86,19 +85,15 @@ MonoBehaviour:
       parentIndex: 
       startIndex: 
       variableStartIndex: 
-      JSONSerialization: '{"EntryTask":{"Type":"BehaviorDesigner.Runtime.Tasks.EntryTask","NodeData":{"Offset":"(-111.555542,-88.11105)"},"ID":0,"Name":"Entry","Instant":true},"RootTask":{"Type":"BehaviorDesigner.Runtime.Tasks.Sequence","NodeData":{"Offset":"(-3.72592163,149.889984)"},"ID":1,"Name":"Sequence","Instant":true,"AbortTypeabortType":"None","Children":[{"Type":"InitalizeMonterData_Elite_2","NodeData":{"Offset":"(-183.513519,138.108139)"},"ID":2,"Name":"Initalize
-        Monter Data   Elite  2","Instant":true,"SharedTransformTargetTrans":{"Type":"BehaviorDesigner.Runtime.SharedTransform","Name":"TargetTrans","IsShared":true},"SharedMonsterMonster":{"Type":"BehaviorDesigner.Runtime.SharedMonster","Name":"Monster","IsShared":true},"SharedNavmeshAgentNavMeshAgent":{"Type":"SharedNavmeshAgent","Name":"NavAgent","IsShared":true}},{"Type":"BehaviorDesigner.Runtime.Tasks.Parallel","NodeData":{"Offset":"(-2.61551666,175.8501)"},"ID":3,"Name":"Parallel","Instant":true,"AbortTypeabortType":"None","Children":[{"Type":"DecisionMonsterState","NodeData":{"Offset":"(-177.484711,142.668854)"},"ID":4,"Name":"Decision
-        Monster State","Instant":true,"SharedTransformTargetTrans":{"Type":"BehaviorDesigner.Runtime.SharedTransform","Name":"TargetTrans","IsShared":true},"SharedMonsterSharedMonster":{"Type":"BehaviorDesigner.Runtime.SharedMonster","Name":"Monster","IsShared":true},"SharedMonsterStateSharedMonsterState":{"Type":"BehaviorDesigner.Runtime.SharedMonsterState","Name":"MonsterState","IsShared":true,"MonsterStatemValue":"Idle"}},{"Type":"BehaviorDesigner.Runtime.Tasks.Repeater","NodeData":{"Offset":"(-4.86560059,177.192657)"},"ID":5,"Name":"Repeater","Instant":true,"SharedIntcount":{"Type":"BehaviorDesigner.Runtime.SharedInt","Name":null,"Int32mValue":0},"SharedBoolrepeatForever":{"Type":"BehaviorDesigner.Runtime.SharedBool","Name":null,"BooleanmValue":false},"SharedBoolendOnFailure":{"Type":"BehaviorDesigner.Runtime.SharedBool","Name":null,"BooleanmValue":true},"Children":[{"Type":"BehaviorDesigner.Runtime.Tasks.Sequence","NodeData":{"Offset":"(-369.966125,147.25531)"},"ID":6,"Name":"\ub300\uae30
-        Sequence","Instant":true,"AbortTypeabortType":"None","Children":[{"Type":"CheckState","NodeData":{"Offset":"(-407.8239,105.526062)","ColorIndex":5},"ID":7,"Name":"Check
-        State","Instant":true,"SharedMonsterStateMonsterState":{"Type":"BehaviorDesigner.Runtime.SharedMonsterState","Name":"MonsterState","IsShared":true,"MonsterStatemValue":"Idle"},"MonsterStatecheakState":"Idle"},{"Type":"CustomWaitIdle","NodeData":{"Offset":"(-285.567383,114.944824)"},"ID":8,"Name":"Custom
-        Wait Idle","Instant":true,"SharedFloatwaitTime":{"Type":"BehaviorDesigner.Runtime.SharedFloat","Name":null,"SinglemValue":3},"SharedTransformTargetTrans":{"Type":"BehaviorDesigner.Runtime.SharedTransform","Name":"TargetTrans","IsShared":true},"SharedFloatTrackDistnace":{"Type":"BehaviorDesigner.Runtime.SharedFloat","Name":"TrackDistance","IsShared":true,"SinglemValue":0}},{"Type":"SetPatrolPosition_2","NodeData":{"Offset":"(-138.297729,108.503418)"},"ID":9,"Name":"Set
-        Patrol Position  2","Instant":true,"SharedMonsterSharedMonster":{"Type":"BehaviorDesigner.Runtime.SharedMonster","Name":"Monster","IsShared":true},"SharedVector3PatrolPosition":{"Type":"BehaviorDesigner.Runtime.SharedVector3","Name":"PatrolPos","IsShared":true,"Vector3mValue":"(0,0,0)"}},{"Type":"Patrol","NodeData":{"Offset":"(21.0994263,109.906189)"},"ID":10,"Name":"Patrol","Instant":true,"SharedFloatspeed":{"Type":"BehaviorDesigner.Runtime.SharedFloat","Name":"Speed","IsShared":true,"SinglemValue":0},"SharedFloatangularSpeed":{"Type":"BehaviorDesigner.Runtime.SharedFloat","Name":"AnuglarSpeed","IsShared":true,"SinglemValue":0},"SharedFloatarriveDistance":{"Type":"BehaviorDesigner.Runtime.SharedFloat","Name":null,"SinglemValue":0.2},"SharedNavmeshAgentnavMeshAgent":{"Type":"SharedNavmeshAgent","Name":"NavmeshAgent","IsShared":true},"SharedVector3destination":{"Type":"BehaviorDesigner.Runtime.SharedVector3","Name":"PatrolPos","IsShared":true,"Vector3mValue":"(0,0,0)"},"SharedTransformTargetTrans":{"Type":"BehaviorDesigner.Runtime.SharedTransform","Name":"TargetTrans","IsShared":true},"SharedFloatTrackDistance":{"Type":"BehaviorDesigner.Runtime.SharedFloat","Name":"TrackDistance","IsShared":true,"SinglemValue":0}}]}]}]}]},"Variables":[{"Type":"BehaviorDesigner.Runtime.SharedGameObject","Name":"Owner","IsShared":true},{"Type":"BehaviorDesigner.Runtime.SharedGameObject","Name":"Model","IsShared":true},{"Type":"BehaviorDesigner.Runtime.SharedTransform","Name":"TargetTrans","IsShared":true},{"Type":"BehaviorDesigner.Runtime.SharedMonster","Name":"Monster","IsShared":true},{"Type":"SharedNavmeshAgent","Name":"NavmeshAgent","IsShared":true},{"Type":"BehaviorDesigner.Runtime.SharedVector3","Name":"PatrolPos","IsShared":true,"Vector3mValue":"(0,0,0)"},{"Type":"BehaviorDesigner.Runtime.SharedMonsterState","Name":"MonsterState","IsShared":true,"MonsterStatemValue":"Idle"},{"Type":"BehaviorDesigner.Runtime.SharedFloat","Name":"SkillCooldown1","IsShared":true,"SinglemValue":0},{"Type":"BehaviorDesigner.Runtime.SharedFloat","Name":"SkillCooldown2","IsShared":true,"SinglemValue":0},{"Type":"BehaviorDesigner.Runtime.SharedFloat","Name":"LastSkillTime1","IsShared":true,"SinglemValue":0},{"Type":"BehaviorDesigner.Runtime.SharedFloat","Name":"LastSkillTime2","IsShared":true,"SinglemValue":0},{"Type":"BehaviorDesigner.Runtime.SharedFloat","Name":"SkillDistance","IsShared":true,"SinglemValue":0}]}'
+      JSONSerialization: '{"Variables":[{"Type":"BehaviorDesigner.Runtime.SharedGameObject","Name":"Owner","IsShared":true,"PropertyMapping":"UnityEngine.Transform/gameObject","PropertyMappingOwner":0},{"Type":"BehaviorDesigner.Runtime.SharedGameObject","Name":"Model","IsShared":true,"PropertyMapping":"UnityEngine.Animator/gameObject","PropertyMappingOwner":1},{"Type":"BehaviorDesigner.Runtime.SharedTransform","Name":"TargetTrans","IsShared":true},{"Type":"BehaviorDesigner.Runtime.SharedMonster","Name":"Monster","IsShared":true},{"Type":"SharedNavmeshAgent","Name":"NavmeshAgent","IsShared":true},{"Type":"BehaviorDesigner.Runtime.SharedVector3","Name":"PatrolPos","IsShared":true,"Vector3mValue":"(0,0,0)"},{"Type":"BehaviorDesigner.Runtime.SharedMonsterState","Name":"MonsterState","IsShared":true,"MonsterStatemValue":"Idle"},{"Type":"BehaviorDesigner.Runtime.SharedFloat","Name":"SkillCooldown1","IsShared":true,"SinglemValue":0},{"Type":"BehaviorDesigner.Runtime.SharedFloat","Name":"SkillCooldown2","IsShared":true,"SinglemValue":0},{"Type":"BehaviorDesigner.Runtime.SharedFloat","Name":"LastSkillTime1","IsShared":true,"SinglemValue":0},{"Type":"BehaviorDesigner.Runtime.SharedFloat","Name":"LastSkillTime2","IsShared":true,"SinglemValue":0},{"Type":"BehaviorDesigner.Runtime.SharedFloat","Name":"SkillDistance","IsShared":true,"SinglemValue":0}]}'
       fieldSerializationData:
         typeName: []
         fieldNameHash: 
         startIndex: 
         dataPosition: 
-        unityObjects: []
+        unityObjects:
+        - {fileID: 292390439611656214}
+        - {fileID: 6547549272688203903}
         byteData: 
         byteDataArray: 
       Version: 1.7.8
@@ -356,7 +351,7 @@ Animator:
   m_GameObject: {fileID: 6547549272688203903}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 586371524d511b847854374c1bd7c316, type: 2}
+  m_Controller: {fileID: 9100000, guid: 0797fd5d28936c2418f838de49fc232c, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -389,6 +384,7 @@ GameObject:
   m_Component:
   - component: {fileID: 63400010825293629}
   - component: {fileID: 5246506777874807098}
+  - component: {fileID: 5204489809954854787}
   m_Layer: 7
   m_Name: AttackCollision
   m_TagString: Untagged
@@ -432,6 +428,18 @@ SphereCollider:
   serializedVersion: 3
   m_Radius: 2
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &5204489809954854787
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6879656347425896870}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6d46cc249dc65454ab03ae5963ce4a33, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &7812677149072409850
 GameObject:
   m_ObjectHideFlags: 0

@@ -4,8 +4,6 @@ using UnityEngine.AI;
 
 public class Monster_Elite_2 : Monster
 {
-    public Transform[] LaunchTrans; // 여러 발사 위치를 가지는 배열
-
     public float overDistance;
     Vector3 previous_Pos;
 
@@ -73,6 +71,7 @@ public class Monster_Elite_2 : Monster
     }
     public override void DrawArc()
     {
+        Debug.LogAssertion("dsf");
         if (AttackCollision.activeSelf == true)
         {
             Handles.color = Color.red;
