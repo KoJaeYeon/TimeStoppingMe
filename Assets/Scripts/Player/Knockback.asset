@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: Knockback
   m_EditorClassIdentifier: 
   skillType: 0
-  knockbackForce: 0
+  knockbackForce: 1
   additionalPiercing: 0
