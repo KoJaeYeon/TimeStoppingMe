@@ -311,11 +311,11 @@ public class Inventory : MonoBehaviour
         {
             if (scrollValue.y > 0f)
             {
-                inventoryIndex[selectedSlot].transform.rotation *= Quaternion.Euler(0f, rotatSpeed * Time.unscaledDeltaTime, 0f); // Time.unscaledDeltaTime 사용
+                inventoryIndex[selectedSlot].transform.rotation *= Quaternion.Euler(0f, rotatSpeed ,  0f); // Time.unscaledDeltaTime 사용
             }
             else if (scrollValue.y < 0f)
             {
-                inventoryIndex[selectedSlot].transform.rotation *= Quaternion.Euler(0f, -rotatSpeed * Time.unscaledDeltaTime, 0f); // Time.unscaledDeltaTime 사용
+                inventoryIndex[selectedSlot].transform.rotation *= Quaternion.Euler(0f, -rotatSpeed, 0f); // Time.unscaledDeltaTime 사용
             }
         }
 

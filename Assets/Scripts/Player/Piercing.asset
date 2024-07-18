@@ -14,4 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   skillType: 1
   knockbackForce: 0
-  additionalPiercing: 0
+  additionalPiercing: 1

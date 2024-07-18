@@ -15,7 +15,7 @@ public class WeaponTypeA : WeaponBase
         maxAmmoSize = 20;
         reloadTime = 2f;
         fireMode = FireMode.Burst;
-        projectileCount = 2;
+        projectileCount = 5;
         projectilePattern = ProjectilePattern.Parallel;
 
         Init();

@@ -78,13 +78,9 @@ public class Bullet : MonoBehaviour
 
                 if (isKnockbackActive)
                 {
-                    Rigidbody rb = other.GetComponent<Rigidbody>();
-                    if (rb != null)
-                    {
-                        Vector3 knockbackDirection = other.transform.position - transform.position;
-                        knockbackDirection.y = 0; // Keep knockback horizontal
-                        rb.AddForce(knockbackDirection.normalized * knockbackForce, ForceMode.Impulse);
-                    }
+                    Vector3 knockbackDirection = other.transform.position - transform.position;
+                    knockbackDirection.y = 0; // Keep knockback horizontal
+                    other.transform.position += knockbackDirection.normalized * knockbackForce;
                 }
 
                 hasPierced.Add(other.gameObject);

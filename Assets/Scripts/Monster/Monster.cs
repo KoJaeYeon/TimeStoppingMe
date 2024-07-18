@@ -127,4 +127,13 @@ public class Monster : MonoBehaviour, IAttackable
         Handles.DrawSolidArc(transform.position, Vector3.up, transform.forward, monster_Data.Search_Range / 2, monster_Data.AttackDistance);
         Handles.DrawSolidArc(transform.position, Vector3.up, transform.forward, -monster_Data.Search_Range / 2, monster_Data.AttackDistance);
     }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("Player"))
+        {
+            var Iattack = other.GetComponent<IAttackable>();
+            Iattack.OnTakeDamaged(monster_Data.Damage);
+        }
+    }
 }
