@@ -1,5 +1,7 @@
 using UnityEngine;
 using System.Collections;
+using static UnityEditor.Progress;
+using Unity.VisualScripting;
 
 public class PlaceableItem : Item
 {
@@ -9,11 +11,13 @@ public class PlaceableItem : Item
     public Material newMaterial; // 새로운 마테리얼을 설정할 변수
 
     public Material[] MeshRenderrrMt;
+    //public Boom Boom;
     public override void Use(Player player)
     {
         //player.StartPlacingItem(this);
         Startblebuild();
     }
+
     
     private void Startblebuild()
     {
@@ -51,7 +55,7 @@ public class PlaceableItem : Item
 
         while (elapsedTime < duration)
         {
-            elapsedTime += Time.deltaTime;
+            elapsedTime += Time.unscaledDeltaTime; // Time.deltaTime 대신 Time.unscaledDeltaTime 사용
             float newValue = Mathf.Lerp(startValue, endValue, elapsedTime / duration);
             material.SetFloat(propertyName, newValue);
             yield return null;
@@ -62,9 +66,30 @@ public class PlaceableItem : Item
     }
     IEnumerator Distroy()
     {
-        Debug.Log("파괴시작");
-        yield return new WaitForSecondsRealtime(durationTime);
+        Debug.Log(transform.name);
+        switch (transform.name)
+        {
+            case "Barricade":
+                transform.gameObject.layer = 12;
+                transform.AddComponent<SphereCollider>();
+                break;
+            case "Boom":
+                Boom boom = transform.GetComponent <Boom>();
+                if(boom != null)
+                {
+                    boom.enabled = true;
+                }
+                else
+                {
+                    transform.AddComponent<Boom>();
+                }
+                break;
 
+            default:
+                break;
+        }
+                Debug.Log("파괴시작");
+        yield return new WaitForSecondsRealtime(durationTime);
         Destroy(gameObject);
     }
 }

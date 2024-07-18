@@ -13,5 +13,8 @@ public class Barricade : MonoBehaviour
         transform.localScale = new Vector3(x, y, z);
         transform.GetChild(0).gameObject.SetActive(false);
     }
-    
+
+    private void OnEnable()
+    {
+    }
 }
