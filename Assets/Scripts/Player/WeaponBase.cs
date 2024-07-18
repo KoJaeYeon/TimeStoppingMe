@@ -166,5 +166,6 @@ public class WeaponBase : MonoBehaviour
         maxAmmoSize = Mathf.Max(maxAmmoSize + itemmaxAmmoSize, 1);
         reloadTime = Mathf.Max(reloadTime + itemreloadTime, 0f);
         projectileCount = Mathf.Max(projectileCount + itemprojectileCount, 1);
+        UIManager.inst.UpdateWeaponToolTip(baseDamage, baseFireRate, baseRange, projectileSpeed, maxAmmoSize, reloadTime, projectileCount);
     }
 }
