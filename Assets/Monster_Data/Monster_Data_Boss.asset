@@ -16,7 +16,7 @@ MonoBehaviour:
   TrackDistance: 999
   MaxHealth: 400
   Damage: 2
-  MoveSpeed: 2
+  MoveSpeed: 4
   AngularSpeed: 36
   IdleRange_Min: 5
   IdleRange_Max: 10
