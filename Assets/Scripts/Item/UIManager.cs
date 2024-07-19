@@ -1,7 +1,9 @@
 using System.Collections;
+using System.Collections.Generic;
 using System.Text;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class UIManager : MonoBehaviour
 {
@@ -22,6 +24,12 @@ public class UIManager : MonoBehaviour
     public GameObject OutGameToolTip;
     public TextMeshProUGUI itemToolTip;
     public GameObject itemToolTipObject;
+    public TextMeshProUGUI AmmoToolTip;
+    public Image timeStop;
+    public GameObject heartPrefab;
+    private List<GameObject> hearts = new List<GameObject>();
+    public Transform panelTransform;
+
     private void Awake()
     {
         if (inst == null)
@@ -139,5 +147,31 @@ public class UIManager : MonoBehaviour
     {
         itemToolTip.text = null;
         itemToolTipObject.SetActive(false );
+    }
+    public void UpdateAmmo(int max , int currnt)
+    {
+        string maxammo = max.ToString();
+        string currntammo = currnt.ToString();
+        AmmoToolTip.text = (currntammo + " / " + maxammo);
+    }
+    public void UpdateTimeGauge(int currnttime,int maxtime)
+    {
+        timeStop.fillAmount = (float)currnttime / maxtime;
+    }
+    public void UpdateHearts(int currnetHP)
+    {
+        // 기존 하트 제거
+        foreach (var heart in hearts)
+        {
+            Destroy(heart);
+        }
+        hearts.Clear();
+
+        // 현재 HP만큼 하트 생성
+        for (int i = 0; i < currnetHP; i++)
+        {
+            GameObject heart = Instantiate(heartPrefab, panelTransform);
+            hearts.Add(heart);
+        }
     }
 }

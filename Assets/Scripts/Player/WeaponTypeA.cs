@@ -19,6 +19,7 @@ public class WeaponTypeA : WeaponBase
         projectilePattern = ProjectilePattern.Parallel;
         Init();
         UIManager.inst.UpdateWeaponToolTip(baseDamage, baseFireRate, baseRange, projectileSpeed, maxAmmoSize, reloadTime, projectileCount);
+        UIManager.inst.UpdateAmmo(maxAmmoSize, 0);
     }
 
     public override void Fire(LayerMask enemyLayers)

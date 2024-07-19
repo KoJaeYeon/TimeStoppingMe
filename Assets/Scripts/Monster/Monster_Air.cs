@@ -74,6 +74,8 @@ public class Monster_Air : Monster
         TargetTrans.localPosition = Vector3.zero;
         var iattack = TargetTrans.GetComponent<IAttackable>();
         iattack.OnTakeDebuffed(DebuffType.Supress, new Debuff_Suppress());
+
+        TargetTrans.GetComponent<NavMeshAgent>().enabled = false;
     }
     public override void Attack2_End()
     {
@@ -84,6 +86,7 @@ public class Monster_Air : Monster
 
         var iattack = TargetTrans.GetComponent<IAttackable>();
         iattack.OnTakeDamaged(monster_Data.Damage);
+        TargetTrans.GetComponent<NavMeshAgent>().enabled = true;
     }
     public override void DrawArc()
     {

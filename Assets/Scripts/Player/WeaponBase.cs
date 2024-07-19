@@ -68,11 +68,13 @@ public class WeaponBase : MonoBehaviour
 
     public virtual void Fire(LayerMask enemyLayers)
     {
+        UIManager.inst.UpdateAmmo(maxAmmoSize, currentAmmoSize);
         if (isReloading) return;
 
         if(currentAmmoSize <= 0 || currentAmmoSize < projectileCount)
         {
             StartCoroutine(Reload());
+
             return;
         }
 
@@ -84,18 +86,19 @@ public class WeaponBase : MonoBehaviour
             if (projectilePattern == ProjectilePattern.Parallel)
             {
                 FireParallel(enemyLayers);
+                
             }
             else if (projectilePattern == ProjectilePattern.Spread)
             {
                 FireSpread(enemyLayers);
             }
-
             currentAmmoSize -= projectileCount;
-
-            if(currentAmmoSize < 0)
+            UIManager.inst.UpdateAmmo(maxAmmoSize, currentAmmoSize);
+            if (currentAmmoSize < 0)
             {
                 StartCoroutine(Reload());
             }
+            UIManager.inst.UpdateAmmo(maxAmmoSize, currentAmmoSize);
         }
     }
 
@@ -155,6 +158,7 @@ public class WeaponBase : MonoBehaviour
         yield return new WaitForSeconds(reloadTime);
         currentAmmoSize = maxAmmoSize;
         isReloading = false;
+        UIManager.inst.UpdateAmmo(maxAmmoSize, currentAmmoSize);
         Debug.Log("Reloaded");
     }
     public void OnUpdateStatToWeapon(int itembaseDamage, float itembaseFireRate, float itembaseRange, float itemprojectileSpeed, int itemmaxAmmoSize, float itemreloadTime, int itemprojectileCount)
