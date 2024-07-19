@@ -14,11 +14,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Monster_Data_Melee
   AttackDistance: 2
   TrackDistance: 20
-  MaxHealth: 100
+  MaxHealth: 200
   Damage: 1
-  MoveSpeed: 1
-  AngularSpeed: 360
+  MoveSpeed: 10
+  AngularSpeed: 320
   IdleRange_Min: 5
   IdleRange_Max: 10
-  Search_Range: 150
+  Search_Range: 200
   attack_MaxDistance: 2
