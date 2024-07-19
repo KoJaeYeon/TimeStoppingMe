@@ -71,14 +71,14 @@ public class Monster_Elite_2 : Monster
         AttackCollision.SetActive(false);
         cube.SetActive(false);
     }
-    public override void DrawArc()
-    {
-        if (AttackCollision.activeSelf == true)
-        {
-            Handles.color = Color.red;
-            var monster_Data_Elite2 = monster_Data as Monster_Data_Elite_2;
-            Handles.DrawSolidArc(transform.position, Vector3.up, transform.forward, monster_Data.Search_Range / 2, monster_Data_Elite2.skill_bite_Distance);
-            Handles.DrawSolidArc(transform.position, Vector3.up, transform.forward, -monster_Data.Search_Range / 2, monster_Data_Elite2.skill_bite_Distance);
-        }
-    }
+    //public override void DrawArc()
+    //{
+    //    if (AttackCollision.activeSelf == true)
+    //    {
+    //        Handles.color = Color.red;
+    //        var monster_Data_Elite2 = monster_Data as Monster_Data_Elite_2;
+    //        Handles.DrawSolidArc(transform.position, Vector3.up, transform.forward, monster_Data.Search_Range / 2, monster_Data_Elite2.skill_bite_Distance);
+    //        Handles.DrawSolidArc(transform.position, Vector3.up, transform.forward, -monster_Data.Search_Range / 2, monster_Data_Elite2.skill_bite_Distance);
+    //    }
+    //}
 }

@@ -94,14 +94,14 @@ public class Monster_Elite : Monster
     {
 
     }
-    public override void DrawArc()
-    {
-        //if(AttackCollision.activeSelf == true)
-        //{
-        //    Handles.color = Color.red;
-        //    var monster_Data_Boss = monster_Data as Monster_Data_Boss;
-        //    Handles.DrawSolidArc(transform.position, Vector3.up, transform.forward, monster_Data.Search_Range / 2, monster_Data_Boss.skill_bite_Distance);
-        //    Handles.DrawSolidArc(transform.position, Vector3.up, transform.forward, -monster_Data.Search_Range / 2, monster_Data_Boss.skill_bite_Distance);
-        //}        
-    }
+    //public override void DrawArc()
+    //{
+    //    //if(AttackCollision.activeSelf == true)
+    //    //{
+    //    //    Handles.color = Color.red;
+    //    //    var monster_Data_Boss = monster_Data as Monster_Data_Boss;
+    //    //    Handles.DrawSolidArc(transform.position, Vector3.up, transform.forward, monster_Data.Search_Range / 2, monster_Data_Boss.skill_bite_Distance);
+    //    //    Handles.DrawSolidArc(transform.position, Vector3.up, transform.forward, -monster_Data.Search_Range / 2, monster_Data_Boss.skill_bite_Distance);
+    //    //}        
+    //}
 }

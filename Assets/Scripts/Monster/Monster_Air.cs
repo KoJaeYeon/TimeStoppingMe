@@ -88,7 +88,7 @@ public class Monster_Air : Monster
         iattack.OnTakeDamaged(monster_Data.Damage);
         TargetTrans.GetComponent<NavMeshAgent>().enabled = true;
     }
-    public override void DrawArc()
-    {
-    }
+    //public override void DrawArc()
+    //{
+    //}
 }

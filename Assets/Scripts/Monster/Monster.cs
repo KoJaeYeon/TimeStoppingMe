@@ -117,17 +117,17 @@ public class Monster : MonoBehaviour, IAttackable
         activeDebuffs.Remove(debuff);
     }
 
-    private void OnDrawGizmos()
-    {
-        DrawArc();
-    }
+    //private void OnDrawGizmos()
+    //{
+    //    DrawArc();
+    //}
 
-    public virtual void DrawArc()
-    {
-        Handles.color = new Color(1, 1, 1, 0.2f);
-        Handles.DrawSolidArc(transform.position, Vector3.up, transform.forward, monster_Data.Search_Range / 2, monster_Data.AttackDistance);
-        Handles.DrawSolidArc(transform.position, Vector3.up, transform.forward, -monster_Data.Search_Range / 2, monster_Data.AttackDistance);
-    }
+    //public virtual void DrawArc()
+    //{
+    //    Handles.color = new Color(1, 1, 1, 0.2f);
+    //    Handles.DrawSolidArc(transform.position, Vector3.up, transform.forward, monster_Data.Search_Range / 2, monster_Data.AttackDistance);
+    //    Handles.DrawSolidArc(transform.position, Vector3.up, transform.forward, -monster_Data.Search_Range / 2, monster_Data.AttackDistance);
+    //}
 
     private void OnTriggerEnter(Collider other)
     {

@@ -1,6 +1,5 @@
 using UnityEngine;
 using System.Collections;
-using static UnityEditor.Progress;
 using Unity.VisualScripting;
 
 public class PlaceableItem : Item
