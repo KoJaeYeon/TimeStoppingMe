@@ -8,25 +8,11 @@ public class MagmaFlooring : MonoBehaviour
     public float PlayerDamage = 1;
     public float MonsterDamage = 15;
     Dictionary<IAttackable,float> _attackableDic = new Dictionary<IAttackable, float>();
-    Dictionary<IAttackable, float> _PattackableDic = new Dictionary<IAttackable, float>();
+
+    public static float playerLastMagmaTime;
 
     private void Update()
     {
-        foreach (var key in _PattackableDic.Keys)
-        {
-            float lastTickTime = _PattackableDic[key];
-            if (lastTickTime + 1 < Time.time)
-            {
-                if (key.IsUnityNull())
-                {
-                    _PattackableDic.Remove(key);
-                    continue;
-                }
-                key.OnTakeDamaged(PlayerDamage);
-                _PattackableDic[key] = Time.time;
-            }
-        }
-
         foreach (var key in _attackableDic.Keys)
         {
             float lastTickTime = _attackableDic[key];
@@ -45,18 +31,14 @@ public class MagmaFlooring : MonoBehaviour
         }
     }
 
-
-
     private void OnTriggerEnter(Collider other)
     {
         var IAttack = other.GetComponent<IAttackable>();
         if (IAttack != null)
         {
-            var player = other.GetComponent<Player>();
-            if(player != null)
+            if(other.GetComponent<Player>())
             {
-                _PattackableDic.Add(IAttack, Time.time);
-                IAttack.OnTakeDamaged(PlayerDamage);
+
             }
             else
             {
@@ -64,6 +46,19 @@ public class MagmaFlooring : MonoBehaviour
                 IAttack.OnTakeDamaged(MonsterDamage);
             }
         }        
+    }
+
+    private void OnTriggerStay(Collider other)
+    {
+        var player = other.GetComponent<Player>();
+        if(player != null)
+        {
+            if(playerLastMagmaTime + 1 <= Time.time)
+            {
+                player.OnTakeDamaged(1);
+                playerLastMagmaTime = Time.time;
+            }
+        }
     }
 
     private void OnTriggerExit(Collider other)
@@ -74,13 +69,7 @@ public class MagmaFlooring : MonoBehaviour
             if(_attackableDic.ContainsKey(IAttack))
             {
                 _attackableDic.Remove(IAttack);
-            }
-            else if(_PattackableDic.Remove(IAttack))
-            {
-                _PattackableDic.Remove(IAttack);
-            }
-            
-        }
-        
+            }            
+        }        
     }
 }
