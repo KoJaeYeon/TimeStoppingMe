@@ -14,9 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Monster_Data_Boss
   AttackDistance: 900
   TrackDistance: 999
-  MaxHealth: 400
+  MaxHealth: 1000
   Damage: 2
-  MoveSpeed: 5
+  MoveSpeed: 13
   AngularSpeed: 36
   IdleRange_Min: 5
   IdleRange_Max: 10
@@ -29,7 +29,7 @@ MonoBehaviour:
     type: 3}
   skill_loveshot_Cooldown: 1
   skill_loveshot_Distance: 18
-  skill_loveshot_LaunchSpeed: 25
+  skill_loveshot_LaunchSpeed: 30
   skill_bite_Cooldown: 10
   skill_bite_Distance: 2
   skiil_bite_Drain: 3

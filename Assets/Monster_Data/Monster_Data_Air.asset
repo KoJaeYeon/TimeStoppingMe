@@ -14,15 +14,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   AttackDistance: 2
   TrackDistance: 20
-  MaxHealth: 50
+  MaxHealth: 75
   Damage: 1
-  MoveSpeed: 1
+  MoveSpeed: 5
   AngularSpeed: 360
   IdleRange_Min: 5
   IdleRange_Max: 10
-  Search_Range: 150
-  skill_grap_Cooldown: 10
+  Search_Range: 500
+  skill_grap_Cooldown: 5
   skill_grap_Distance: 2
-  Grap_x: 2
-  Grap_y: 2
-  Grap_z: 2
+  Grap_x: 4
+  Grap_y: 4
+  Grap_z: 4
