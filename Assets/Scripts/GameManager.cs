@@ -2,6 +2,7 @@ using Cinemachine;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -81,7 +82,7 @@ public class GameManager : MonoBehaviour
     private IEnumerator RespawnPlayerWithDelay(float delay)
     {
         yield return new WaitForSecondsRealtime(delay);
-        RespawnPlayer();
+        SceneManager.LoadScene(0);
     }
 
     public void OnBossKilled()
