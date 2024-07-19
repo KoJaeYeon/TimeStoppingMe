@@ -161,7 +161,6 @@ public class TrackingTarget_Running : Action
 
         if (HasArrived())
         {
-            Debug.Log("HasArrived체크");
             return TaskStatus.Running;
         }
 

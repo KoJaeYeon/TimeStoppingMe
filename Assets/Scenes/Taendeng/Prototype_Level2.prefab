@@ -2579,6 +2579,7 @@ MonoBehaviour:
   monster_Data: {fileID: 11400000, guid: 2e71cd80a42c083408813f9f3ec7edd4, type: 2}
   bt: {fileID: 6293192262464245077}
   moveSpeed: 0
+  playerEnter: 0
   LaunchTrans: {fileID: 0}
   AttackCollision: {fileID: 1460898834877957641}
 --- !u!114 &6293192262464245077
@@ -2621,8 +2622,8 @@ MonoBehaviour:
         byteData: 
         byteDataArray: 
       Version: 1.7.8
-  gizmoViewMode: 0
-  showBehaviorDesignerGizmo: 0
+  gizmoViewMode: 2
+  showBehaviorDesignerGizmo: 1
 --- !u!195 &1792267928385739405
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -4563,6 +4564,7 @@ MonoBehaviour:
   monster_Data: {fileID: 11400000, guid: 2e71cd80a42c083408813f9f3ec7edd4, type: 2}
   bt: {fileID: 3896302935314231042}
   moveSpeed: 0
+  playerEnter: 0
   LaunchTrans: {fileID: 0}
   AttackCollision: {fileID: 3874020788157581982}
 --- !u!114 &3896302935314231042
@@ -4605,8 +4607,8 @@ MonoBehaviour:
         byteData: 
         byteDataArray: 
       Version: 1.7.8
-  gizmoViewMode: 0
-  showBehaviorDesignerGizmo: 0
+  gizmoViewMode: 2
+  showBehaviorDesignerGizmo: 1
 --- !u!195 &8571013406360595248
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -15809,6 +15811,7 @@ MonoBehaviour:
   monster_Data: {fileID: 11400000, guid: 2e71cd80a42c083408813f9f3ec7edd4, type: 2}
   bt: {fileID: 4053472140018372473}
   moveSpeed: 0
+  playerEnter: 0
   LaunchTrans: {fileID: 0}
   AttackCollision: {fileID: 4041549863805814289}
 --- !u!114 &4053472140018372473
@@ -15851,8 +15854,8 @@ MonoBehaviour:
         byteData: 
         byteDataArray: 
       Version: 1.7.8
-  gizmoViewMode: 0
-  showBehaviorDesignerGizmo: 0
+  gizmoViewMode: 2
+  showBehaviorDesignerGizmo: 1
 --- !u!195 &6385966741551969538
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -35478,6 +35481,7 @@ MonoBehaviour:
   monster_Data: {fileID: 11400000, guid: b00a121bf44968d4191fa8c7009d7ee8, type: 2}
   bt: {fileID: 590249009665015755}
   moveSpeed: 0
+  playerEnter: 0
   LaunchTrans: {fileID: 2777810044566518521}
 --- !u!114 &590249009665015755
 MonoBehaviour:
@@ -35520,8 +35524,8 @@ MonoBehaviour:
         byteData: 
         byteDataArray: 
       Version: 1.7.8
-  gizmoViewMode: 0
-  showBehaviorDesignerGizmo: 0
+  gizmoViewMode: 2
+  showBehaviorDesignerGizmo: 1
 --- !u!195 &7641380575813733617
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -39637,6 +39641,7 @@ MonoBehaviour:
   monster_Data: {fileID: 11400000, guid: b00a121bf44968d4191fa8c7009d7ee8, type: 2}
   bt: {fileID: 778433546662444831}
   moveSpeed: 0
+  playerEnter: 0
   LaunchTrans: {fileID: 1412243562544922575}
 --- !u!114 &778433546662444831
 MonoBehaviour:
@@ -39679,8 +39684,8 @@ MonoBehaviour:
         byteData: 
         byteDataArray: 
       Version: 1.7.8
-  gizmoViewMode: 0
-  showBehaviorDesignerGizmo: 0
+  gizmoViewMode: 2
+  showBehaviorDesignerGizmo: 1
 --- !u!195 &5480841240115094008
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -40749,6 +40754,7 @@ MonoBehaviour:
   monster_Data: {fileID: 11400000, guid: b00a121bf44968d4191fa8c7009d7ee8, type: 2}
   bt: {fileID: 4561633977231926132}
   moveSpeed: 0
+  playerEnter: 0
   LaunchTrans: {fileID: 4457054566768340298}
 --- !u!114 &4561633977231926132
 MonoBehaviour:
@@ -40791,8 +40797,8 @@ MonoBehaviour:
         byteData: 
         byteDataArray: 
       Version: 1.7.8
-  gizmoViewMode: 0
-  showBehaviorDesignerGizmo: 0
+  gizmoViewMode: 2
+  showBehaviorDesignerGizmo: 1
 --- !u!195 &8476104827857404403
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -60094,6 +60100,7 @@ MonoBehaviour:
   monster_Data: {fileID: 11400000, guid: 2e71cd80a42c083408813f9f3ec7edd4, type: 2}
   bt: {fileID: 115362724371510176}
   moveSpeed: 0
+  playerEnter: 0
   LaunchTrans: {fileID: 0}
   AttackCollision: {fileID: 5650828787747283281}
 --- !u!114 &115362724371510176
@@ -60136,8 +60143,8 @@ MonoBehaviour:
         byteData: 
         byteDataArray: 
       Version: 1.7.8
-  gizmoViewMode: 0
-  showBehaviorDesignerGizmo: 0
+  gizmoViewMode: 2
+  showBehaviorDesignerGizmo: 1
 --- !u!195 &4630578638055154208
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -62085,6 +62092,7 @@ MonoBehaviour:
   monster_Data: {fileID: 11400000, guid: b00a121bf44968d4191fa8c7009d7ee8, type: 2}
   bt: {fileID: 6149929659644870077}
   moveSpeed: 0
+  playerEnter: 0
   LaunchTrans: {fileID: 1984381300424616700}
 --- !u!114 &6149929659644870077
 MonoBehaviour:
@@ -62127,8 +62135,8 @@ MonoBehaviour:
         byteData: 
         byteDataArray: 
       Version: 1.7.8
-  gizmoViewMode: 0
-  showBehaviorDesignerGizmo: 0
+  gizmoViewMode: 2
+  showBehaviorDesignerGizmo: 1
 --- !u!195 &2896898478655622033
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -72114,6 +72122,7 @@ MonoBehaviour:
   monster_Data: {fileID: 11400000, guid: 2e71cd80a42c083408813f9f3ec7edd4, type: 2}
   bt: {fileID: 4925276880323304608}
   moveSpeed: 0
+  playerEnter: 0
   LaunchTrans: {fileID: 0}
   AttackCollision: {fileID: 2700372944441652917}
 --- !u!114 &4925276880323304608
@@ -72156,8 +72165,8 @@ MonoBehaviour:
         byteData: 
         byteDataArray: 
       Version: 1.7.8
-  gizmoViewMode: 0
-  showBehaviorDesignerGizmo: 0
+  gizmoViewMode: 2
+  showBehaviorDesignerGizmo: 1
 --- !u!195 &3530937405409839232
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -81430,6 +81439,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7777427793017399288}
+  - component: {fileID: 3166135348445473287}
+  - component: {fileID: 8520044932334966810}
   m_Layer: 0
   m_Name: Prototype_Level2
   m_TagString: Untagged
@@ -81460,8 +81471,37 @@ Transform:
   - {fileID: 6363373846694265857}
   - {fileID: 6188742855661473250}
   - {fileID: 8386947659729804849}
+  - {fileID: 3976874820028740855}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &3166135348445473287
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8110643490349818519}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: feab2bdf3ad50f74d8310b1dcf41f173, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  StageType: 0
+  StageCollider: {fileID: 0}
+--- !u!114 &8520044932334966810
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8110643490349818519}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: feab2bdf3ad50f74d8310b1dcf41f173, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  StageType: 0
+  StageCollider: {fileID: 0}
 --- !u!1 &8125495390249105854
 GameObject:
   m_ObjectHideFlags: 0
@@ -91913,6 +91953,80 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!1001 &621583613540781024
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 7777427793017399288}
+    m_Modifications:
+    - target: {fileID: 3740708690142185948, guid: 262c411b2d7ffbd4593e6b011e3d604a,
+        type: 3}
+      propertyPath: m_Name
+      value: StageEnterCheck
+      objectReference: {fileID: 0}
+    - target: {fileID: 4580439636476657431, guid: 262c411b2d7ffbd4593e6b011e3d604a,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -26.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4580439636476657431, guid: 262c411b2d7ffbd4593e6b011e3d604a,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4580439636476657431, guid: 262c411b2d7ffbd4593e6b011e3d604a,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 27.8
+      objectReference: {fileID: 0}
+    - target: {fileID: 4580439636476657431, guid: 262c411b2d7ffbd4593e6b011e3d604a,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4580439636476657431, guid: 262c411b2d7ffbd4593e6b011e3d604a,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4580439636476657431, guid: 262c411b2d7ffbd4593e6b011e3d604a,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4580439636476657431, guid: 262c411b2d7ffbd4593e6b011e3d604a,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4580439636476657431, guid: 262c411b2d7ffbd4593e6b011e3d604a,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4580439636476657431, guid: 262c411b2d7ffbd4593e6b011e3d604a,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4580439636476657431, guid: 262c411b2d7ffbd4593e6b011e3d604a,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 262c411b2d7ffbd4593e6b011e3d604a, type: 3}
+--- !u!4 &3976874820028740855 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 4580439636476657431, guid: 262c411b2d7ffbd4593e6b011e3d604a,
+    type: 3}
+  m_PrefabInstance: {fileID: 621583613540781024}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &3654652568650748422
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -92127,12 +92241,12 @@ PrefabInstance:
     - target: {fileID: 6967114950068480922, guid: 3a8848a789e269f46b76e783c622ca06,
         type: 3}
       propertyPath: gizmoViewMode
-      value: 0
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 6967114950068480922, guid: 3a8848a789e269f46b76e783c622ca06,
         type: 3}
       propertyPath: showBehaviorDesignerGizmo
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

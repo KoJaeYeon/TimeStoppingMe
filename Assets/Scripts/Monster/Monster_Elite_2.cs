@@ -7,8 +7,7 @@ public class Monster_Elite_2 : Monster
     public float overDistance;
     Vector3 previous_Pos;
 
-    public GameObject AttackCollision;
-    
+    public GameObject AttackCollision;    
 
     public override void Awake()
     {

@@ -19,6 +19,8 @@ public class Monster : MonoBehaviour, IAttackable
     [Header("MonsterBt_Version2")]
     public float moveSpeed;
 
+    public bool playerEnter = false;
+
     public virtual void Awake()
     {
         health = monster_Data.MaxHealth;
@@ -29,7 +31,6 @@ public class Monster : MonoBehaviour, IAttackable
     {
         CalculateDebuff();
         var variable = bt.GetVariable("Speed");
-        Debug.Log(variable);
     }
 
     private void Start()
