@@ -181,4 +181,9 @@ public class Monster_Boss : Monster
         }
         
     }
+
+    private void OnDestroy()
+    {
+        GameManager.Instance.OnBossKilled();
+    }
 }
