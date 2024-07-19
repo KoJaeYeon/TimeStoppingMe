@@ -19,6 +19,7 @@ public class WeaponTypeD : WeaponBase
         projectilePattern = ProjectilePattern.Spread;
         Init();
         UIManager.inst.UpdateWeaponToolTip(baseDamage, baseFireRate, baseRange, projectileSpeed, maxAmmoSize, reloadTime, projectileCount);
+        UIManager.inst.UpdateAmmo(maxAmmoSize, 0);
     }
 
     public override void Fire(LayerMask enemyLayers)
