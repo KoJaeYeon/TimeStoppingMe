@@ -251,7 +251,7 @@ public class Player : MonoBehaviour, IAttackable
         if (currentTimeGauge <= 0 && !isTimeStopped) return;
 
         isTimeStopped = !isTimeStopped;
-        Time.timeScale = isTimeStopped ? 0f : 1f;
+        Time.timeScale = isTimeStopped ? 0.001f : 1f;
         Time.fixedDeltaTime = 0.02f * Time.timeScale;
         Debug.Log(isTimeStopped ? "Time stopped." : "Time resumed.");
 
