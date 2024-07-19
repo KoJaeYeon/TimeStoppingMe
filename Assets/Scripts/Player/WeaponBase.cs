@@ -155,7 +155,7 @@ public class WeaponBase : MonoBehaviour
 
         isReloading = true;
         Debug.Log("Reloading...");
-        yield return new WaitForSeconds(reloadTime);
+        yield return new WaitForSecondsRealtime(reloadTime);
         currentAmmoSize = maxAmmoSize;
         isReloading = false;
         UIManager.inst.UpdateAmmo(maxAmmoSize, currentAmmoSize);
