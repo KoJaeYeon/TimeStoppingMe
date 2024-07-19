@@ -11,6 +11,7 @@ public class DecisionMonsterState : Action
 
     public override TaskStatus OnUpdate()
     {
+        if (SharedMonster.Value.playerEnter == false) return TaskStatus.Running;
         var monsterData = SharedMonster.Value.monster_Data;
         float distance = Vector3.Distance(TargetTrans.Value.position, Owner.transform.position);
 
@@ -34,6 +35,7 @@ public class DecisionMonsterState_Air : Action
 
     public override TaskStatus OnUpdate()
     {
+        if (SharedMonster.Value.playerEnter == false) return TaskStatus.Running;
         var monsterData = SharedMonster.Value.monster_Data;
         float distance = Vector3.Distance(TargetTrans.Value.position, Owner.transform.position);
 

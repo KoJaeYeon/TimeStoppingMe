@@ -8,7 +8,7 @@ public class Monster_Elite_2 : Monster
     Vector3 previous_Pos;
 
     public GameObject AttackCollision;
-    
+    public GameObject cube;
 
     public override void Awake()
     {
@@ -64,10 +64,12 @@ public class Monster_Elite_2 : Monster
     public override void Attack2()
     {
         AttackCollision.SetActive(true);
+        cube.SetActive(true);
     }
     public override void Attack2_End()
     {
         AttackCollision.SetActive(false);
+        cube.SetActive(false);
     }
     public override void DrawArc()
     {

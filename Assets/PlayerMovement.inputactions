@@ -94,6 +94,15 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": true
+                },
+                {
+                    "name": "EscUI",
+                    "type": "Button",
+                    "id": "3fc4c71a-7092-4495-8446-d4a293eb8ea5",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -341,8 +350,8 @@
                 },
                 {
                     "name": "",
-                    "id": "32d12b84-75cd-461f-bd70-effbc938f1b3",
-                    "path": "<Keyboard>/escape",
+                    "id": "2f271883-deb9-466f-9788-5302ee8cce4d",
+                    "path": "<Mouse>/rightButton",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
@@ -352,12 +361,12 @@
                 },
                 {
                     "name": "",
-                    "id": "2f271883-deb9-466f-9788-5302ee8cce4d",
-                    "path": "<Mouse>/rightButton",
+                    "id": "dc6b13c8-1371-4a7f-bc4b-6469aa28e7a8",
+                    "path": "<Keyboard>/escape",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Cancel",
+                    "action": "EscUI",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

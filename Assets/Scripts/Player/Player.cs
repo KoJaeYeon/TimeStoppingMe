@@ -39,11 +39,15 @@ public class Player : MonoBehaviour, IAttackable
     public Material PlayerMaterial;
     bool NoDamageMode = false;
 
+    private Vector3 initialPosition;
+
     private void Start()
     {
+        initialPosition = transform.position;
         InitializePlayer();
         dummyWeapon.SetActive(false);
         currentTimeGauge = maxTimeGauge;
+        UIManager.inst.UpdateHearts(currentHP);
     }
 
     private void InitializePlayer()
@@ -52,6 +56,7 @@ public class Player : MonoBehaviour, IAttackable
         CurrentHP = maxHP;
         moveSpeed = playerData.moveSpeed;
         rotationSpeed = playerData.rotationSpeed;
+        UIManager.inst.UpdatePlayerToolTip(moveSpeed);
     }
 
     public void EquipWeapon<T>() where T : WeaponBase
@@ -87,6 +92,8 @@ public class Player : MonoBehaviour, IAttackable
         this.maxHP = maxHP;
         this.currentHP = currentHP;
         this.moveSpeed = moveSpeed;
+        UIManager.inst.UpdatePlayerToolTip(moveSpeed);
+        UIManager.inst.UpdateHearts(currentHP);
     }
 
     private void Update()
@@ -133,6 +140,7 @@ public class Player : MonoBehaviour, IAttackable
 
             currentHP -= (int)(object)damage;
             Debug.Log("Player took damage: " + damage + " Current health: " + currentHP);
+            UIManager.inst.UpdateHearts(CurrentHP);
             if (currentHP <= 0)
             {
                 Die();
@@ -220,9 +228,14 @@ public class Player : MonoBehaviour, IAttackable
 
     void Die()
     {
-        // 플레이어 사망 처리 로직
         Debug.Log("Player died");
-        // 게임 오버 처리
+        GameManager.Instance.HandlePlayerDeath();
+    }
+
+    public void Respawn(Vector3 spawnPosition)
+    {
+        transform.position = spawnPosition;
+        InitializePlayer();
     }
 
     public void ReloadWeapon()
@@ -252,9 +265,11 @@ public class Player : MonoBehaviour, IAttackable
     {
         while (isTimeStopped && currentTimeGauge > 0)
         {
+            UIManager.inst.UpdateTimeGauge(currentTimeGauge, maxTimeGauge);
             yield return new WaitForSecondsRealtime(1f);
             currentTimeGauge -= 1;
             if (currentTimeGauge <= 0) TimeStop();
+            UIManager.inst.UpdateTimeGauge(currentTimeGauge, maxTimeGauge);
         }
     }
 
@@ -356,4 +371,5 @@ public class Player : MonoBehaviour, IAttackable
         currentPlaceableItem.Use(this);
         CancelInstallation();
     }
+
 }
