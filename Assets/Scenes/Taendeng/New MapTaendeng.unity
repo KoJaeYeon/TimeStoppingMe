@@ -135,6 +135,12 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1947535322}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &159348874 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3491966619922571755, guid: 02e010b82eee1a1498bb06833968347b,
+    type: 3}
+  m_PrefabInstance: {fileID: 717444666}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &244095743 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3576167174043669489, guid: 4699771f9085e0c428d11d7163fd66e0,
@@ -557,6 +563,26 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 397925973085077165, guid: 02e010b82eee1a1498bb06833968347b,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1943934756406495216, guid: 02e010b82eee1a1498bb06833968347b,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3491966619922571755, guid: 02e010b82eee1a1498bb06833968347b,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3632182018553397881, guid: 02e010b82eee1a1498bb06833968347b,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3644791235689289208, guid: 02e010b82eee1a1498bb06833968347b,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -612,6 +638,21 @@ PrefabInstance:
       propertyPath: m_Name
       value: UI
       objectReference: {fileID: 0}
+    - target: {fileID: 3954266802215871936, guid: 02e010b82eee1a1498bb06833968347b,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5929918481730884478, guid: 02e010b82eee1a1498bb06833968347b,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6470039224307799832, guid: 02e010b82eee1a1498bb06833968347b,
+        type: 3}
+      propertyPath: OutGameToolTip
+      value: 
+      objectReference: {fileID: 159348874}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -7516,6 +7557,12 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1797137413}
     m_Modifications:
+    - target: {fileID: 805756543719064785, guid: 0e8c58c4237621d4f8e2af1cdbad8acb,
+        type: 3}
+      propertyPath: icon
+      value: 
+      objectReference: {fileID: 21300000, guid: 25ec717366f50e64d870d198b52721e1,
+        type: 3}
     - target: {fileID: 7136456773870295946, guid: 0e8c58c4237621d4f8e2af1cdbad8acb,
         type: 3}
       propertyPath: m_Name

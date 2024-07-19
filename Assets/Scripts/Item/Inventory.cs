@@ -49,6 +49,7 @@ public class Inventory : MonoBehaviour
         playerInput.actions["Use"].performed += OnUse;
         playerInput.actions["SelectWheel"].performed += OnSelectWheel;
         playerInput.actions["Cancel"].performed += OnCancel;
+        playerInput.actions["EscUI"].performed += OnEscUI;
     }
 
     void Update()
@@ -242,7 +243,11 @@ public class Inventory : MonoBehaviour
             }
         }
     }
-
+    public void OnEscUI(InputAction.CallbackContext context)
+    {
+        UIManager.inst.OnOutGameToolTip();
+        Debug.Log("ONESCUI");
+    }
     private void OnUse(InputAction.CallbackContext context)
     {
         if (construct && validPlacement)
@@ -345,7 +350,7 @@ public class Inventory : MonoBehaviour
             if (item != null)
             {
                 inturectItem = other.gameObject;
-
+                UIManager.inst.ItemToolTip(item);
                 bool isfull = true;
                 for (int i = 0; i < inventoryIndex.Length; i++)
                 {
@@ -369,6 +374,7 @@ public class Inventory : MonoBehaviour
         if (other.gameObject == inturectItem)
         {
             inturectItem = null;
+            UIManager.inst.ClearToolTip();
         }
     }
 }

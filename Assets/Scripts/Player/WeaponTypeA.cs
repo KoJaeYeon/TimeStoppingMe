@@ -17,8 +17,8 @@ public class WeaponTypeA : WeaponBase
         fireMode = FireMode.Burst;
         projectileCount = 5;
         projectilePattern = ProjectilePattern.Parallel;
-
         Init();
+        UIManager.inst.UpdateWeaponToolTip(baseDamage, baseFireRate, baseRange, projectileSpeed, maxAmmoSize, reloadTime, projectileCount);
     }
 
     public override void Fire(LayerMask enemyLayers)
