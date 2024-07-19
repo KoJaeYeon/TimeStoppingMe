@@ -35,6 +35,40 @@ public class UIManager : MonoBehaviour
         }
     }
 
+    public void SendGameClearMessage()
+    {
+        if (inturectMessage == null)
+        {
+            inturectMessage = GameObject.Find("inturectMessage").GetComponent<TextMeshProUGUI>();
+        }
+        inturectMessage.text = "Game Clear!";
+        CenterMessage(inturectMessage);
+
+        if (!isCoroutineRunning)
+        {
+            StartCoroutine(ClearMessage());
+        }
+    }
+
+    public void SendPlayerDeathMessage()
+    {
+        if (inturectMessage == null)
+        {
+            inturectMessage = GameObject.Find("inturectMessage").GetComponent<TextMeshProUGUI>();
+        }
+        inturectMessage.text = "Player Died!";
+        CenterMessage(inturectMessage);
+    }
+
+    private void CenterMessage(TextMeshProUGUI message)
+    {
+        RectTransform rectTransform = message.GetComponent<RectTransform>();
+        rectTransform.anchorMin = new Vector2(0.5f, 0.5f);
+        rectTransform.anchorMax = new Vector2(0.5f, 0.5f);
+        rectTransform.pivot = new Vector2(0.5f, 0.5f);
+        rectTransform.anchoredPosition = Vector2.zero;
+    }
+
     private IEnumerator ClearMessage()
     {
         isCoroutineRunning = true; // 코루틴 시작
