@@ -62,11 +62,29 @@ public class GameManager : MonoBehaviour
     private void SpawnPlayer(Vector3 spawnPoint)
     {
         player = Instantiate(playerPrefab, spawnPoint, Quaternion.identity);
+        player.GetComponent<Player>().Respawn(spawnPoint); // 초기 위치 설정
         CinemachineVirtualCamera virtualCamera = FindObjectOfType<CinemachineVirtualCamera>();
         if (virtualCamera != null)
         {
             virtualCamera.Follow = player.transform;
         }
+    }
+
+    public void RespawnPlayer()
+    {
+        player.GetComponent<Player>().Respawn(startStageSpawnPoint.position);
+    }
+
+    public void HandlePlayerDeath()
+    {
+        UIManager.inst.SendPlayerDeathMessage();
+        StartCoroutine(RespawnPlayerWithDelay(3f));
+    }
+
+    private IEnumerator RespawnPlayerWithDelay(float delay)
+    {
+        yield return new WaitForSecondsRealtime(delay);
+        RespawnPlayer();
     }
 
     private void OpenCombatStageDoors()
@@ -117,7 +135,7 @@ public class GameManager : MonoBehaviour
     public void OnBossKilled()
     {
         Debug.Log("Boss defeated! You win!");
-        // 게임 승리 로직을 구현합니다.
+        UIManager.inst.SendGameClearMessage();
     }
 
     public void OnPlayerEnterStage(Stage stage)

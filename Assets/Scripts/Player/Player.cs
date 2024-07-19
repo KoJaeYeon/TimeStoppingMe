@@ -39,8 +39,11 @@ public class Player : MonoBehaviour, IAttackable
     public Material PlayerMaterial;
     bool NoDamageMode = false;
 
+    private Vector3 initialPosition;
+
     private void Start()
     {
+        initialPosition = transform.position;
         InitializePlayer();
         dummyWeapon.SetActive(false);
         currentTimeGauge = maxTimeGauge;
@@ -222,9 +225,14 @@ public class Player : MonoBehaviour, IAttackable
 
     void Die()
     {
-        // 플레이어 사망 처리 로직
         Debug.Log("Player died");
-        // 게임 오버 처리
+        GameManager.Instance.HandlePlayerDeath();
+    }
+
+    public void Respawn(Vector3 spawnPosition)
+    {
+        transform.position = spawnPosition;
+        InitializePlayer();
     }
 
     public void ReloadWeapon()
