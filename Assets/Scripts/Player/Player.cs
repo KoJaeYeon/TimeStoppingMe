@@ -44,6 +44,7 @@ public class Player : MonoBehaviour, IAttackable
         InitializePlayer();
         dummyWeapon.SetActive(false);
         currentTimeGauge = maxTimeGauge;
+        UIManager.inst.UpdateHearts(currentHP);
     }
 
     private void InitializePlayer()
@@ -89,6 +90,7 @@ public class Player : MonoBehaviour, IAttackable
         this.currentHP = currentHP;
         this.moveSpeed = moveSpeed;
         UIManager.inst.UpdatePlayerToolTip(moveSpeed);
+        UIManager.inst.UpdateHearts(currentHP);
     }
 
     private void Update()
@@ -135,6 +137,7 @@ public class Player : MonoBehaviour, IAttackable
 
             currentHP -= (int)(object)damage;
             Debug.Log("Player took damage: " + damage + " Current health: " + currentHP);
+            UIManager.inst.UpdateHearts(CurrentHP);
             if (currentHP <= 0)
             {
                 Die();
@@ -254,9 +257,11 @@ public class Player : MonoBehaviour, IAttackable
     {
         while (isTimeStopped && currentTimeGauge > 0)
         {
+            UIManager.inst.UpdateTimeGauge(currentTimeGauge, maxTimeGauge);
             yield return new WaitForSecondsRealtime(1f);
             currentTimeGauge -= 1;
             if (currentTimeGauge <= 0) TimeStop();
+            UIManager.inst.UpdateTimeGauge(currentTimeGauge, maxTimeGauge);
         }
     }
 
