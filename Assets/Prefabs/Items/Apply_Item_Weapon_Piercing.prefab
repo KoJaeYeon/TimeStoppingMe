@@ -282,6 +282,13 @@ MonoBehaviour:
   itemName: 
   icon: {fileID: 21300000, guid: 0ef65bb1234951b4cb679be653d61093, type: 3}
   originMaterial: {fileID: 0}
+  baseDamage: 0
+  baseFireRate: 0
+  baseRange: 0
+  projectileSpeed: 0
+  maxAmmoSize: 0
+  reloadTime: 0
+  projectileCount: 0
   skillItem: {fileID: 11400000, guid: d0501ad5544223f40a57de8cb252f04c, type: 2}
 --- !u!23 &6963498022032742832
 MeshRenderer:

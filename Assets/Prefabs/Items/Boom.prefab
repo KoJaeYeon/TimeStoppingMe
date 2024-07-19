@@ -26,37 +26,37 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: 9ee40a22afa589a4896648e03db2dae4,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 43
+      value: 22
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 9ee40a22afa589a4896648e03db2dae4,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 9ee40a22afa589a4896648e03db2dae4,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -46.53
+      value: -5.38
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 9ee40a22afa589a4896648e03db2dae4,
         type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.699964
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 9ee40a22afa589a4896648e03db2dae4,
         type: 3}
       propertyPath: m_LocalRotation.x
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 9ee40a22afa589a4896648e03db2dae4,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0.7141782
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 9ee40a22afa589a4896648e03db2dae4,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 9ee40a22afa589a4896648e03db2dae4,
         type: 3}
@@ -66,7 +66,7 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: 9ee40a22afa589a4896648e03db2dae4,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
-      value: 91.152
+      value: 180
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 9ee40a22afa589a4896648e03db2dae4,
         type: 3}
@@ -129,7 +129,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   itemName: 
-  icon: {fileID: 21300000, guid: 10ad4272fea016446935dc16cc1df3a8, type: 3}
+  icon: {fileID: 21300000, guid: 25ec717366f50e64d870d198b52721e1, type: 3}
   originMaterial: {fileID: 0}
   installationTime: 3
   durationTime: 10

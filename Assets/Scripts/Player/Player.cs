@@ -55,6 +55,7 @@ public class Player : MonoBehaviour, IAttackable
         CurrentHP = maxHP;
         moveSpeed = playerData.moveSpeed;
         rotationSpeed = playerData.rotationSpeed;
+        UIManager.inst.UpdatePlayerToolTip(moveSpeed);
     }
 
     public void EquipWeapon<T>() where T : WeaponBase
@@ -90,6 +91,7 @@ public class Player : MonoBehaviour, IAttackable
         this.maxHP = maxHP;
         this.currentHP = currentHP;
         this.moveSpeed = moveSpeed;
+        UIManager.inst.UpdatePlayerToolTip(moveSpeed);
     }
 
     private void Update()
@@ -364,4 +366,5 @@ public class Player : MonoBehaviour, IAttackable
         currentPlaceableItem.Use(this);
         CancelInstallation();
     }
+
 }

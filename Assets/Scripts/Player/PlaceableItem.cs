@@ -66,6 +66,7 @@ public class PlaceableItem : Item
     }
     IEnumerator Distroy()
     {
+        gameObject.name = icon.name;
         Debug.Log(transform.name);
         switch (transform.name)
         {
