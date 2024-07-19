@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Monster_DATA_Range
   AttackDistance: 20
   TrackDistance: 15
-  MaxHealth: 150
+  MaxHealth: 300
   Damage: 1
   MoveSpeed: 10
   AngularSpeed: 360
